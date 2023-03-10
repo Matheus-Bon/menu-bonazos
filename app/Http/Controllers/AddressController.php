@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class AddressController extends Controller
 {
@@ -28,7 +29,21 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $address = new Address();
+
+        $address->user_id = auth()->id();
+        $address->local_name = $request->local_name;
+        $address->street = $request->street;
+        $address->district = $request->district;
+        $address->state = $request->state;
+        $address->complement = $request->complement;
+        $address->zip_code = $request->zip_code;
+
+        $address->save();
+
+        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+
     }
 
     /**

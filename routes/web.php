@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AddressController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,3 +30,5 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::post('/profile/add-address', [AddressController::class, 'store'])->name('profile.address.add');

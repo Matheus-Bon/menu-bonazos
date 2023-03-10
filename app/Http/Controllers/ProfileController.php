@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Address;
 
 class ProfileController extends Controller
 {
@@ -33,6 +34,9 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
+
+        /* Criando aba de adição de endereço */
+        
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
