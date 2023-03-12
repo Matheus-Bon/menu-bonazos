@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
 class AddressController extends Controller
@@ -51,7 +53,14 @@ class AddressController extends Controller
      */
     public function show(Address $address)
     {
-        //
+        $user_id = Auth::user()->id;
+
+        $addresses = Address::where('user_id',$user_id)->get();
+
+        return view('address-user-form', ['addresses' => $addresses]);
+
+
+        
     }
 
     /**

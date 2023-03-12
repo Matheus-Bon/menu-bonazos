@@ -27,8 +27,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::post('/profile', [ProfileController::class, 'storeAddress'])->name('profile.address.post');
+    Route::patch('/profile/address-update', [ProfileController::class, 'updateAddress'])->name('profile.address.update');
+    Route::delete('/profile/address-delete/{id}', [ProfileController::class, 'destroyAddress'])->name('profile.address.destroy');
+    Route::get('/profile/address-form', [ProfileController::class, 'showFormAddress'])->name('profile.address.form');
+    
 });
 
 require __DIR__.'/auth.php';
 
-Route::post('/profile/add-address', [AddressController::class, 'store'])->name('profile.address.add');
+
