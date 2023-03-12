@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/profile', [ProfileController::class, 'storeAddress'])->name('profile.address.post');
     Route::patch('/profile/address-update', [ProfileController::class, 'updateAddress'])->name('profile.address.update');
-    Route::delete('/profile/address-delete/{id}', [ProfileController::class, 'destroyAddress'])->name('profile.address.destroy');
+    Route::delete('/profile/address-delete/{code}', [ProfileController::class, 'destroyAddress'])->name('profile.address.destroy');
     Route::get('/profile/address-form', [ProfileController::class, 'showFormAddress'])->name('profile.address.form');
     
 });

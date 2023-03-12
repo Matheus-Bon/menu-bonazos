@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\Address;
+USE Illuminate\Support\Facades\DB;
+
 
 
 class ProfileController extends Controller
@@ -91,8 +93,7 @@ class ProfileController extends Controller
         $address->state = $request->state;
         $address->complement = $request->complement;
         $address->zip_code = $request->zip_code;
-        $address->code = $request->zip_code;
-
+        
         $address->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
@@ -105,10 +106,10 @@ class ProfileController extends Controller
 
     }
 
-    public function destroyAddress(Address $code)
+    public function destroyAddress(Request $request)
     {
 
-        $code->delete();
+        DB::table('addresses')->where('code','=',$request->code)->delete();
         
 
         return redirect()->route('profile.edit');

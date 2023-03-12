@@ -31,7 +31,7 @@
                 
 
 
-                <form id="form-delete-address-{{$loop->index}}" action="{{ route('profile.address.destroy', $address->id) }}" method="post" style="display: none;">
+                <form id="form-delete-address-{{$loop->index}}" action="{{ route('profile.address.destroy', $address->code) }}" method="post" style="display: none;">
                     @csrf
                     @method('delete')
                 </form>

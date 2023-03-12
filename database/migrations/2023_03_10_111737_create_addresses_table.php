@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Address;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,10 +21,10 @@ return new class extends Migration
             $table->string('state');
             $table->text('complement');
             $table->integer('zip_code');
-            $table->string('code');
+            $table->uuid('code')->default(Address::raw('uuid()'))->unique();
             $table->timestamps();
-
             $table->foreign('user_id')->references('id')->on('users');
+            
         });
     }
 
