@@ -26,7 +26,7 @@ Esse template é gerado quando o usuário novo ou que excluiu todos seus endere�
     
     
 
-    @if($addresses)
+    @if(count($addresses) > 0)
         @include('profile.partials.card')
 
         <div>
@@ -71,7 +71,7 @@ Esse template é gerado quando o usuário novo ou que excluiu todos seus endere�
             </div>
 
             <div>
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button>{{ __('Registar novo endereço') }}</x-primary-button>
             </div>
             
 

@@ -11,6 +11,8 @@ class Address extends Model
 
     protected $table = 'addresses';
 
+    protected $fillable = ['is_default'];
+
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -29,9 +29,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::post('/profile', [ProfileController::class, 'storeAddress'])->name('profile.address.post');
-    Route::patch('/profile/address-update', [ProfileController::class, 'updateAddress'])->name('profile.address.update');
+    Route::get('/profile/address-update-form/{code}', [ProfileController::class, 'showUpdateAddress'])->name('profile.address.form.update');
+    Route::patch('/profile/address-update/{code}', [ProfileController::class, 'updateAddress'])->name('profile.address.update');
     Route::delete('/profile/address-delete/{code}', [ProfileController::class, 'destroyAddress'])->name('profile.address.destroy');
     Route::get('/profile/address-form', [ProfileController::class, 'showFormAddress'])->name('profile.address.form');
+    Route::get('/profile/address-is-default/{code}', [ProfileController::class, 'updateDefaultAddress'])->name('profile.address.is_default');
     
 });
 

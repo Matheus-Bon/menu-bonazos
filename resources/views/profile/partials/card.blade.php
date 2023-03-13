@@ -19,18 +19,22 @@
 
                 <br>
 
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" style="padding-right: 10px;" href="{{ route('profile.address.update') }}">
+                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" style="padding-right: 10px;" href="{{ route('profile.address.form.update', $address->code) }}">
                     {{ __('Alterar') }}
                 </a>
                 
 
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" onclick="event.preventDefault(); document.getElementById('form-delete-address-{{$loop->index}}').submit(); console.log('ola')" href="">
+                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" onclick="event.preventDefault(); document.getElementById('form-delete-address-{{$loop->index}}').submit(); console.log('ola')" href="" style="padding-right: 10px;">
                     {{ __('Excluir') }}
                 </a>
 
+                @if($address->is_default == false)
+                    <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" style="padding-right: 10px;" href="{{ route('profile.address.is_default', $address->code) }}" style="padding-right: 10px;">
+                        {{ __('Definir como padrão') }}
+                    </a>
+                @endif
+
                 
-
-
                 <form id="form-delete-address-{{$loop->index}}" action="{{ route('profile.address.destroy', $address->code) }}" method="post" style="display: none;">
                     @csrf
                     @method('delete')
