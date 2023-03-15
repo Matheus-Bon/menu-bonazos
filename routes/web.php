@@ -19,14 +19,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+/* Rota para área administrativa */
+Route::get('/admin', function () {
+    return view('admin.admin');
+})->middleware(['auth', 'verified', 'role:admin'])->name('admin');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Rotas para o CRUD de endereços
 
     Route::post('/profile', [ProfileController::class, 'storeAddress'])->name('profile.address.post');
     Route::get('/profile/address-update-form/{code}', [ProfileController::class, 'showUpdateAddress'])->name('profile.address.form.update');

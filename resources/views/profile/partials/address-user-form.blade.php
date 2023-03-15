@@ -39,11 +39,17 @@ Esse template é gerado quando o usuário novo ou que excluiu todos seus endere�
         <form action="{{ route('profile.address.post') }}" method="post" class="mt-6 space-y-6" id="form-address">
             @csrf
 
-            
+
             <div>
                 <x-input-label for="local_name" :value="__('Apelido do Endereço')" />
                 <x-text-input id="local_name" name="local_name" type="text" class="mt-1 block w-full" required autofocus  />
             </div>
+
+            <div>
+                <x-input-label for="zip_code" :value="__('CEP')" />
+                <x-text-input id="zip_code" name="zip_code" type="number" class="mt-1 block w-full" required autofocus  />
+            </div>
+
 
             <div>
                 <x-input-label for="street" :value="__('Logradouro/Rua')" />
@@ -56,7 +62,7 @@ Esse template é gerado quando o usuário novo ou que excluiu todos seus endere�
             </div>
 
             <div>
-                <x-input-label for="state" :value="__('Estado - UF')" />
+                <x-input-label for="state" :value="__('Estado')" />
                 <x-text-input id="state" name="state" type="text" class="mt-1 block w-full" required autofocus  />
             </div>
 
@@ -65,11 +71,7 @@ Esse template é gerado quando o usuário novo ou que excluiu todos seus endere�
                 <x-text-input id="complement" name="complement" type="text" class="mt-1 block w-full" required autofocus  />
             </div>
 
-            <div>
-                <x-input-label for="zip_code" :value="__('CEP')" />
-                <x-text-input id="zip_code" name="zip_code" type="number" class="mt-1 block w-full" required autofocus  />
-            </div>
-
+            
             <div>
             <x-primary-button>{{ __('Registar novo endereço') }}</x-primary-button>
             </div>

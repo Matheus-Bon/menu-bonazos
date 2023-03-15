@@ -38,6 +38,12 @@ Esse template é gerado quando o usuário quer atualizar dados ou modificar
                         </div>
 
                         <div>
+                            <x-input-label for="zip_code" :value="__('CEP')" />
+                            <x-text-input id="zip_code" name="zip_code" type="text" class="mt-1 block w-full" :value="old('zip_code', $address->zip_code)" required autofocus autocomplete="zip_code" />    
+                        </div>
+
+
+                        <div>
                             <x-input-label for="street" :value="__('Logradouro/Rua')" />
                             <x-text-input id="street" name="street" type="text" class="mt-1 block w-full" :value="old('street', $address->street)" required autofocus autocomplete="street" />
                             
@@ -50,8 +56,8 @@ Esse template é gerado quando o usuário quer atualizar dados ou modificar
                         </div>
 
                         <div>
-                            <x-input-label for="state" :value="__('Estado - UF')" />
-                            <x-text-input id="state" name="state" type="text" class="mt-1 block w-full" :value="old('state', $address->state)" required autofocus autocomplete="state" />
+                            <x-input-label for="state" :value="__('Estado')" />
+                            <x-text-input id="state" name="state" type="text" class="mt-1 block w-full" :value="old('state', $address->state)" required autofocus autocomplete="state" readonly/>
                             
                         </div>
 
@@ -61,11 +67,6 @@ Esse template é gerado quando o usuário quer atualizar dados ou modificar
                             
                         </div>
 
-                        <div>
-                            <x-input-label for="zip_code" :value="__('CEP')" />
-                            <x-text-input id="zip_code" name="zip_code" type="text" class="mt-1 block w-full" :value="old('zip_code', $address->zip_code)" required autofocus autocomplete="zip_code" />
-                            
-                        </div>
             
                         <div>
                         <x-primary-button>{{ __('Atualizar') }}</x-primary-button>

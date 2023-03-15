@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\Address;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\User;
 
 
@@ -74,26 +75,45 @@ class ProfileController extends Controller
 
 
 
+
+
+
+
     /* 
     
     Functions Address
     
     */
 
+
+
+
+
+
     public function storeAddress(Request $request)
     {
-        
+        $user = Auth::user();
+        $numberAddresses = Address::where('user_id',$user->id)->count();
+
         $address = new Address();
-
-        //$code = encrypt($address->street = $request->street);
-
-        $address->user_id = auth()->id();
+        
+        $address->user_id = $user->id;
         $address->local_name = $request->local_name;
         $address->street = $request->street;
         $address->district = $request->district;
         $address->state = $request->state;
         $address->complement = $request->complement;
         $address->zip_code = $request->zip_code;
+        
+
+        if($numberAddresses == 0){
+
+            $address->is_default = true;
+
+        }else{
+
+            $address->is_default = false;
+        }
         
         $address->save();
 
