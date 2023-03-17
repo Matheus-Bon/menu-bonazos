@@ -1,7 +1,3 @@
-@include('admin.layouts.head')
-
-@include('admin.layouts.left-panel')
-
 <div id="right-panel" class="right-panel">
 
     <!-- Header-->
@@ -27,5 +23,3 @@
     <!-- /.content -->
     <div class="clearfix"></div>
 </div>
-
-@include('admin.layouts.footer')

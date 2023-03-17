@@ -25,11 +25,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-/* Rota para área administrativa */
-Route::get('/admin', function () {
-    return view('admin.admin');
-})->middleware(['auth', 'verified', 'role:admin'])->name('admin');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -44,6 +39,25 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/address-form', [ProfileController::class, 'showFormAddress'])->name('profile.address.form');
     Route::get('/profile/address-is-default/{code}', [ProfileController::class, 'updateDefaultAddress'])->name('profile.address.is_default');
     
+});
+
+
+
+/* Rota para área administrativa */
+Route::get('/admin', function () {
+    return view('admin.admin');
+})->middleware(['auth', 'verified', 'role:admin'])->name('admin');
+
+Route::middleware(['auth','verified','role:admin'])->group(function () {
+
+    Route::get('/admin/orders', function (){
+        return view('admin.orders');
+    })->name('admin.orders');
+
+
+
+
+
 });
 
 require __DIR__.'/auth.php';
