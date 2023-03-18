@@ -16,7 +16,7 @@
 
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            Launch static backdrop modal
+            Criar uma categoria
         </button>
   
         <!-- Modal -->
@@ -31,17 +31,35 @@
                     </div>
 
                     <div class="modal-body">
-                    ...
+                    
+                        <form action="{{ route('admin.category.store') }}" method="POST" id="form-category">
+
+                            @csrf
+                            
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Criar nova categoria</label>
+                                <input type="text" class="form-control" name="name">
+
+                            </div>
+                            
+                        </form>
+
+
                     </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-outline-primary">Continuar</button>
+                        <button type="submit" class="btn btn-outline-success" form="form-category">Continuar</button>
                     </div>
 
                 </div>
-            </div>
+            </div>    
         </div>
+        {{-- /Modal --}}
+
+        <br><br><br><br><br>
+
+        @include('admin.partials.card-category')
   
   
 

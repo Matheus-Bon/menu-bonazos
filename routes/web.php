@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,13 +51,8 @@ Route::get('/admin', function () {
 
 Route::middleware(['auth','verified','role:admin'])->group(function () {
 
-    Route::get('/admin/orders', function (){
-        return view('admin.orders');
-    })->name('admin.orders');
-
-
-
-
+    Route::get('/admin/orders', [ProductController::class, 'view'])->name('admin.orders');
+    Route::post('/admin/orders/category', [ProductController::class, 'storeCategory'])->name('admin.category.store');
 
 });
 

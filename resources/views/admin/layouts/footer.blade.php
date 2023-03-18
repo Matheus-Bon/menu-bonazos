@@ -14,6 +14,7 @@
     <!-- /.site-footer -->
 
     @include('admin.layouts.scripts')
+    @include('sweetalert::alert')
 
 </body>
 </html>
