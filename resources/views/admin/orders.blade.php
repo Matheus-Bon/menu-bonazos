@@ -1,6 +1,9 @@
+
 @include('admin.layouts.head')
 
 @include('admin.layouts.left-panel')
+
+
 
 <div id="right-panel" class="right-panel">
 
@@ -62,11 +65,12 @@
         @include('admin.partials.card-category')
   
   
-
+        
 
         @include('admin.layouts.footer')
     </div>
     <!-- /.content -->
     
 </div>
+
 

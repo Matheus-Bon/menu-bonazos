@@ -54,6 +54,8 @@ Route::middleware(['auth','verified','role:admin'])->group(function () {
     Route::get('/admin/orders', [ProductController::class, 'view'])->name('admin.orders');
     Route::post('/admin/orders/category', [ProductController::class, 'storeCategory'])->name('admin.category.store');
 
+    Route::put('/admin/orders/active/{id}', [ProductController::class, 'updateActive'])->name('admin.category.active');
+
 });
 
 require __DIR__.'/auth.php';
