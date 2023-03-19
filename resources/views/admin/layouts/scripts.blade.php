@@ -36,30 +36,54 @@
     let url = "{{ route('admin.category.active', ':id') }}"
     url = url.replace(':id', categoryId)
 
-    if(active == false){
-      $(this).removeAttr('checked');
-    }
-
     $.ajaxSetup({
       headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
 
-    $.ajax({
+    console.log(active);
 
-      url: url,
-      type: 'put',
-      data:{active:active},
-      dataType: "json",
-      success: function (response) {
-        console.log(response);
-      },
-      error: function(xhr,status,error){
-        console.log(xhr.responseText);
-      }
 
-    });
+    if(active == false){
+      $(this).removeAttr('checked');
+
+      $.ajax({
+
+        url: url,
+        type: 'put',
+        data:{active:active},
+        dataType: "json",
+        success: function (response) {
+          console.log(response);
+        },
+        error: function(xhr,status,error){
+          console.log(xhr.responseText);
+        }
+
+      });
+    }else{
+
+      $(this).prop('checked');
+      $.ajax({
+
+        url: url,
+        type: 'put',
+        data:{active:active},
+        dataType: "json",
+        success: function (response) {
+          console.log(response);
+        },
+        error: function(xhr,status,error){
+          console.log(xhr.responseText);
+        }
+
+      });
+
+    }
+    
+
+    
     
    
   });

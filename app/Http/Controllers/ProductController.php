@@ -61,15 +61,18 @@ class ProductController extends Controller
     //Função que atualiza se a categoria está ativa ou não
     public function updateActive(Request $request)
     {
-        
+        $active = $request->input('active') === 'true' ? true : false;
         $category = Category::findOrFail($request->id);
-        $category->active = true;
+
+        
+        $category->active = $active;
+        
         $category->save();
 
         
         return response()->json([
-            'success' => true
-          ]);
+            'success' => $active
+        ]);
     }
 
 
