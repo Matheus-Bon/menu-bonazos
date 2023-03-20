@@ -53,6 +53,8 @@ Route::middleware(['auth','verified','role:admin'])->group(function () {
 
     Route::get('/admin/orders', [ProductController::class, 'view'])->name('admin.orders');
     Route::post('/admin/orders/category', [ProductController::class, 'storeCategory'])->name('admin.category.store');
+    Route::put('admin/orders/category/update/{id}', [ProductController::class, 'updateCategory'])->name('admin.category.update');
+    Route::delete('admin/orders/category/delete/{id}', [ProductController::class, 'deleteCategory'])->name('admin.category.delete');
 
     Route::put('/admin/orders/active/{id}', [ProductController::class, 'updateActive'])->name('admin.category.active');
 

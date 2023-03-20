@@ -58,6 +58,38 @@ class ProductController extends Controller
     }
 
 
+    //Função update do nome da categoria
+    public function updateCategory($id , Request $request)
+    {
+        
+
+        $category = Category::where('id',$id)->first();
+
+        //dd($category);
+
+        $category->name = $request->name;
+
+        $category->save();
+
+        toast('Categoria atualizada!','success');
+
+        return Redirect::route('admin.orders');
+    }
+    
+    public function deleteCategory($id)
+    {
+
+        $category = Category::where('id' , $id)->first();
+
+        $category->delete();
+
+        toast('Categoria deletada!','success');
+
+        return Redirect::route('admin.orders');
+
+    }
+
+
     //Função que atualiza se a categoria está ativa ou não
     public function updateActive(Request $request)
     {
