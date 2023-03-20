@@ -75,7 +75,9 @@ class ProductController extends Controller
 
         return Redirect::route('admin.orders');
     }
+
     
+    //Função delete categoria
     public function deleteCategory($id)
     {
 

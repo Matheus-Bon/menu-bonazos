@@ -1,3 +1,5 @@
+console.log('ola');
+
 $(document).ready(function(){
     $('input[id^="switch-"]').change(function(){
   
@@ -19,10 +21,10 @@ $(document).ready(function(){
         data:{active:active},
         dataType: "json",
         success: function (response) {
-          //console.log(response);
+          console.log(response);
         },
         error: function(xhr,status,error){
-          //console.log(xhr.responseText);
+          console.log(xhr.responseText);
         }
   
         });

@@ -63,6 +63,8 @@
         <br><br><br><br><br>
 
         @include('admin.partials.card-category')
+
+        @include('admin.partials.offcanva-category')
   
   
         
@@ -72,6 +74,8 @@
     <!-- /.content -->
     
 </div>
+
+
 
 
 <script>
