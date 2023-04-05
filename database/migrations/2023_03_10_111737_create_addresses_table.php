@@ -1,9 +1,10 @@
 <?php
 
 use App\Models\Address;
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -14,16 +15,16 @@ return new class extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('local_name');
-            $table->string('street');
-            $table->string('district');
-            $table->string('state');
+            $table->uuid('address_code')->default(DB::raw('uuid()'))->unique();
+            $table->tinyText('local_name');
+            $table->tinyText('street');
+            $table->tinyText('district');
+            $table->tinyText('state');
             $table->text('complement');
-            $table->integer('zip_code');
-            $table->uuid('code')->default(Address::raw('uuid()'))->unique();
+            $table->tinyText('zip_code');
+            $table->boolean('standard_address');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
+            
             
         });
     }

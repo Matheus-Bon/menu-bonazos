@@ -22,8 +22,10 @@ class ProfileController extends Controller
     public function edit(Request $request): View
     {
 
-        $user_id = Auth::user()->id;
-        $addresses = Address::where('user_id',$user_id)->get();
+        $user = Auth::user();
+        
+        $addresses = $user->addresses;
+        
 
 
         return view('profile.edit', [

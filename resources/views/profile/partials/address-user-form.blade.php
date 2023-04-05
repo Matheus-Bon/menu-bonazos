@@ -47,7 +47,7 @@ Esse template é gerado quando o usuário novo ou que excluiu todos seus endere�
 
             <div>
                 <x-input-label for="zip_code" :value="__('CEP')" />
-                <x-text-input id="zip_code" name="zip_code" type="number" class="mt-1 block w-full" required autofocus  />
+                <x-text-input id="zip_code" name="zip_code" type="text" class="mt-1 block w-full" required autofocus  />
             </div>
 
 

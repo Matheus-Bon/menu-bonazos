@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('product_price', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
-            $table->decimal('price',8,2);
+            $table->unsignedDecimal('price',8,2);
             $table->timestamps();
 
-            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 
