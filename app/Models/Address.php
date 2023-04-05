@@ -12,7 +12,7 @@ class Address extends Model
 
     protected $table = 'addresses';
 
-    protected $fillable = ['is_default'];
+    protected $fillable = ['local_name', 'street', 'district', 'state', 'complement', 'zip_code', 'standard_address'];
 
    
     public function users():BelongsToMany
