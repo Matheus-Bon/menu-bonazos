@@ -23,11 +23,11 @@ const form = useForm({
     <section>
         <header>
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-200">
-                Informações do perfil
+                Livro de endereços
             </h2>
 
             <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Atualize as informações do perfil da sua conta.
+                Aqui estarão todos os seus endereços cadastrados.
             </p>
         </header>
 
@@ -37,19 +37,19 @@ const form = useForm({
         >
            <div>
                 <InputLabel
-                    for="name"
-                    value="Nome"
+                    for="local_name"
+                    value="Apelido"
                     class="dark:text-gray-200"
                 />
 
                 <TextInput
-                    id="name"
+                    id="local_name"
                     type="text"
                     class="mt-1 block w-full dark:text-gray-300"
                     v-model="form.name"
                     re quired
                     autofocus
-                    autocomplete="name"
+                    autocomplete="local_name"
                 />
 
                 <InputError class="mt-2" :message="form.errors.name" />
@@ -57,18 +57,18 @@ const form = useForm({
 
             <div>
                 <InputLabel
-                    for="email"
-                    value="Email"
+                    for="zip_code"
+                    value="CEP"
                     class="dark:text-gray-200"
                 />
 
                 <TextInput
-                    id="email"
+                    id="zip_code"
                     type="email"
                     class="mt-1 block w-full dark:text-gray-300"
                     v-model="form.email"
                     required
-                    autocomplete="username"
+                    autocomplete="zip_code"
                 />
 
                 <InputError class="mt-2" :message="form.errors.email" />
@@ -76,47 +76,80 @@ const form = useForm({
 
             <div>
                 <InputLabel
-                    for="phone"
-                    value="Celular"
+                    for="street"
+                    value="Logradouro"
                     class="dark:text-gray-200"
                 />
 
                 <TextInput
-                    id="phone"
-                    type="tel"
+                    id="street"
+                    type="text"
                     class="mt-1 block w-full dark:text-gray-300"
-                    v-model="form.phone"
-                    pattern="[0-9]{2}[0-9]{5}[0-9]{4}"
+                    v-model="form.email"
                     required
-                    autocomplete="phone"
+                    autocomplete="street"
                 />
 
-                <InputError class="mt-2" :message="form.errors.phone" />
+                <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
-            <div
-                v-if="props.mustVerifyEmail && user.email_verified_at === null"
-            >
-                <p class="text-sm mt-2 text-gray-800">
-                    Seu endereço de e-mail não foi verificado.
-                    <Link
-                        :href="route('verification.send')"
-                        method="post"
-                        as="button"
-                        class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    >
-                        Clique aqui para reenviar o e-mail de verificação.
-                    </Link>
-                </p>
+            <div>
+                <InputLabel
+                    for="distric"
+                    value="Bairro"
+                    class="dark:text-gray-200"
+                />
 
-                <div
-                    v-show="props.status === 'verification-link-sent'"
-                    class="mt-2 font-medium text-sm text-green-600"
-                >
-                    Um novo link de verificação foi enviado para o seu endereço
-                    de e-mail.
-                </div>
+                <TextInput
+                    id="distric"
+                    type="text"
+                    class="mt-1 block w-full dark:text-gray-300"
+                    v-model="form.email"
+                    required
+                    autocomplete="distric"
+                />
+
+                <InputError class="mt-2" :message="form.errors.email" />
             </div>
+
+            <div>
+                <InputLabel
+                    for="state"
+                    value="Estado"
+                    class="dark:text-gray-200"
+                />
+
+                <TextInput
+                    id="state"
+                    type="text"
+                    class="mt-1 block w-full dark:text-gray-300"
+                    v-model="form.email"
+                    required
+                    autocomplete="state"
+                />
+
+                <InputError class="mt-2" :message="form.errors.email" />
+            </div>
+
+            <div>
+                <InputLabel
+                    for="complement"
+                    value="Complemento"
+                    class="dark:text-gray-200"
+                />
+
+                <TextInput
+                    id="complement"
+                    type="text"
+                    class="mt-1 block w-full dark:text-gray-300"
+                    v-model="form.email"
+                    required
+                    autocomplete="complement"
+                />
+
+                <InputError class="mt-2" :message="form.errors.email" />
+            </div>
+
 
             <div class="flex items-center gap-4">
                 <PrimaryButton :disabled="form.processing"

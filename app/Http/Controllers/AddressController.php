@@ -19,7 +19,7 @@ class AddressController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Profile/Parials/UpdateAddressInformationForm');
     }
 
     /**
@@ -27,7 +27,7 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request
     }
 
     /**
