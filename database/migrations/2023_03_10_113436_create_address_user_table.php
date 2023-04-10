@@ -20,8 +20,8 @@ return new class extends Migration
     {
         Schema::create('address_user', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('address_id');
+            $table->uuid('user_id');
+            $table->uuid('address_id');
             $table->timestamps();
 
         });

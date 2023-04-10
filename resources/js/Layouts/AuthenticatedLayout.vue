@@ -188,7 +188,7 @@ const showingNavigationDropdown = ref(false);
             </header>
 
             <!-- Page Content -->
-            <main class="grid grid-cols-2 gap-3 mt-7">
+            <main class="grid xl:grid-cols-2 gap-3 mt-7 md:grid-cols-1">
                 <slot class="" />
             </main>
         </div>

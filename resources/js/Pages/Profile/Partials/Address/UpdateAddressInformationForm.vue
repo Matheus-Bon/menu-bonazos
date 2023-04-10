@@ -5,17 +5,18 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
 import { Link, useForm, usePage } from "@inertiajs/vue3";
 
-const props = defineProps({
-    mustVerifyEmail: Boolean,
-    status: String,
-});
 
 const user = usePage().props.auth.user;
 
 const form = useForm({
-    name: user.name,
-    email: user.email,
-    phone: user.phone,
+    local_name: user.addresses.local_name,
+    street: user.addresses.street,
+    distric: user.addresses.distric,
+    state: user.addresses.state,
+    complement: user.addresses.complement,
+    zip_code: user.addresses.zip_code,
+    standard_address: user.addresses.standard_user,
+  
 });
 </script>
 
@@ -29,10 +30,12 @@ const form = useForm({
             <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
                 Aqui estarão todos os seus endereços cadastrados.
             </p>
+
+            
         </header>
 
         <form
-            @submit.prevent="form.patch(route('profile.update'))"
+            @submit.prevent="form.post(route('address.update'))"
             class="mt-6 space-y-6"
         >
            <div>
@@ -46,13 +49,13 @@ const form = useForm({
                     id="local_name"
                     type="text"
                     class="mt-1 block w-full dark:text-gray-300"
-                    v-model="form.name"
+                    v-model="form.local_name"
                     re quired
                     autofocus
                     autocomplete="local_name"
                 />
 
-                <InputError class="mt-2" :message="form.errors.name" />
+                <InputError class="mt-2" :message="form.errors.local_name" />
             </div>
 
             <div>
@@ -64,14 +67,14 @@ const form = useForm({
 
                 <TextInput
                     id="zip_code"
-                    type="email"
+                    type="text"
                     class="mt-1 block w-full dark:text-gray-300"
-                    v-model="form.email"
+                    v-model="form.zip_code"
                     required
                     autocomplete="zip_code"
                 />
 
-                <InputError class="mt-2" :message="form.errors.email" />
+                <InputError class="mt-2" :message="form.errors.zip_code" />
             </div>
 
             <div>
@@ -85,12 +88,12 @@ const form = useForm({
                     id="street"
                     type="text"
                     class="mt-1 block w-full dark:text-gray-300"
-                    v-model="form.email"
+                    v-model="form.street"
                     required
                     autocomplete="street"
                 />
 
-                <InputError class="mt-2" :message="form.errors.email" />
+                <InputError class="mt-2" :message="form.errors.street" />
             </div>
 
             <div>
@@ -104,12 +107,12 @@ const form = useForm({
                     id="distric"
                     type="text"
                     class="mt-1 block w-full dark:text-gray-300"
-                    v-model="form.email"
+                    v-model="form.distric"
                     required
                     autocomplete="distric"
                 />
 
-                <InputError class="mt-2" :message="form.errors.email" />
+                <InputError class="mt-2" :message="form.errors.distric" />
             </div>
 
             <div>
@@ -123,12 +126,12 @@ const form = useForm({
                     id="state"
                     type="text"
                     class="mt-1 block w-full dark:text-gray-300"
-                    v-model="form.email"
+                    v-model="form.state"
                     required
                     autocomplete="state"
                 />
 
-                <InputError class="mt-2" :message="form.errors.email" />
+                <InputError class="mt-2" :message="form.errors.state" />
             </div>
 
             <div>
@@ -142,12 +145,12 @@ const form = useForm({
                     id="complement"
                     type="text"
                     class="mt-1 block w-full dark:text-gray-300"
-                    v-model="form.email"
+                    v-model="form.complement"
                     required
                     autocomplete="complement"
                 />
 
-                <InputError class="mt-2" :message="form.errors.email" />
+                <InputError class="mt-2" :message="form.errors.complement" />
             </div>
 
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\IndexClientController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StandardAddressChange;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -44,5 +45,6 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('address', AddressController::class);
 
+Route::name('addressStandard.change')->put('addressStandard/{address}/change', StandardAddressChange::class);
 
 require __DIR__.'/auth.php';
