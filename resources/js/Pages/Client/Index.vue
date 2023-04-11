@@ -1,6 +1,6 @@
 <script setup>
-import BoxProduct from '@/Components/UI/BoxProduct.vue';
-import NavBar from '@/Layouts/NavBar.vue';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+
 
 const props = defineProps({ user: Object });
 
@@ -8,13 +8,13 @@ const props = defineProps({ user: Object });
 
 <template>
 
-    <NavBar/>
+    <AuthenticatedLayout>
+        <header class="mt-3">
+           <h1 class="text-4xl text-gray-100">HOME</h1>
+        </header>
 
-    <BoxProduct class="mt-5">
-        <div>
-            <h1 class="text-lg">Pizza</h1>
-        </div>
-    </BoxProduct>
+        
+    </AuthenticatedLayout>
 
     
 </template>

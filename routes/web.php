@@ -30,7 +30,7 @@ Route::get('/', function () {
         'user' => Auth::user()
         
     ]);
-});
+})->name('home');
 
 
 
