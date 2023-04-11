@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\Admin\IndexAdminController;
 use App\Http\Controllers\IndexClientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StandardAddressChange;
@@ -31,11 +32,7 @@ Route::get('/', function () {
     ]);
 });
 
-//Route::get('/', [IndexClientController::class, 'index'])->name('client.index');
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -46,5 +43,10 @@ Route::middleware('auth')->group(function () {
 Route::resource('address', AddressController::class);
 
 Route::name('addressStandard.change')->put('addressStandard/{address}/change', StandardAddressChange::class);
+
+Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified', 'role:admin'])->group(function () {
+
+    Route::get('', [IndexAdminController::class, 'index']);
+});
 
 require __DIR__.'/auth.php';
