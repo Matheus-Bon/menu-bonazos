@@ -11,4 +11,14 @@ class IndexAdminController extends Controller
     {
         return inertia('Admin/Dashboard');
     }
+
+    public function table()
+    {
+        return inertia('Admin/Table');
+    }
+
+    public function menu()
+    {
+        return inertia('Admin/Menu');
+    }
 }

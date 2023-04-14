@@ -47,6 +47,8 @@ Route::name('addressStandard.change')->put('addressStandard/{address}/change', S
 Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
     Route::get('', [IndexAdminController::class, 'index']);
+    Route::get('/tabela', [IndexAdminController::class, 'table'])->name('table');
+    Route::get('/cardapio', [IndexAdminController::class, 'menu'])->name('menu');
 });
 
 require __DIR__.'/auth.php';

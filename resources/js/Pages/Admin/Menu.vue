@@ -4,8 +4,7 @@ import LayoutAdmin from "./Layouts/LayoutAdmin.vue";
 
 <template>
     <LayoutAdmin>
-        <div>
-            INÍCIO
-        </div>
+        <h1>MENU</h1>
+        
     </LayoutAdmin>
 </template>

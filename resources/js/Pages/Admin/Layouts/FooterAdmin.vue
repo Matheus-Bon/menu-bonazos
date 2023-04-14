@@ -1,0 +1,33 @@
+<template>
+    <footer class="block py-4">
+        <div class="flex px-4">
+            <hr class="mb-4 border-b-1 border-blueGray-200" />
+            <div
+                class="flex items-center basis-full justify-end"
+            >
+                <div class="w-full md:w-4/12 px-4">
+                    <div
+                        class="text-sm text-blueGray-500 font-semibold py-1 text-right"
+                    >
+                        Copyright © {{ date }}
+                        <a
+                            href="#"
+                            class="text-blueGray-500 hover:text-blueGray-700 text-sm font-semibold py-1"
+                        >
+                            Bonazos
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</template>
+<script>
+export default {
+    data() {
+        return {
+            date: new Date().getFullYear(),
+        };
+    },
+};
+</script>
