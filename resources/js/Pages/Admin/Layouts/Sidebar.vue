@@ -4,8 +4,6 @@ import UserDropdown from "@/Pages/Admin/Components/UserDropdown.vue";
 import { Link } from "@inertiajs/vue3";
 import { computed, ref } from "vue";
 
-const activeClass = ref("text-emerald-500 hover:text-emerald-600");
-const notActiveClass = "text-blueGray-700 hover:text-blueGray-500";
 </script>
 
 <template>
