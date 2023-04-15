@@ -3,7 +3,6 @@ import NotificationDropdown from "@/Pages/Admin/Components/NotificationDropdown.
 import UserDropdown from "@/Pages/Admin/Components/UserDropdown.vue";
 import { Link } from "@inertiajs/vue3";
 import { computed, ref } from "vue";
-
 </script>
 
 <template>
@@ -101,13 +100,13 @@ import { computed, ref } from "vue";
 
                     <li class="items-center">
                         <Link
-                            :href="route('dashboard.')"
+                            :href="route('dashboard.orders')"
                             class="text-sm uppercase py-3 font-bold block"
                             :class="{
                                 'text-emerald-500 hover:text-emerald-600':
-                                    $page.url === '/dashboard',
+                                    $page.url === '/dashboard/pedidos',
                                 'text-blueGray-700 hover:text-blueGray-500':
-                                    $page.url != '/dashboard',
+                                    $page.url != '/dashboard/pedidos',
                             }"
                         >
                             <i class="bi bi-bookmark"></i>
@@ -117,13 +116,13 @@ import { computed, ref } from "vue";
 
                     <li class="items-center">
                         <Link
-                            :href="route('dashboard.table')"
+                            :href="route('dashboard.tables')"
                             class="text-sm uppercase py-3 font-bold block"
                             :class="{
                                 'text-emerald-500 hover:text-emerald-600':
-                                    $page.url === '/dashboard/tabela',
+                                    $page.url === '/dashboard/tabelas',
                                 'text-blueGray-700 hover:text-blueGray-500':
-                                    $page.url != '/dashboard/tabela',
+                                    $page.url != '/dashboard/tabelas',
                             }"
                         >
                             <i class="bi bi-table"></i>
@@ -157,7 +156,7 @@ import { computed, ref } from "vue";
                 <ul class="md:flex-col md:min-w-full flex flex-col list-none">
                     <li class="items-center">
                         <Link
-                            :href="route('dashboard.')"
+                            :href="route('dashboard.delivery')"
                             class="text-sm uppercase py-3 font-bold block"
                             :class="{
                                 'text-emerald-500 hover:text-emerald-600':
@@ -173,7 +172,7 @@ import { computed, ref } from "vue";
 
                     <li class="items-center">
                         <Link
-                            :href="route('dashboard.')"
+                            :href="route('dashboard.schedule')"
                             class="text-sm uppercase py-3 font-bold block"
                             :class="{
                                 'text-emerald-500 hover:text-emerald-600':
@@ -191,15 +190,15 @@ import { computed, ref } from "vue";
 
                     <li class="items-center">
                         <Link
-                            :href="route('dashboard.')"
+                            :href="route('dashboard.timetable')"
                             class="text-sm uppercase py-3 font-bold block"
                             :class="{
                                 'text-emerald-500 hover:text-emerald-600':
                                     $page.url ===
-                                    '/dashboard/agendamento-pedido',
+                                    '/dashboard/horario-funcionamento',
                                 'text-blueGray-700 hover:text-blueGray-500':
                                     $page.url !=
-                                    '/dashboard/agendamento-pedido',
+                                    '/dashboard/horario-funcionamento',
                             }"
                         >
                             <i class="bi bi-clock"></i>
@@ -209,15 +208,13 @@ import { computed, ref } from "vue";
 
                     <li class="items-center">
                         <Link
-                            :href="route('dashboard.')"
+                            :href="route('dashboard.evaluations')"
                             class="text-sm uppercase py-3 font-bold block"
                             :class="{
                                 'text-emerald-500 hover:text-emerald-600':
-                                    $page.url ===
-                                    '/dashboard/agendamento-pedido',
+                                    $page.url === '/dashboard/avaliacoes',
                                 'text-blueGray-700 hover:text-blueGray-500':
-                                    $page.url !=
-                                    '/dashboard/agendamento-pedido',
+                                    $page.url != '/dashboard/avaliacoes',
                             }"
                         >
                             <i class="bi bi-star"></i>

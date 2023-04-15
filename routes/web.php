@@ -47,8 +47,13 @@ Route::name('addressStandard.change')->put('addressStandard/{address}/change', S
 Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
     Route::get('', [IndexAdminController::class, 'index']);
-    Route::get('/tabela', [IndexAdminController::class, 'table'])->name('table');
+    Route::get('/pedidos', [IndexAdminController::class, 'orders'])->name('orders');
+    Route::get('/tabelas', [IndexAdminController::class, 'tables'])->name('tables');
     Route::get('/cardapio', [IndexAdminController::class, 'menu'])->name('menu');
+    Route::get('/area-entrega', [IndexAdminController::class, 'delivery'])->name('delivery');
+    Route::get('/agendamento-pedido', [IndexAdminController::class, 'schedule'])->name('schedule');
+    Route::get('/horario-funcionamento', [IndexAdminController::class, 'timetable'])->name('timetable');
+    Route::get('/avaliacoes', [IndexAdminController::class, 'evaluations'])->name('evaluations');
 });
 
 require __DIR__.'/auth.php';

@@ -1,4 +1,4 @@
-<!-- Página referente a 'Início' -->
+<!-- Página referente a 'Área de Entrega' -->
 <script setup>
 import LayoutAdmin from "@/Pages/Admin/Layouts/LayoutAdmin.vue";
 </script>
@@ -6,7 +6,7 @@ import LayoutAdmin from "@/Pages/Admin/Layouts/LayoutAdmin.vue";
 <template>
     <LayoutAdmin>
         <div>
-            INÍCIO
+            Área de entrega
         </div>
     </LayoutAdmin>
 </template>

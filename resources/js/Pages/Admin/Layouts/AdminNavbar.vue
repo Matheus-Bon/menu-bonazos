@@ -10,12 +10,12 @@ Assim que criar uma nova página é recomendado que adicione em routes a nova ro
 const routes = [
     {path: '/dashboard', name: 'Início'},
     {path: '/dashboard/pedidos', name: 'Pedidos'},
-    {path: '/dashboard/tabela', name: 'Tabelas'},
+    {path: '/dashboard/tabelas', name: 'Tabelas'},
     {path: '/dashboard/cardapio', name: 'Cardápio'},
     {path: '/dashboard/area-entrega', name: 'Área de Entrega'},
     {path: '/dashboard/agendamento-pedido', name: 'Agendamento de Pedidos'},
-    {path: '/dashboard/horário-funcionamento', name: 'Horário de Funcionamento'},
-    {path: '/dashboard/avaliações', name: 'Avaliações'},
+    {path: '/dashboard/horario-funcionamento', name: 'Horário de Funcionamento'},
+    {path: '/dashboard/avaliacoes', name: 'Avaliações'},
 ]
 
 const nameRoute = computed(() => {

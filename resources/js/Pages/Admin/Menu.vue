@@ -1,3 +1,4 @@
+<!-- Página referente a 'Menu' -->
 <script setup>
 import LayoutAdmin from "./Layouts/LayoutAdmin.vue";
 </script>

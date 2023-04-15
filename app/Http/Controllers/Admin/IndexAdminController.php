@@ -12,13 +12,38 @@ class IndexAdminController extends Controller
         return inertia('Admin/Dashboard');
     }
 
-    public function table()
+    public function orders()
     {
-        return inertia('Admin/Table');
+        return inertia('Admin/Orders');
+    }
+
+    public function tables()
+    {
+        return inertia('Admin/Tables');
     }
 
     public function menu()
     {
         return inertia('Admin/Menu');
+    }
+
+    public function delivery()
+    {
+        return inertia('Admin/Delivery');
+    }
+
+    public function schedule()
+    {
+        return inertia('Admin/Schedule');
+    }
+
+    public function timetable()
+    {
+        return inertia('Admin/Timetable');
+    }
+
+    public function evaluations()
+    {
+        return inertia('Admin/Evaluations');
     }
 }
