@@ -9,7 +9,7 @@ const toggleDark = useToggle(isDark);
 </script>
 
 <template>
-    <Menu as="div" as-hover="true" class="relative inline-block text-left">
+    <Menu as="div" class="relative inline-block text-left">
         <div>
             <MenuButton
                 class="text-2xl text-secondary-color-light dark:text-secondary-color-dark"
@@ -39,7 +39,7 @@ const toggleDark = useToggle(isDark);
             leave-to-class="transform opacity-0 scale-95"
         >
             <MenuItems
-                class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-admin-card"
+                class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg shadow-white/20 ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-admin-card"
             >
                 <div class="pt-1">
                     <MenuItem v-slot="{ active }">

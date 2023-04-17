@@ -83,10 +83,10 @@ import { Link } from "@inertiajs/vue3";
                             :href="route('dashboard.')"
                             class="text-base py-3 font-normal block"
                             :class="{
-                                'text-secondary-color-light hover:opacity-90':
+                                'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
                                     $page.url === '/dashboard',
 
-                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color':
+                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
                                     $page.url != '/dashboard',
                             }"
                         >
@@ -100,10 +100,10 @@ import { Link } from "@inertiajs/vue3";
                             :href="route('dashboard.orders')"
                             class="text-base py-3 font-normal block"
                             :class="{
-                                'text-secondary-color-light hover:opacity-90':
+                                'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
                                     $page.url === '/dashboard/pedidos',
 
-                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color':
+                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
                                     $page.url != '/dashboard/pedidos',
                             }"
                         >
@@ -117,10 +117,10 @@ import { Link } from "@inertiajs/vue3";
                             :href="route('dashboard.tables')"
                             class="text-base py-3 font-normal block"
                             :class="{
-                                'text-secondary-color-light hover:opacity-90':
+                                'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
                                     $page.url === '/dashboard/tabelas',
 
-                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color':
+                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
                                     $page.url != '/dashboard/tabelas',
                             }"
                         >
@@ -134,10 +134,10 @@ import { Link } from "@inertiajs/vue3";
                             :href="route('dashboard.menu')"
                             class="text-base py-3 font-normal block"
                             :class="{
-                                'text-secondary-color-light hover:opacity-90':
+                                'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
                                     $page.url === '/dashboard/cardapio',
 
-                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color':
+                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
                                     $page.url != '/dashboard/cardapio',
                             }"
                         >
@@ -161,10 +161,10 @@ import { Link } from "@inertiajs/vue3";
                             :href="route('dashboard.delivery')"
                             class="text-base py-3 font-normal block"
                             :class="{
-                                'text-secondary-color-light hover:opacity-90':
+                                'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
                                     $page.url === '/dashboard/area-entrega',
 
-                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color':
+                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
                                     $page.url != '/dashboard/area-entrega',
                             }"
                         >
@@ -178,11 +178,11 @@ import { Link } from "@inertiajs/vue3";
                             :href="route('dashboard.schedule')"
                             class="text-base py-3 font-normal block"
                             :class="{
-                                'text-secondary-color-light hover:opacity-90 dark:text-gray-400 hover:text-secondary-color':
+                                'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90 hover:text-secondary-color':
                                     $page.url ===
                                     '/dashboard/agendamento-pedido',
 
-                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color':
+                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
                                     $page.url !=
                                     '/dashboard/agendamento-pedido',
                             }"
@@ -197,11 +197,11 @@ import { Link } from "@inertiajs/vue3";
                             :href="route('dashboard.timetable')"
                             class="text-base py-3 font-normal block"
                             :class="{
-                                'text-secondary-color-light hover:opacity-90':
+                                'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
                                     $page.url ===
                                     '/dashboard/horario-funcionamento',
 
-                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color':
+                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
                                     $page.url !=
                                     '/dashboard/horario-funcionamento',
                             }"
@@ -216,10 +216,10 @@ import { Link } from "@inertiajs/vue3";
                             :href="route('dashboard.evaluations')"
                             class="text-base py-3 font-normal block"
                             :class="{
-                                'text-secondary-color-light hover:opacity-90':
+                                'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
                                     $page.url === '/dashboard/avaliacoes',
 
-                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color':
+                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
                                     $page.url != '/dashboard/avaliacoes',
                             }"
                         >

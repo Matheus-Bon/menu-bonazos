@@ -1,14 +1,14 @@
 <template>
   <div
-    class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg dark:bg-admin-card"
+    class="relative flex flex-col min-w-0 break-words bg-white rounded-xl mb-6 xl:mb-0  border dark:border-gray-750 border-dashed dark:bg-admin-card"
   >
     <div class="flex-auto p-4">
       <div class="flex flex-wrap">
         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-          <h5 class="text-blueGray-400 uppercase font-bold text-xs">
+          <h5 class="text-gray-600 dark:text-light-gray uppercase font-normal text-base pb-2">
             {{ statSubtitle }}
           </h5>
-          <span class="font-semibold text-xl text-blueGray-700">
+          <span class="font-medium text-2xl text-gray-600 dark:text-light-gray">
             {{ statTitle }}
           </span>
         </div>
@@ -30,7 +30,7 @@
           ></i>
           {{ statPercent }}%
         </span>
-        <span class="whitespace-nowrap">{{ statDescripiron }}</span>
+        <span class="whitespace-nowrap text-gray-500 text-sm">{{ statDescripiron }}</span>
       </p>
     </div>
   </div>
