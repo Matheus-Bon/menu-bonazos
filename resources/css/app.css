@@ -2,3 +2,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* código para girar o svg config da área de admistração */
+#gear-icon:hover {
+    transition: transform 0.7s ease-in-out;
+    transform: rotate(360deg);
+}
+
+/* retorna o elemento à posição original */
+#gear-icon:not(:hover) {
+    transition: transform 0.5s ease-in-out;
+    transform: rotate(0deg); 
+}

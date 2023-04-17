@@ -2,12 +2,11 @@
 import NotificationDropdown from "@/Pages/Admin/Components/NotificationDropdown.vue";
 import UserDropdown from "@/Pages/Admin/Components/UserDropdown.vue";
 import { Link } from "@inertiajs/vue3";
-import { computed, ref } from "vue";
 </script>
 
 <template>
     <nav
-        class="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6"
+        class="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6 dark:bg-admin-card"
     >
         <div
             class="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto"
@@ -23,16 +22,10 @@ import { computed, ref } from "vue";
             <!-- Brand -->
             <Link
                 :href="route('dashboard.')"
-                class="md:block text-center md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-3xl uppercase font-semibold p-4 px-0"
-            >
-                Bonazos
-            </Link>
-
-            <span
-                class="md:block text-center md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-base uppercase font-normal p-4 px-0"
+                class="md:block text-center md:pb-2 text-gray-800 mr-0 inline-block whitespace-nowrap text-3xl uppercase font-semibold p-4 px-0 dark:text-gray-200"
             >
                 Delivery
-            </span>
+            </Link>
 
             <!-- User -->
             <ul class="md:hidden items-center flex flex-wrap list-none">
@@ -55,8 +48,9 @@ import { computed, ref } from "vue";
                     <div class="flex flex-wrap">
                         <div class="w-6/12">
                             <Link
-                                class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
+                                class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-semibold p-4 px-0"
                             >
+                                <i class="bi bi-database"></i>
                                 Bonazos
                             </Link>
                         </div>
@@ -72,10 +66,12 @@ import { computed, ref } from "vue";
                     </div>
                 </div>
                 <!-- Divider -->
-                <hr class="my-4 md:min-w-full" />
+                <hr
+                    class="my-4 md:min-w-full dark:border-secondary-color border-dashed"
+                />
                 <!-- Heading -->
                 <h6
-                    class="md:min-w-full text-blueGray-500 text-2xs uppercase font-bold block pt-1 pb-4 no-underline"
+                    class="md:min-w-full text-gray-800 text-2xs uppercase font-bold block pt-1 pb-4 no-underline dark:text-gray-300"
                 >
                     Páginas Principais
                 </h6>
@@ -85,15 +81,16 @@ import { computed, ref } from "vue";
                     <li class="items-center">
                         <Link
                             :href="route('dashboard.')"
-                            class="text-sm uppercase py-3 font-bold block"
+                            class="text-base py-3 font-normal block"
                             :class="{
-                                'text-emerald-500 hover:text-emerald-600':
+                                'text-secondary-color-light hover:opacity-90':
                                     $page.url === '/dashboard',
-                                'text-blueGray-700 hover:text-blueGray-500':
+
+                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color':
                                     $page.url != '/dashboard',
                             }"
                         >
-                            <i class="bi bi-house-door"></i>
+                            <i class="bi bi-house-door pr-1"></i>
                             Início
                         </Link>
                     </li>
@@ -101,15 +98,16 @@ import { computed, ref } from "vue";
                     <li class="items-center">
                         <Link
                             :href="route('dashboard.orders')"
-                            class="text-sm uppercase py-3 font-bold block"
+                            class="text-base py-3 font-normal block"
                             :class="{
-                                'text-emerald-500 hover:text-emerald-600':
+                                'text-secondary-color-light hover:opacity-90':
                                     $page.url === '/dashboard/pedidos',
-                                'text-blueGray-700 hover:text-blueGray-500':
+
+                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color':
                                     $page.url != '/dashboard/pedidos',
                             }"
                         >
-                            <i class="bi bi-bookmark"></i>
+                            <i class="bi bi-bookmark pr-1"></i>
                             Pedidos
                         </Link>
                     </li>
@@ -117,15 +115,16 @@ import { computed, ref } from "vue";
                     <li class="items-center">
                         <Link
                             :href="route('dashboard.tables')"
-                            class="text-sm uppercase py-3 font-bold block"
+                            class="text-base py-3 font-normal block"
                             :class="{
-                                'text-emerald-500 hover:text-emerald-600':
+                                'text-secondary-color-light hover:opacity-90':
                                     $page.url === '/dashboard/tabelas',
-                                'text-blueGray-700 hover:text-blueGray-500':
+
+                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color':
                                     $page.url != '/dashboard/tabelas',
                             }"
                         >
-                            <i class="bi bi-table"></i>
+                            <i class="bi bi-table pr-1"></i>
                             Tabelas
                         </Link>
                     </li>
@@ -133,23 +132,26 @@ import { computed, ref } from "vue";
                     <li class="items-center">
                         <Link
                             :href="route('dashboard.menu')"
-                            class="text-sm uppercase py-3 font-bold block"
+                            class="text-base py-3 font-normal block"
                             :class="{
-                                'text-emerald-500 hover:text-emerald-600':
+                                'text-secondary-color-light hover:opacity-90':
                                     $page.url === '/dashboard/cardapio',
-                                'text-blueGray-700 hover:text-blueGray-500':
+
+                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color':
                                     $page.url != '/dashboard/cardapio',
                             }"
                         >
-                            <i class="bi bi-card-list"></i>
+                            <i class="bi bi-card-list pr-1"></i>
                             Cardápio
                         </Link>
                     </li>
                 </ul>
-                <hr class="my-4 md:min-w-full" />
+                <hr
+                    class="my-4 md:min-w-full dark:border-secondary-color border-dashed"
+                />
                 <!-- Heading -->
                 <h6
-                    class="md:min-w-full text-blueGray-500 text-2xs uppercase font-bold block pt-1 pb-4 no-underline"
+                    class="md:min-w-full text-gray-800 text-2xs uppercase font-bold block pt-1 pb-4 no-underline dark:text-gray-300"
                 >
                     Páginas Secundárias
                 </h6>
@@ -157,15 +159,16 @@ import { computed, ref } from "vue";
                     <li class="items-center">
                         <Link
                             :href="route('dashboard.delivery')"
-                            class="text-sm uppercase py-3 font-bold block"
+                            class="text-base py-3 font-normal block"
                             :class="{
-                                'text-emerald-500 hover:text-emerald-600':
+                                'text-secondary-color-light hover:opacity-90':
                                     $page.url === '/dashboard/area-entrega',
-                                'text-blueGray-700 hover:text-blueGray-500':
+
+                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color':
                                     $page.url != '/dashboard/area-entrega',
                             }"
                         >
-                            <i class="bi bi-truck"></i>
+                            <i class="bi bi-truck pr-1"></i>
                             Área de entrega
                         </Link>
                     </li>
@@ -173,17 +176,18 @@ import { computed, ref } from "vue";
                     <li class="items-center">
                         <Link
                             :href="route('dashboard.schedule')"
-                            class="text-sm uppercase py-3 font-bold block"
+                            class="text-base py-3 font-normal block"
                             :class="{
-                                'text-emerald-500 hover:text-emerald-600':
+                                'text-secondary-color-light hover:opacity-90 dark:text-gray-400 hover:text-secondary-color':
                                     $page.url ===
                                     '/dashboard/agendamento-pedido',
-                                'text-blueGray-700 hover:text-blueGray-500':
+
+                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color':
                                     $page.url !=
                                     '/dashboard/agendamento-pedido',
                             }"
                         >
-                            <i class="bi bi-calendar"></i>
+                            <i class="bi bi-calendar pr-1"></i>
                             Agendar Pedido
                         </Link>
                     </li>
@@ -191,17 +195,18 @@ import { computed, ref } from "vue";
                     <li class="items-center">
                         <Link
                             :href="route('dashboard.timetable')"
-                            class="text-sm uppercase py-3 font-bold block"
+                            class="text-base py-3 font-normal block"
                             :class="{
-                                'text-emerald-500 hover:text-emerald-600':
+                                'text-secondary-color-light hover:opacity-90':
                                     $page.url ===
                                     '/dashboard/horario-funcionamento',
-                                'text-blueGray-700 hover:text-blueGray-500':
+
+                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color':
                                     $page.url !=
                                     '/dashboard/horario-funcionamento',
                             }"
                         >
-                            <i class="bi bi-clock"></i>
+                            <i class="bi bi-clock pr-1"></i>
                             Horários
                         </Link>
                     </li>
@@ -209,20 +214,29 @@ import { computed, ref } from "vue";
                     <li class="items-center">
                         <Link
                             :href="route('dashboard.evaluations')"
-                            class="text-sm uppercase py-3 font-bold block"
+                            class="text-base py-3 font-normal block"
                             :class="{
-                                'text-emerald-500 hover:text-emerald-600':
+                                'text-secondary-color-light hover:opacity-90':
                                     $page.url === '/dashboard/avaliacoes',
-                                'text-blueGray-700 hover:text-blueGray-500':
+
+                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color':
                                     $page.url != '/dashboard/avaliacoes',
                             }"
                         >
-                            <i class="bi bi-star"></i>
+                            <i class="bi bi-star pr-1"></i>
                             Avaliações
                         </Link>
                     </li>
                 </ul>
             </div>
+            <span class="text-center text-xs font-thin text-gray-400 dark:text-gray-700">
+                Desenvolvido por
+                
+                <span class="font-bold text-gray-500">
+                    Bonazos <i class="bi bi-database"></i>
+                </span>
+                
+            </span>
         </div>
     </nav>
 </template>

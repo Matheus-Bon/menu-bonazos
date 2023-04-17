@@ -3,8 +3,8 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import './bootstrap';
-import 'boxicons'
-import '../css/tailwind.css';
+import 'boxicons';
+import 'animate.css';
 import '../css/app.css';
 
 

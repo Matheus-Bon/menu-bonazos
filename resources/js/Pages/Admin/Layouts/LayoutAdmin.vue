@@ -14,7 +14,10 @@ import { Head } from "@inertiajs/vue3";
             <AdminNavbar />
             <HeaderStats />
 
-            <slot class="" />
+            <div class="dark:bg-admin-body">
+                <slot class="" />
+            </div>
+            
 
             <FooterAdmin />
         </div>
