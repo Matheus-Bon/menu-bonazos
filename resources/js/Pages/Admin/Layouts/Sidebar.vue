@@ -168,7 +168,7 @@ import { Link } from "@inertiajs/vue3";
                                     $page.url != '/dashboard/area-entrega',
                             }"
                         >
-                            <i class="bi bi-truck pr-1"></i>
+                            <i class="fa-solid fa-location-dot pr-1"></i>
                             Área de entrega
                         </Link>
                     </li>

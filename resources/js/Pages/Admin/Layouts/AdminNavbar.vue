@@ -52,12 +52,15 @@ const hourDay = computed(() => {
             class="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4"
         >
             <div class="text-gray-200">
-                <p class="mb-3 text-base text-secondary-color-light dark:text-secondary-color-dark">
+                <p
+                    class="mb-3 text-base text-secondary-color-light dark:text-secondary-color-dark"
+                >
                     {{ nameRoute }}
                 </p>
                 <p class="text-xl font-medium">
                     {{ hourDay }} {{ user.name }}!
-                </p>     
+                </p>
+                
             </div>
 
             <!-- User -->
