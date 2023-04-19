@@ -34,7 +34,7 @@
 @layer components {
 
     .btn-primary {
-        @apply p-2 px-4 rounded-md bg-primary-color font-medium text-gray-200 text-center hover:opacity-80 transition delay-75 ease-in-out 
+        @apply p-2 px-4 rounded-md bg-primary-color font-medium text-gray-200 text-center hover:opacity-80 transition delay-75 ease-in-out md:px-2 md:text-sm
     }
 }
 
