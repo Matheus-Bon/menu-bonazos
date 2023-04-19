@@ -15,6 +15,8 @@
 
     <script src="https://kit.fontawesome.com/b2a0910940.js" crossorigin="anonymous"></script>
     <!-- Scripts -->
+    
+    
     @routes
     @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
     @inertiaHead

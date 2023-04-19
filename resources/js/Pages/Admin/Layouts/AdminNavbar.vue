@@ -57,7 +57,7 @@ const hourDay = computed(() => {
                 >
                     {{ nameRoute }}
                 </p>
-                <p class="text-xl font-medium">
+                <p class="text-xl font-medium text-gray-700 dark:text-gray-300">
                     {{ hourDay }} {{ user.name }}!
                 </p>
                 

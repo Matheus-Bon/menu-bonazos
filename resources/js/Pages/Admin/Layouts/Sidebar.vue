@@ -86,7 +86,7 @@ import { Link } from "@inertiajs/vue3";
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
                                     $page.url === '/dashboard',
 
-                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
+                                'text-gray-800 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
                                     $page.url != '/dashboard',
                             }"
                         >
@@ -103,7 +103,7 @@ import { Link } from "@inertiajs/vue3";
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
                                     $page.url === '/dashboard/pedidos',
 
-                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
+                                'text-gray-800 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
                                     $page.url != '/dashboard/pedidos',
                             }"
                         >
@@ -120,7 +120,7 @@ import { Link } from "@inertiajs/vue3";
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
                                     $page.url === '/dashboard/tabelas',
 
-                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
+                                'text-gray-800 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
                                     $page.url != '/dashboard/tabelas',
                             }"
                         >
@@ -137,7 +137,7 @@ import { Link } from "@inertiajs/vue3";
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
                                     $page.url === '/dashboard/cardapio',
 
-                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
+                                'text-gray-800 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
                                     $page.url != '/dashboard/cardapio',
                             }"
                         >
@@ -164,7 +164,7 @@ import { Link } from "@inertiajs/vue3";
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
                                     $page.url === '/dashboard/area-entrega',
 
-                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
+                                'text-gray-800 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
                                     $page.url != '/dashboard/area-entrega',
                             }"
                         >
@@ -182,7 +182,7 @@ import { Link } from "@inertiajs/vue3";
                                     $page.url ===
                                     '/dashboard/agendamento-pedido',
 
-                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
+                                'text-gray-800 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
                                     $page.url !=
                                     '/dashboard/agendamento-pedido',
                             }"
@@ -201,7 +201,7 @@ import { Link } from "@inertiajs/vue3";
                                     $page.url ===
                                     '/dashboard/horario-funcionamento',
 
-                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
+                                'text-gray-800 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
                                     $page.url !=
                                     '/dashboard/horario-funcionamento',
                             }"
@@ -219,7 +219,7 @@ import { Link } from "@inertiajs/vue3";
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
                                     $page.url === '/dashboard/avaliacoes',
 
-                                'text-gray-900 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
+                                'text-gray-800 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
                                     $page.url != '/dashboard/avaliacoes',
                             }"
                         >

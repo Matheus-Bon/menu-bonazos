@@ -23,10 +23,12 @@ module.exports = {
                 'secondary-color-dark': '#00C894',
                 'secondary-color-light': '#00AC9A',
                 'light-gray': '#E0E0E0',
-                'gray-750': '#353535'
-                
-                
-                
+                'gray-750': '#353535',
+                'indigo-09': '#6382D8'
+                   
+            },
+            boxShadow: {
+                'shadow-input-search': ''
             }
         },
     },
