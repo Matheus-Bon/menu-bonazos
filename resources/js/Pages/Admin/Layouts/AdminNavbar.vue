@@ -1,7 +1,7 @@
 <script setup>
 import UserDropdown from "@/Pages/Admin/Components/UserDropdown.vue";
 import { Link, usePage } from "@inertiajs/vue3";
-import { computed } from "vue";
+import { computed, reactive, ref } from "vue";
 
 const user = usePage().props.auth.user;
 
@@ -41,6 +41,19 @@ const hourDay = computed(() => {
         return "Boa noite,";
     }
 });
+
+/* Lógica para desaparecer o flash */
+const isVisible = ref(true)
+const slideOut = ref(false)
+
+setTimeout(() => {
+    isVisible.value = false
+}, 5000);
+
+setTimeout(() => {
+    slideOut.value = true
+},4000)
+
 </script>
 
 <template>
@@ -60,7 +73,20 @@ const hourDay = computed(() => {
                 <p class="text-xl font-medium text-gray-700 dark:text-gray-300">
                     {{ hourDay }} {{ user.name }}!
                 </p>
-                
+            </div>
+
+            <div
+                v-if="$page.props.flash.success && isVisible"
+                class="absolute inset-x-1/3 top-0 flex flex-row gap-2 p-2 text-lg font-medium text-gray-800 justify-center rounded-b-md bg-secondary-color-dark w-1/5 animate__animated animate__slideInDown"
+                :class="[slideOut ? 'animate__slideOutUp' : '' ]"
+            >
+                <div>
+                    <i class="bi bi-check2-all text-2xl"></i>
+                </div>
+                <div>
+                    
+                    {{ $page.props.flash.success }}
+                </div>
             </div>
 
             <!-- User -->

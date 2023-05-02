@@ -24,7 +24,7 @@ import { Link } from "@inertiajs/vue3";
                 :href="route('dashboard.')"
                 class="md:block text-center md:pb-2 text-gray-800 mr-0 inline-block whitespace-nowrap text-3xl uppercase font-semibold p-4 px-0 dark:text-gray-200"
             >
-                Delivery
+                NOME - LOJA
             </Link>
 
             <!-- User -->
@@ -131,7 +131,7 @@ import { Link } from "@inertiajs/vue3";
 
                     <li class="items-center">
                         <Link
-                            :href="route('dashboard.menu')"
+                            :href="route('dashboard.category.index')"
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':

@@ -14,7 +14,13 @@ class CategoryAdminController extends Controller
      */
     public function index()
     {
-        return inertia('Admin/Partials/CardCategories');
+        return inertia('Admin/Menu',
+
+            [
+                'categories' => Category::all()
+            ]
+                
+        );
     }
 
     /**
@@ -30,9 +36,10 @@ class CategoryAdminController extends Controller
      */
     public function store(Request $request)
     {
+        //dd(Category::all());
         
         $request->validate([
-            'name' => 'required|max:40',
+            'name' => 'required|min:2|max:40',
             'active' => 'boolean'
         ]);
 
@@ -41,7 +48,7 @@ class CategoryAdminController extends Controller
             'active' => false
         ]);
 
-        return redirect()->back()->with('success', 'Categoria criada!');
+        return Redirect::back()->with('success', 'Categoria criada!');
         
     }
 
@@ -64,16 +71,35 @@ class CategoryAdminController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Category $category)
+    {   
+        $categoryFound = Category::findOrFail($category->id);
+
+        $categoryFound->name = $request->name;
+        $categoryFound->save();
+        
+        return back();
+    }
+
+    public function updateActiveCategory(Request $request, Category $category)
     {
-        //
+        $category->active = !$category->active;
+        $category->save();
+
+        return back();
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        //
+        $categoryFound = Category::findOrFail($category->id);
+
+        $categoryFound->delete();
+
+        return back();
     }
+
 }

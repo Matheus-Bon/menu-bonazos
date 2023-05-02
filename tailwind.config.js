@@ -22,6 +22,15 @@ module.exports = {
                 'primary-color': '#2794eb',
                 'secondary-color-dark': '#00C894',
                 'secondary-color-light': '#00AC9A',
+                'secondary-color': {
+                    100: '#3ED0A9',
+                    200: '#3ED0A9',
+                    300: '#00946C',
+                    400: '#15473A',
+                    500: '#004734'
+
+
+                },
                 'light-gray': '#E0E0E0',
                 'gray-750': '#353535',
                 'indigo-09': '#6382D8'

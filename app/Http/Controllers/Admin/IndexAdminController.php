@@ -22,11 +22,6 @@ class IndexAdminController extends Controller
         return inertia('Admin/Tables');
     }
 
-    public function menu()
-    {
-        return inertia('Admin/Menu');
-    }
-
     public function delivery()
     {
         return inertia('Admin/Delivery');

@@ -7,19 +7,21 @@ import {
     TransitionChild,
     TransitionRoot,
 } from "@headlessui/vue";
-import { ExclamationTriangleIcon } from "@heroicons/vue/24/outline";
 
-const props = defineProps({ open: Boolean });
-const emit = defineEmits();
+defineEmits(["close-modal"]);
+const modal = ref(null);
 
-const close = () => {
-    emit("close");
-};
+const props = defineProps({
+    modalActive: {
+        type: Boolean,
+        default: false,
+    },
+});
 </script>
 
 <template>
-    <TransitionRoot as="template" :show="props.open">
-        <Dialog as="div" class="relative z-10" @close="close" @click.away="close">
+    <TransitionRoot as="template" :show="modalActive" ref="modal">
+        <Dialog as="div" class="relative z-10">
             <TransitionChild
                 as="template"
                 enter="ease-out duration-300"
@@ -48,10 +50,24 @@ const close = () => {
                         leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     >
                         <DialogPanel
-                            class="h-full relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl shadow-white/10 transition-all"
+                            class="h-full relative transform overflow-hidden rounded-lg bg-white dark:bg-admin-body text-left shadow-xl shadow-white/10 transition-all"
                         >
-                            <slot />
-                            
+                            <DialogTitle
+                                as="h2"
+                                class="pb-2 text-3xl font-semibold dark:text-gray-300 text-gray-700"
+                            >
+                                <slot name="modal-title" />
+                            </DialogTitle>
+
+                            <main
+                                class="bg-white dark:bg-admin-body h-[80vh] w-[100vh] px-4 pb-4 pt-5 sm:p-6 sm:pb-4"
+                            >
+                                <slot name="modal-body" />
+                            </main>
+
+                            <footer>
+                                <slot name="modal-buttons" />
+                            </footer>
                         </DialogPanel>
                     </TransitionChild>
                 </div>

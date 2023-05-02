@@ -50,7 +50,7 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified', 
     Route::get('', [IndexAdminController::class, 'index']);
     Route::get('/pedidos', [IndexAdminController::class, 'orders'])->name('orders');
     Route::get('/tabelas', [IndexAdminController::class, 'tables'])->name('tables');
-    Route::get('/cardapio', [IndexAdminController::class, 'menu'])->name('menu');
+    //Route::get('/cardapio', [IndexAdminController::class, 'menu'])->name('menu');
     Route::get('/area-entrega', [IndexAdminController::class, 'delivery'])->name('delivery');
     Route::get('/agendamento-pedido', [IndexAdminController::class, 'schedule'])->name('schedule');
     Route::get('/horario-funcionamento', [IndexAdminController::class, 'timetable'])->name('timetable');
@@ -59,8 +59,8 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified', 
     /* Rotas de Ações */
 
     //CRUD Categoria
-    Route::resource('category', CategoryAdminController::class)->except(['index']);
-
+    Route::resource('category', CategoryAdminController::class);
+    Route::put('category/{category}/active-category', [CategoryAdminController::class, 'updateActiveCategory'])->name('update.active.category');
     
 });
 

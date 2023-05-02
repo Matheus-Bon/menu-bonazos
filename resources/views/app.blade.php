@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" >
 
 <head>
     <meta charset="utf-8">
@@ -15,6 +15,9 @@
 
     <script src="https://kit.fontawesome.com/b2a0910940.js" crossorigin="anonymous"></script>
     <!-- Scripts -->
+
+
+ <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     
     
     @routes

@@ -1,10 +1,8 @@
 <template>
     <footer class="block py-1 dark:bg-admin-body">
         <div class="flex px-4">
-            <hr class="mb-4 border- border-gray-200 dark:border-gray-200" />
-            <div
-                class="flex items-center basis-full justify-end"
-            >
+            <hr class="mb-4 border-gray-200 dark:border-gray-200" />
+            <div class="flex items-center basis-full justify-end">
                 <div class="w-full md:w-4/12 px-4">
                     <div
                         class="text-sm text-gray-500 font-semibold py-1 text-right"

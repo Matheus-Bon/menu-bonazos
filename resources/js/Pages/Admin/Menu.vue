@@ -6,31 +6,27 @@ import AdminNavbar from "@/Pages/Admin/Layouts/AdminNavbar.vue";
 import CardCategories from "./Partials/CardCategories.vue";
 import { Head } from "@inertiajs/vue3";
 import CardViewDelivery from "./Partials/CardViewDelivery.vue";
+
+defineProps({ categories: Object });
+
 </script>
 
 <template>
     <Head title="Cardápio" />
-    <div>
-        <Sidebar />
-        <div class="relative md:ml-64 bg-gray-100">
-            <AdminNavbar />
 
-            <div v-if="$page.props.flash.success" class="alert">
-                {{ $page.props.flash.success }}
-            </div>
-
-            <div class="pt-9 dark:bg-admin-body h-screen">
-                <div class="flex flex-row pt-20 mx-14 justify-center gap-5">
-                    <div class="basis-2/3">
-                        <CardCategories />
-                    </div>
-                    <div class="basis-1/3">
-                        <CardViewDelivery />
-                    </div>
+    <Sidebar />
+    <div class="relative md:ml-64 bg-admin-body">
+        <AdminNavbar />
+        <div class="pt-9 dark:bg-admin-body">
+            <div class="flex flex-row pt-20 mx-14 justify-center gap-5">
+                <div class="basis-2/3">
+                    <CardCategories :categories="categories" />
+                </div>
+                <div class="basis-1/3">
+                    <CardViewDelivery />
                 </div>
             </div>
-
-            <FooterAdmin />
         </div>
     </div>
+    <FooterAdmin />
 </template>
