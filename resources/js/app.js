@@ -2,10 +2,16 @@ import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
-
+import NProgress from 'nprogress'
+import { router } from '@inertiajs/vue3'
 
 import "animate.css";
 import "../css/app.css";
+
+
+router.on('start', () => NProgress.start())
+router.on('finish', () => NProgress.done())
+
 
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
@@ -24,6 +30,6 @@ createInertiaApp({
             .mount(el);
     },
     progress: {
-        color: "#4B5563",
+        progress: false,
     },
 });

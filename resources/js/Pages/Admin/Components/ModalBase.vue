@@ -1,5 +1,6 @@
 <script setup>
 import { computed, ref } from "vue";
+import { onClickOutside } from "@vueuse/core";
 import {
     Dialog,
     DialogPanel,
@@ -10,17 +11,25 @@ import {
 
 defineEmits(["close-modal"]);
 const modal = ref(null);
+const open = ref(false);
 
-const props = defineProps({
-    modalActive: {
-        type: Boolean,
-        default: false,
-    },
-});
+const toggleModal = () => {
+    if (!open.value) {
+        open.value = !open.value;
+    }
+};
+
+const toggleModalAfter = () => {
+    if (open.value) {
+        open.value = !open.value;
+    }
+};
+
+defineExpose({ toggleModal, toggleModalAfter });
 </script>
 
 <template>
-    <TransitionRoot as="template" :show="modalActive" ref="modal">
+    <TransitionRoot as="template" :show="open" v-if="open" ref="modal">
         <Dialog as="div" class="relative z-10">
             <TransitionChild
                 as="template"

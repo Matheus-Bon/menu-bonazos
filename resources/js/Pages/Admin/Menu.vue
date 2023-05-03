@@ -3,9 +3,9 @@
 import FooterAdmin from "@/Pages/Admin/Layouts/FooterAdmin.vue";
 import Sidebar from "@/Pages/Admin/Layouts/Sidebar.vue";
 import AdminNavbar from "@/Pages/Admin/Layouts/AdminNavbar.vue";
-import CardCategories from "./Partials/CardCategories.vue";
+import CardCategories from "./Partials/Menu/CardCategories.vue";
 import { Head } from "@inertiajs/vue3";
-import CardViewDelivery from "./Partials/CardViewDelivery.vue";
+import CardViewDelivery from "./Partials/Menu/CardViewDelivery.vue";
 
 defineProps({ categories: Object });
 

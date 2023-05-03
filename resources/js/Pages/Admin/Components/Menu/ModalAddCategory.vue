@@ -5,6 +5,8 @@ import { ref } from "vue";
 import { vOnClickOutside } from "@vueuse/components";
 import { onClickOutside } from "@vueuse/core";
 
+/* Lógica Create para Categoria */
+// Início
 const form = useForm({
     name: null,
     active: false,
@@ -14,25 +16,20 @@ const create = () =>
     form.post(route("dashboard.category.store"), {
         preserveState: (page) => Object.keys(page.props.errors).length,
     });
-
-// Lógica para abrir o modal no componente pai
+//Fim
 
 const open = ref(false);
 const modal = ref(null);
 
-const toggleModal = () => {
-    if (!open.value) {
-        open.value = !open.value;
-    }
-};
-
-defineExpose({ toggleModal });
-
 const toggleModalAfter = () => {
-    if (open.value) {
-        open.value = !open.value;
-    }
+    modal.value.toggleModalAfter()
 };
+
+const toggleModal = () => {
+    modal.value.toggleModal()
+}
+
+defineExpose({ toggleModal, toggleModalAfter });
 
 onClickOutside(modal, toggleModalAfter);
 </script>

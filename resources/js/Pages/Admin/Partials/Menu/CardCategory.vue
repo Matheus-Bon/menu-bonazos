@@ -1,32 +1,44 @@
 <script setup>
-import { ref, computed } from "vue";
-import { useForm, useRemember } from '@inertiajs/vue3'
+import { ref } from "vue";
+import { useForm } from "@inertiajs/vue3";
 import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
-import ModalUpdateCategory from "../Components/ModalUpdateCategory.vue";
+import ModalUpdateCategory from "@/Pages/Admin/Components/Menu/ModalUpdateCategory.vue";
+import { onClickOutside } from "@vueuse/core";
 
-const modal = ref(null);
 
+const modal = ref(null); // Referência do ModalUpdateCategory - Final: Pegar atributos e funções do ModalUpdateCategory
+
+/* Constante que pega as informações do BD para usar no front  */
 const props = defineProps({
     category: Object,
     product: Object,
 });
 
+/* Constante que armazena uma função de abrir/fechar o modal */
 const toggleModal = () => {
     modal.value.toggleModal();
 };
 
-const form = useForm({
-    active: props.category.active
-})
+const closeModal = () => {
+    modal.value.toggleModalAfter();
+};
 
-const activeCategory = () => form.put(route('dashboard.update.active.category', props.category.id))
+/* Lógica Update para ativar/desativar Categoria */
+// Início
+const form = useForm({
+    active: props.category.active,
+});
+
+const activeCategory = () =>
+    form.put(route("dashboard.update.active.category", props.category.id));
+
+// Fim
 
 
 </script>
 
 <template>
     <ModalUpdateCategory :category="category" ref="modal" />
-
     <BoxBorder>
         <div class="p-4">
             <section>
@@ -57,7 +69,6 @@ const activeCategory = () => form.put(route('dashboard.update.active.category', 
                                 >
                                     Ativar
                                 </label>
-
                             </form>
                         </div>
 

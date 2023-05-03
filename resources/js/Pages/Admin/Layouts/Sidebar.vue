@@ -131,14 +131,14 @@ import { Link } from "@inertiajs/vue3";
 
                     <li class="items-center">
                         <Link
-                            :href="route('dashboard.category.index')"
+                            :href="route('dashboard.menu.index')"
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
-                                    $page.url === '/dashboard/cardapio',
+                                    $page.url === '/dashboard/menu',
 
                                 'text-gray-800 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
-                                    $page.url != '/dashboard/cardapio',
+                                    $page.url != '/dashboard/menu',
                             }"
                         >
                             <i class="bi bi-card-list pr-1"></i>

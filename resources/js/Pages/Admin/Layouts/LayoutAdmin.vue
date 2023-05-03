@@ -7,14 +7,13 @@ import AdminNavbar from "@/Pages/Admin/Layouts/AdminNavbar.vue";
 
 <template>
     <Sidebar />
-    <div class="relative md:ml-64 bg-blueGray-100">
+    <div class="relative md:ml-64 dark:bg-admin-body">
         <AdminNavbar />
         <HeaderStats />
 
         <div class="dark:bg-admin-body">
             <slot class="" />
         </div>
-
-        <FooterAdmin />
     </div>
+    <FooterAdmin />
 </template>

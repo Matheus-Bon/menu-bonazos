@@ -100,6 +100,7 @@ class AddressController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * Essa função usa AddressUpdateRequest (Dentro de App/Http/Requests) para criar o validador em outro arquivo
      */
     public function update(AddressUpdateRequest $request, $addressId):RedirectResponse
     {

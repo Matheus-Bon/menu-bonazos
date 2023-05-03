@@ -3,48 +3,42 @@ import ModalBase from "@/Pages/Admin/Components/ModalBase.vue";
 import { useForm, Link } from "@inertiajs/vue3";
 import { ref } from "vue";
 import { onClickOutside } from "@vueuse/core";
+import { vOnClickOutside } from '@vueuse/components'
 // Lógica para abrir o modal no componente pai
 
-const open = ref(false);
 const modal = ref(null);
 
 const props = defineProps({ category: Object });
 
-const toggleModal = () => {
-    if (!open.value) {
-        open.value = !open.value;
-    }
-};
-
-defineExpose({ toggleModal });
-
 const toggleModalAfter = () => {
-    if (open.value) {
-        open.value = !open.value;
-    }
+    modal.value.toggleModalAfter()
 };
 
-onClickOutside(modal, toggleModalAfter);
+const toggleModal = () => {
+    modal.value.toggleModal()
+}
 
 const form = useForm({
     name: props.category.name,
-    date: props.category.timestamps,
 });
 
 const update = () =>
     form.put(
-        route("dashboard.category.update", { category: props.category.id }),
+        route("dashboard.menu.update", { category: props.category.id }),
         {
             preserveState: (page) => Object.keys(page.props.errors).length,
             preserveScroll: true,
         }
     );
+
+defineExpose({ toggleModal, toggleModalAfter });
+
 </script>
 
 <template>
-    <ModalBase :modal-active="open" ref="modal">
+    <ModalBase ref="modal">
         <template #modal-title>
-            <div class="pt-10 pl-6">
+            <div class="pl-6">
                 <i
                     class="bx bx-category text-4xl text-secondary-color-100 pr-1"
                 ></i>
@@ -52,6 +46,11 @@ const update = () =>
                 <span class="text-secondary-color-100">{{
                     category.name
                 }}</span>
+            </div>
+            <div class="pt-10 pl-6">
+                <p class="text-sm font-light text-gray-500">
+                    Categoria criada em: 
+                </p>
             </div>
         </template>
 
@@ -93,7 +92,11 @@ const update = () =>
                         as="button"
                         type="submit"
                         class="btn-delete"
-                        :href="route('dashboard.category.destroy', {category: props.category.id})"
+                        :href="
+                            route('dashboard.menu.destroy', {
+                                menu: props.category.id,
+                            })
+                        "
                         method="DELETE"
                     >
                         Excluir {{ category.name }}
@@ -114,7 +117,7 @@ const update = () =>
                     Salvar Mudanças
                 </button>
                 <button
-                    @click="toggleModalAfter && form.reset()"
+                    @click="toggleModalAfter"
                     type="button"
                     class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                     ref="cancelButtonRef"

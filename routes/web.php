@@ -48,19 +48,17 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified', 
 
     /* Rotas de Visualização */
     Route::get('', [IndexAdminController::class, 'index']);
-    Route::get('/pedidos', [IndexAdminController::class, 'orders'])->name('orders');
-    Route::get('/tabelas', [IndexAdminController::class, 'tables'])->name('tables');
-    //Route::get('/cardapio', [IndexAdminController::class, 'menu'])->name('menu');
-    Route::get('/area-entrega', [IndexAdminController::class, 'delivery'])->name('delivery');
-    Route::get('/agendamento-pedido', [IndexAdminController::class, 'schedule'])->name('schedule');
-    Route::get('/horario-funcionamento', [IndexAdminController::class, 'timetable'])->name('timetable');
-    Route::get('/avaliacoes', [IndexAdminController::class, 'evaluations'])->name('evaluations');
+    Route::get('/orders', [IndexAdminController::class, 'orders'])->name('orders');
+    Route::get('/tables', [IndexAdminController::class, 'tables'])->name('tables');
+    Route::get('/delivery-area', [IndexAdminController::class, 'delivery'])->name('delivery');
+    Route::get('/schedule', [IndexAdminController::class, 'schedule'])->name('schedule');
+    Route::get('/timetable', [IndexAdminController::class, 'timetable'])->name('timetable');
+    Route::get('/evaluations', [IndexAdminController::class, 'evaluations'])->name('evaluations');
 
-    /* Rotas de Ações */
-
-    //CRUD Categoria
-    Route::resource('category', CategoryAdminController::class);
-    Route::put('category/{category}/active-category', [CategoryAdminController::class, 'updateActiveCategory'])->name('update.active.category');
+    /* Rotas de CRUD */
+    //CRUD Menu
+    Route::resource('menu', CategoryAdminController::class);
+    Route::put('menu/{category}/active-category', [CategoryAdminController::class, 'updateActiveCategory'])->name('update.active.category');
     
 });
 

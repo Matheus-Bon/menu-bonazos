@@ -1,5 +1,5 @@
 <template>
-    <footer class="block py-1 dark:bg-admin-body">
+    <footer class="block relative bottom-0 left-0 right-0 py-1 mt-5">
         <div class="flex px-4">
             <hr class="mb-4 border-gray-200 dark:border-gray-200" />
             <div class="flex items-center basis-full justify-end">

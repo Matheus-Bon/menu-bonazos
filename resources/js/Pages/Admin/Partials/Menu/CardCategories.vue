@@ -1,8 +1,9 @@
 <script setup>
 import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
-import SelectMenu from "../Components/SelectMenu.vue";
-import CardCategory from "./CardCategory.vue";
-import ModalAddCategory from "@/Pages/Admin/Components/ModalAddCategory.vue";
+import SelectMenu from "@/Pages/Admin/Components/SelectMenu.vue";
+import CardCategory from "@/Pages/Admin/Partials/Menu/CardCategory.vue";
+import ModalAddCategory from "@/Pages/Admin/Components/Menu/ModalAddCategory.vue";
+
 import { ref } from "vue";
 
 defineProps({ categories: Object });
@@ -15,7 +16,7 @@ const toggleModal = () => {
 
 <template>
     <ModalAddCategory ref="modal" />
-
+    
     <div class="flex flex-col gap-10">
         <BoxBorder>
             <div class="bg-white p-4 dark:bg-admin-body">
