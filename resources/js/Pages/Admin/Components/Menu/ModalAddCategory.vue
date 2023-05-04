@@ -13,7 +13,7 @@ const form = useForm({
 });
 
 const create = () =>
-    form.post(route("dashboard.category.store"), {
+    form.post(route("dashboard.menu.store"), {
         preserveState: (page) => Object.keys(page.props.errors).length,
     });
 //Fim
@@ -27,15 +27,18 @@ const toggleModalAfter = () => {
 
 const toggleModal = () => {
     modal.value.toggleModal()
+    open.value = modal.value.isOpen()
 }
 
 defineExpose({ toggleModal, toggleModalAfter });
 
-onClickOutside(modal, toggleModalAfter);
+
+onClickOutside(modal, (event) => {console.log(event);toggleModalAfter()})
+
 </script>
 
 <template>
-    <ModalBase :modal-active="open" ref="modal">
+    <ModalBase :modal-active="open" >
         <template #modal-title>
             <section class="pl-6 pt-10">
                 <div>
@@ -52,7 +55,7 @@ onClickOutside(modal, toggleModalAfter);
             </section>
         </template>
 
-        <template #modal-body>
+        <template #modal-body ref="modal">
             <section>
                 <form id="category-form" @submit.prevent="create">
                     <div class="flex flex-col">

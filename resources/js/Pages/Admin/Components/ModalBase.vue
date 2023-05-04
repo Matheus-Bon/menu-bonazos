@@ -25,12 +25,14 @@ const toggleModalAfter = () => {
     }
 };
 
-defineExpose({ toggleModal, toggleModalAfter });
+const isOpen = () => {return open.value}
+
+defineExpose({ toggleModal, toggleModalAfter, isOpen });
 </script>
 
 <template>
-    <TransitionRoot as="template" :show="open" v-if="open" ref="modal">
-        <Dialog as="div" class="relative z-10">
+    <TransitionRoot as="template" :show="open"  v-if="open" ref="modal" >
+        <Dialog as="div" class="relative z-10" >
             <TransitionChild
                 as="template"
                 enter="ease-out duration-300"
@@ -60,6 +62,7 @@ defineExpose({ toggleModal, toggleModalAfter });
                     >
                         <DialogPanel
                             class="h-full relative transform overflow-hidden rounded-lg bg-white dark:bg-admin-body text-left shadow-xl shadow-white/10 transition-all"
+                            
                         >
                             <DialogTitle
                                 as="h2"

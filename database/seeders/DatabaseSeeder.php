@@ -21,5 +21,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(RoleSeeder::class);
         $this->call(AdminSeeder::class);
+
+        \App\Models\Timetable::factory(1)->create();
     }
 }

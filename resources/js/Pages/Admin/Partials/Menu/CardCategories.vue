@@ -19,9 +19,9 @@ const toggleModal = () => {
     
     <div class="flex flex-col gap-10">
         <BoxBorder>
-            <div class="bg-white p-4 dark:bg-admin-body">
-                <section>
-                    <div
+
+            <template #card-header>
+                <div
                         class="p-2 border border-l-8 border-indigo-500 dark:border-indigo-700 rounded-md xl:w-full 2xl:w-9/12"
                     >
                         <h5
@@ -32,8 +32,9 @@ const toggleModal = () => {
                             estarão no seu catálago.
                         </h5>
                     </div>
-
-                    <div class="pt-10">
+            </template>
+                <section>
+                    <div class="">
                         <div class="flex flex-row justify-between">
                             <div>
                                 <button
@@ -78,7 +79,6 @@ const toggleModal = () => {
                         </div>
                     </div>
                 </section>
-            </div>
         </BoxBorder>
 
         <section>

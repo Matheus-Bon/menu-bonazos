@@ -32,10 +32,6 @@ class IndexAdminController extends Controller
         return inertia('Admin/Schedule');
     }
 
-    public function timetable()
-    {
-        return inertia('Admin/Timetable');
-    }
 
     public function evaluations()
     {

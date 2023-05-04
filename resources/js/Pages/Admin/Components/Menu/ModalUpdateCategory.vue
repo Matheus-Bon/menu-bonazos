@@ -94,7 +94,7 @@ defineExpose({ toggleModal, toggleModalAfter });
                         class="btn-delete"
                         :href="
                             route('dashboard.menu.destroy', {
-                                menu: props.category.id,
+                                category: props.category.id,
                             })
                         "
                         method="DELETE"

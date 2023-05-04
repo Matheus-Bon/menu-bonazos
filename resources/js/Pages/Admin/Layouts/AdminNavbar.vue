@@ -1,7 +1,7 @@
 <script setup>
 import UserDropdown from "@/Pages/Admin/Components/UserDropdown.vue";
 import { Link, usePage } from "@inertiajs/vue3";
-import { computed, reactive, ref } from "vue";
+import { computed, reactive, ref, onMounted } from "vue";
 
 const user = usePage().props.auth.user;
 
@@ -16,13 +16,13 @@ const routes = [
     { path: "/dashboard/menu", name: "Cardápio" },
     { path: "/dashboard/delivery-area", name: "Área de Entrega" },
     { path: "/dashboard/schedule", name: "Agendamento de Pedidos" },
-    {
-        path: "/dashboard/timetable",
-        name: "Horário de Funcionamento",
-    },
+    { path: "/dashboard/timetable", name: "Horário de Funcionamento" },
     { path: "/dashboard/evaluations", name: "Avaliações" },
 ];
 
+/* 
+Função com finalidade de buscar a url na matriz routes e comparar com a url que o user está no site
+*/
 const nameRoute = computed(() => {
     const currentRoute = routes.find((route) => route.path === usePage().url);
 
@@ -43,17 +43,19 @@ const hourDay = computed(() => {
 });
 
 /* Lógica para desaparecer o flash */
-const isVisible = ref(true)
-const slideOut = ref(false)
+const showNotif = ref(false)
 
-setTimeout(() => {
-    isVisible.value = false
-}, 5000);
+onMounted(() => {
+    showNotif.value = true;
+    setTimeout(() => {
+        showNotif.value = false;
+        usePage().props.flash.success = null;
+    }, 6000);
+    
+});
 
-setTimeout(() => {
-    slideOut.value = true
-},4000)
 
+console.log(usePage().props.flash.success);
 </script>
 
 <template>
@@ -75,23 +77,30 @@ setTimeout(() => {
                 </p>
             </div>
 
-            <div
-                v-if="$page.props.flash.success && isVisible"
-                class="absolute inset-x-1/3 top-0 flex flex-row gap-2 p-2 text-lg font-medium text-gray-800 justify-center rounded-b-md bg-secondary-color-dark w-1/5 animate__animated animate__slideInDown"
-                :class="[slideOut ? 'animate__slideOutUp' : '' ]"
+            <Transition
+                enter-active-class="animate__animated animate__slideInDown animate__slow"
+                leave-active-class="animate__animated animate__slideOutUp animate__slow"
+                
             >
-                <div>
-                    <i class="bi bi-check2-all text-2xl"></i>
+                <div
+                    v-if="$page.props.flash.success && showNotif"
+                    class="fixed top-0 flex flex-row gap-2 p-2 text-lg font-medium text-gray-800 justify-center rounded-b-md bg-secondary-color-dark w-1/5"
+                    style="left: calc(50% - 200px)"
+                >
+                    <div>
+                        <i class="bi bi-check2-all text-2xl"></i>
+                    </div>
+                    <div>
+                        {{ $page.props.flash.success }}
+                    </div>
                 </div>
-                <div>
-                    
-                    {{ $page.props.flash.success }}
-                </div>
-            </div>
-
+            </Transition>
             <!-- User -->
             <UserDropdown />
         </div>
     </nav>
     <!-- End Navbar -->
 </template>
+
+<!--  -->
+<!-- && isVisible -->

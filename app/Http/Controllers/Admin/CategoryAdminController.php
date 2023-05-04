@@ -99,7 +99,7 @@ class CategoryAdminController extends Controller
 
         $categoryFound->delete();
 
-        return back();
+        return Redirect::back()->with('success', 'Categoria excluída!');
     }
 
 }

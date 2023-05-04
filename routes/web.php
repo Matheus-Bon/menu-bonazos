@@ -3,6 +3,7 @@
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\Admin\CategoryAdminController;
 use App\Http\Controllers\Admin\IndexAdminController;
+use App\Http\Controllers\Admin\TimetableController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StandardAddressChange;
 use Illuminate\Foundation\Application;
@@ -52,13 +53,15 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified', 
     Route::get('/tables', [IndexAdminController::class, 'tables'])->name('tables');
     Route::get('/delivery-area', [IndexAdminController::class, 'delivery'])->name('delivery');
     Route::get('/schedule', [IndexAdminController::class, 'schedule'])->name('schedule');
-    Route::get('/timetable', [IndexAdminController::class, 'timetable'])->name('timetable');
     Route::get('/evaluations', [IndexAdminController::class, 'evaluations'])->name('evaluations');
 
     /* Rotas de CRUD */
     //CRUD Menu
-    Route::resource('menu', CategoryAdminController::class);
+    Route::resource('menu', CategoryAdminController::class)->parameters(['menu' => 'category']);
     Route::put('menu/{category}/active-category', [CategoryAdminController::class, 'updateActiveCategory'])->name('update.active.category');
+
+    //CRUD Timetable
+    Route::resource('timetable', TimetableController::class)->parameters(['timetable' => 'id']);
     
 });
 

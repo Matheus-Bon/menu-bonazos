@@ -194,16 +194,16 @@ import { Link } from "@inertiajs/vue3";
 
                     <li class="items-center">
                         <Link
-                            :href="route('dashboard.timetable')"
+                            :href="route('dashboard.timetable.index')"
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
                                     $page.url ===
-                                    '/dashboard/horario-funcionamento',
+                                    '/dashboard/timetable',
 
                                 'text-gray-800 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
                                     $page.url !=
-                                    '/dashboard/horario-funcionamento',
+                                    '/dashboard/timetable',
                             }"
                         >
                             <i class="bi bi-clock pr-1"></i>

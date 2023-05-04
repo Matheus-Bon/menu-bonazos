@@ -3,23 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Timetable;
 use Illuminate\Http\Request;
 
-class TimetableController extends Controller
+class HolidayController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return inertia('Admin/Timetable',
-
-            [
-                'timetable' => Timetable::all()
-            ]
-    
-        );
+        //
     }
 
     /**
@@ -57,7 +50,7 @@ class TimetableController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Timetable $timetable)
+    public function update(Request $request, string $id)
     {
         //
     }
