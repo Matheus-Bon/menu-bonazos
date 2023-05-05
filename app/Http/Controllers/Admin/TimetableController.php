@@ -16,7 +16,7 @@ class TimetableController extends Controller
         return inertia('Admin/Timetable',
 
             [
-                'timetable' => Timetable::all()
+                'timetable' => Timetable::find(1)->first()
             ]
     
         );

@@ -14,7 +14,7 @@ const formHour = useForm({
     preserveScroll: true
 }) */
 
-console.log(props.timetable.opens_at)
+console.log(props.timetable.closes_at)
 </script>
 
 <template>
@@ -194,7 +194,13 @@ console.log(props.timetable.opens_at)
                 </h3>
 
                 <div class="flex flex-row gap-5 items-center">
-                    <form action="">
+                        
+
+    
+                    <label id="opensAt" class="text-base font-medium text-secondary-color-300">
+                        Loja abrirá às:
+                    </label>
+                    <div class="basis-3/12">
                         <select
                             id="opensAt"
                             class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
@@ -213,13 +219,6 @@ console.log(props.timetable.opens_at)
                             <option value="02:30">02:30</option>
                             <option value="02:45">02:45</option>
                         </select>
-
-                    </form>
-                    <label id="opensAt" class="text-base font-medium text-secondary-color-300">
-                        Loja abrirá às:
-                    </label>
-                    <div class="basis-3/12">
-                        
                     </div>
 
                     <div class="text-base font-medium text-red-400">

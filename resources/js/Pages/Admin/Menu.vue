@@ -15,7 +15,7 @@ defineProps({ categories: Object });
     <Head title="Cardápio" />
 
     <Sidebar />
-    <div class="relative md:ml-64 bg-admin-body">
+    <div class="relative md:ml-64">
         <AdminNavbar />
         <div class="pt-9 dark:bg-admin-body">
             <div class="flex flex-row pt-20 mx-14 justify-center gap-5">

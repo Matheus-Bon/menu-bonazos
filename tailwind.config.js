@@ -18,6 +18,7 @@ module.exports = {
             },
             colors: {
                 'admin-body': '#1d1f20',
+                'admin-body-light': '#f4f7f6',
                 'admin-card': '#212324',
                 'primary-color': '#2794eb',
                 'secondary-color-dark': '#00C894',
@@ -28,8 +29,6 @@ module.exports = {
                     300: '#00946C',
                     400: '#15473A',
                     500: '#004734'
-
-
                 },
                 'light-gray': '#E0E0E0',
                 'gray-750': '#353535',

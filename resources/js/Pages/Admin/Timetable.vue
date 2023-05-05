@@ -8,9 +8,9 @@ import AdminNavbar from "@/Pages/Admin/Layouts/AdminNavbar.vue";
 import CardTimetable from "./Partials/Timetable/CardTimetable.vue";
 import CardHoliday from "./Partials/Timetable/CardHoliday.vue";
 
-defineProps({timetable: Object})
+const props = defineProps({timetable: Object})
 
-
+console.log(props.timetable)
 </script>
 
 <template>

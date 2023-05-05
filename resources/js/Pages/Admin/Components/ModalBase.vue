@@ -25,15 +25,13 @@ const toggleModalAfter = () => {
     }
 };
 
-const isOpen = () => {return open.value}
-
-defineExpose({ toggleModal, toggleModalAfter, isOpen });
+defineExpose({ toggleModal, toggleModalAfter });
 </script>
 
 <template>
     <TransitionRoot as="template" :show="open"  v-if="open" ref="modal" >
         <Dialog as="div" class="relative z-10" >
-            <TransitionChild
+            <TransitionChild 
                 as="template"
                 enter="ease-out duration-300"
                 enter-from="opacity-0"
@@ -42,16 +40,16 @@ defineExpose({ toggleModal, toggleModalAfter, isOpen });
                 leave-from="opacity-100"
                 leave-to="opacity-0"
             >
-                <div
+                <div v-on:click="toggleModalAfter"
                     class="fixed inset-0 bg-gray-500 dark:bg-admin-body bg-opacity-75 dark:bg-opacity-75 transition-opacity"
                 />
             </TransitionChild>
 
-            <div class="fixed inset-0 z-10 overflow-y-auto">
+            <div class="fixed inset-0 z-10 overflow-y-auto max-w-min max-h-min m-auto p-3">
                 <div
                     class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0"
                 >
-                    <TransitionChild
+                    <TransitionChild 
                         as="template"
                         enter="ease-out duration-300"
                         enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -61,7 +59,7 @@ defineExpose({ toggleModal, toggleModalAfter, isOpen });
                         leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     >
                         <DialogPanel
-                            class="h-full relative transform overflow-hidden rounded-lg bg-white dark:bg-admin-body text-left shadow-xl shadow-white/10 transition-all"
+                            class="h-full relative transform overflow-hidden rounded-lg bg-white dark:bg-admin-body text-left shadow-lg shadow-white/5 transition-all"
                             
                         >
                             <DialogTitle
@@ -72,7 +70,7 @@ defineExpose({ toggleModal, toggleModalAfter, isOpen });
                             </DialogTitle>
 
                             <main
-                                class="bg-white dark:bg-admin-body h-[80vh] w-[100vh] px-4 pb-4 pt-5 sm:p-6 sm:pb-4"
+                                class="bg-white dark:bg-admin-body w-[700px] px-4 pb-4 pt-5 sm:p-6 sm:pb-4"
                             >
                                 <slot name="modal-body" />
                             </main>

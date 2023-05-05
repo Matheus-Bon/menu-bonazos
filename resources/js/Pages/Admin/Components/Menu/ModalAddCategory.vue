@@ -27,18 +27,14 @@ const toggleModalAfter = () => {
 
 const toggleModal = () => {
     modal.value.toggleModal()
-    open.value = modal.value.isOpen()
 }
 
 defineExpose({ toggleModal, toggleModalAfter });
 
-
-onClickOutside(modal, (event) => {console.log(event);toggleModalAfter()})
-
 </script>
 
 <template>
-    <ModalBase :modal-active="open" >
+    <ModalBase :modal-active="open" ref="modal">
         <template #modal-title>
             <section class="pl-6 pt-10">
                 <div>
@@ -55,7 +51,7 @@ onClickOutside(modal, (event) => {console.log(event);toggleModalAfter()})
             </section>
         </template>
 
-        <template #modal-body ref="modal">
+        <template #modal-body >
             <section>
                 <form id="category-form" @submit.prevent="create">
                     <div class="flex flex-col">
