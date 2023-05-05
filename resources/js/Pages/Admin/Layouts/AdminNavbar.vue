@@ -16,7 +16,7 @@ const routes = [
     { path: "/dashboard/menu", name: "Cardápio" },
     { path: "/dashboard/delivery-area", name: "Área de Entrega" },
     { path: "/dashboard/schedule", name: "Agendamento de Pedidos" },
-    { path: "/dashboard/timetable", name: "Horário de Funcionamento" },
+    { path: "/dashboard/timetable", name: "Horários" },
     { path: "/dashboard/evaluations", name: "Avaliações" },
 ];
 
@@ -54,8 +54,6 @@ onMounted(() => {
     
 });
 
-
-console.log(usePage().props.flash.success);
 </script>
 
 <template>

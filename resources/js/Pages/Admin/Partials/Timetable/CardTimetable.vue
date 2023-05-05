@@ -2,19 +2,19 @@
 import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
 import { useForm } from "@inertiajs/vue3";
 
-const props = defineProps({timetable:Object})
+const props = defineProps({ timetable: Object });
 
 const formHour = useForm({
     opens_at: props.timetable.opens_at,
     closes_at: props.timetable.closes_at,
-})
+});
 
 /* const updateHour = formHour.patch(route('dashboard.timetable.update', {id: props.timetable.id}), {
     preserveState: (page) => Object.keys(page.props.errors).length,
     preserveScroll: true
 }) */
 
-console.log(props.timetable.closes_at)
+console.log(props.timetable.closes_at);
 </script>
 
 <template>
@@ -194,55 +194,37 @@ console.log(props.timetable.closes_at)
                 </h3>
 
                 <div class="flex flex-row gap-5 items-center">
-                        
-
-    
-                    <label id="opensAt" class="text-base font-medium text-secondary-color-300">
-                        Loja abrirá às:
-                    </label>
-                    <div class="basis-3/12">
-                        <select
+                    <div  class="flex flex-row gap-7 items-center">
+                        <label
                             id="opensAt"
-                            class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+                            class="basis-7/12 text-base font-medium text-secondary-color-300"
                         >
-                            <option selected>Escolha um horário</option>
-                            <option value="00:00">00:00</option>
-                            <option value="00:15">00:15</option>
-                            <option value="00:30">00:30</option>
-                            <option value="00:45">00:45</option>
-                            <option value="01:00">01:00</option>
-                            <option value="01:15">01:15</option>
-                            <option value="01:30">01:30</option>
-                            <option value="01:45">01:45</option>
-                            <option value="02:00">02:00</option>
-                            <option value="02:15">02:15</option>
-                            <option value="02:30">02:30</option>
-                            <option value="02:45">02:45</option>
-                        </select>
-                    </div>
-
-                    <div class="text-base font-medium text-red-400">
-                        Loja fechará às:
-                    </div>
-                    <div class="basis-3/12">
-                        <select
-                            id="underline_select"
-                            class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
-                        >
-                            <option selected>Escolha um horário</option>
-                            <option value="00:00">00:00</option>
-                            <option value="00:15">00:15</option>
-                            <option value="00:30">00:30</option>
-                            <option value="00:45">00:45</option>
-                            <option value="01:00">01:00</option>
-                            <option value="01:15">01:15</option>
-                            <option value="01:30">01:30</option>
-                            <option value="01:45">01:45</option>
-                            <option value="02:00">02:00</option>
-                            <option value="02:15">02:15</option>
-                            <option value="02:30">02:30</option>
-                            <option value="02:45">02:45</option>
-                        </select>
+                            Segunda-feira:
+                        </label>
+                        <div class="basis-10/12">
+                            <select
+                                id="opensAt"
+                                class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+                            >
+                                <option selected>Abrirá às</option>
+                                <option value="00:00">00:00</option>
+                                <option value="00:15">00:15</option>
+                                <option value="00:30">00:30</option>
+                                <option value="00:45">00:45</option>
+                            </select>
+                        </div>
+                        <div class="basis-10/12">
+                            <select
+                                id="underline_select"
+                                class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+                            >
+                                <option selected>Fechará às</option>
+                                <option value="00:00">00:00</option>
+                                <option value="00:15">00:15</option>
+                                <option value="00:30">00:30</option>
+                                <option value="00:45">00:45</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </section>

@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
 import ModalUpdateCategory from "@/Pages/Admin/Components/Menu/ModalUpdateCategory.vue";
-import { onClickOutside } from "@vueuse/core";
+
 
 const modal = ref(null); // Referência do ModalUpdateCategory - Final: Pegar atributos e funções do ModalUpdateCategory
 
@@ -29,7 +29,9 @@ const form = useForm({
 });
 
 const activeCategory = () =>
-    form.put(route("dashboard.update.active.category", props.category.id));
+    form.put(route("dashboard.update.active.category", props.category.id),{
+        preserveScroll:true
+    });
 
 // Fim
 </script>
@@ -69,7 +71,7 @@ const activeCategory = () =>
 
                     <button title="Adicionar produto">
                         <i
-                            class="bi bi-plus-circle-dotted text-xl text-secondary-color-200"
+                            class="bi bi-plus-circle-dotted text-xl text-secondary-color-300"
                         ></i>
                     </button>
 
@@ -78,7 +80,7 @@ const activeCategory = () =>
                         :title="'Detalhes ' + category.name"
                     >
                         <i
-                            class="bi bi-three-dots-vertical text-xl text-secondary-color-200"
+                            class="bi bi-three-dots-vertical text-xl text-secondary-color-300"
                         ></i>
                     </button>
                 </div>

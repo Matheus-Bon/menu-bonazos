@@ -20,7 +20,7 @@ const toggleModal = () => {
     <div class="flex flex-col gap-10">
         <BoxBorder>
             <template #card-header>
-                <h4 class="font-semibold text-lg text-gray-900 dark:text-white">
+                <h4 class="font-semibold text-lg text-gray-800 dark:text-white">
                     Funções principais para criação do Cardápio
                 </h4>
                 <span class="text-sm font-light text-gray-500">
@@ -34,7 +34,7 @@ const toggleModal = () => {
                     <div>
                         <button
                             @click="toggleModal"
-                            class="btn-primary bg-indigo-500 hover:opacity-90 dark:bg-indigo-700"
+                            class="btn-primary bg-indigo-500 hover:bg-indigo-700 hover:dark:bg-indigo-800 dark:bg-indigo-700"
                         >
                             <i class="fa-solid fa-plus pr-1"></i>
                             Adicionar Categoria

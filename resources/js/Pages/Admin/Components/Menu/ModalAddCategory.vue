@@ -36,7 +36,7 @@ defineExpose({ toggleModal, toggleModalAfter });
 <template>
     <ModalBase :modal-active="open" ref="modal">
         <template #modal-title>
-            <section class="pl-6 pt-10">
+            <section class="pl-6 pt-7">
                 <div>
                     <i
                         class="bx bx-category pr-1 text-4xl text-secondary-color-light dark:text-secondary-color-dark"
@@ -78,7 +78,7 @@ defineExpose({ toggleModal, toggleModalAfter });
             >
                 <button
                     type="submit"
-                    class="inline-flex w-full justify-center rounded-md bg-secondary-color-dark px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm hover:bg-opacity-90 sm:ml-3 sm:w-auto"
+                    class="inline-flex w-full justify-center rounded-md bg-secondary-color-100 dark:bg-secondary-color-dark px-3 py-2 ml-2 text-sm font-medium text-gray-900 shadow-sm hover:bg-opacity-90 dark:hover:bg-secondary-color-300 sm:w-auto transition-all ease-in-out delay-75"
                     @click="create"
                 >
                     Criar Categoria
