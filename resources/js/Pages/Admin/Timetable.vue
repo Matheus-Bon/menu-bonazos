@@ -10,7 +10,8 @@ import CardHoliday from "./Partials/Timetable/CardHoliday.vue";
 
 const props = defineProps({timetable: Object})
 
-console.log(props.timetable)
+
+
 </script>
 
 <template>

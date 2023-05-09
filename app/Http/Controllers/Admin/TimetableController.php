@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Timetable;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 
 class TimetableController extends Controller
 {
@@ -13,10 +14,12 @@ class TimetableController extends Controller
      */
     public function index()
     {
+
         return inertia('Admin/Timetable',
 
             [
-                'timetable' => Timetable::find(1)->first()
+                'timetable' => Timetable::all(),
+                
             ]
     
         );
@@ -27,7 +30,7 @@ class TimetableController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Admin/Partials/Timetable/CardTimetable');
     }
 
     /**
@@ -35,7 +38,20 @@ class TimetableController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->day_of_week);
+        $request->validate([
+            'opens_at' => 'required',
+            'closes_at' => 'required',
+            'day_of_week' => 'required',
+        ]);
+
+        Timetable::create([
+            'opens_at' => $request->opens_at,
+            'closes_at' => $request->closes_at,
+            'day_of_week' => $request->day_of_week,
+        ]);
+
+        return Redirect::back();
     }
 
     /**
@@ -51,15 +67,30 @@ class TimetableController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return inertia('Admin/Partials/Timetable/CardTimetableUpdate');
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Timetable $timetable)
+    {   
+        $timetable->update(
+            $request->validate([
+                'opens_at' => 'required',
+                'closes_at' => 'required'
+            ])
+        );
+
+        return Redirect::back()->with('success', 'Horário atualizado!');
+    }
+
+    public function updateActiveDay(Request $request, Timetable $timetable)
     {
-        //
+        $timetable->active = !$timetable->active;
+        $timetable->save();
+
+        return back();
     }
 
     /**

@@ -22,6 +22,40 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(AdminSeeder::class);
 
-        \App\Models\Timetable::factory(1)->create();
+        \App\Models\Timetable::factory()->create([
+            'opens_at' => null,
+            'closes_at' => null,
+            'day_of_week' => 'Segunda-feira'
+        ]);
+        \App\Models\Timetable::factory()->create([
+            'opens_at' => null,
+            'closes_at' => null,
+            'day_of_week' => 'Terça-feira'
+        ]);
+        \App\Models\Timetable::factory()->create([
+            'opens_at' => null,
+            'closes_at' => null,
+            'day_of_week' => 'Quarta-feira'
+        ]);
+        \App\Models\Timetable::factory()->create([
+            'opens_at' => null,
+            'closes_at' => null,
+            'day_of_week' => 'Quinta-feira'
+        ]);
+        \App\Models\Timetable::factory()->create([
+            'opens_at' => null,
+            'closes_at' => null,
+            'day_of_week' => 'Sexta-feira'
+        ]);
+        \App\Models\Timetable::factory()->create([
+            'opens_at' => null,
+            'closes_at' => null,
+            'day_of_week' => 'Sábado'
+        ]);
+        \App\Models\Timetable::factory()->create([
+            'opens_at' => null,
+            'closes_at' => null,
+            'day_of_week' => 'Domingo'
+        ]);
     }
 }

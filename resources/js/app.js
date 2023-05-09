@@ -9,8 +9,8 @@ import "animate.css";
 import "../css/app.css";
 
 
-router.on("start", () => NProgress.start());
-router.on("finish", () => NProgress.done());
+//router.on("start", () => NProgress.start());
+//router.on("finish", () => NProgress.done());
 
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";

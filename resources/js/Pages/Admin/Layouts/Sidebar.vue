@@ -1,7 +1,10 @@
 <script setup>
 import NotificationDropdown from "@/Pages/Admin/Components/NotificationDropdown.vue";
 import UserDropdown from "@/Pages/Admin/Components/UserDropdown.vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, usePage } from "@inertiajs/vue3";
+
+
+
 </script>
 
 <template>
@@ -26,6 +29,12 @@ import { Link } from "@inertiajs/vue3";
             >
                 NOME - LOJA
             </Link>
+
+            <div>
+                <span class="text-gray-500 text-sm font-thin">
+                    Sua loja está:
+                </span>
+            </div>
 
             <!-- User -->
             <ul class="md:hidden items-center flex flex-wrap list-none">

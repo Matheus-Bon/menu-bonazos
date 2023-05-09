@@ -2,8 +2,6 @@
 import ModalBase from "@/Pages/Admin/Components/ModalBase.vue";
 import { useForm } from "@inertiajs/vue3";
 import { ref } from "vue";
-import { vOnClickOutside } from "@vueuse/components";
-import { onClickOutside } from "@vueuse/core";
 
 /* Lógica Create para Categoria */
 // Início

@@ -61,7 +61,8 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified', 
     Route::put('menu/{category}/active-category', [CategoryAdminController::class, 'updateActiveCategory'])->name('update.active.category');
 
     //CRUD Timetable
-    Route::resource('timetable', TimetableController::class)->parameters(['timetable' => 'id']);
+    Route::resource('timetable', TimetableController::class);
+    Route::patch('timetable/{timetable}/active-day', [TimetableController::class, 'updateActiveDay'])->name('update.active.day');
     
 });
 
