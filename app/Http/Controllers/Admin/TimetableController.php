@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use App\Models\Timetable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Holiday;
 use Illuminate\Support\Facades\Redirect;
 
 class TimetableController extends Controller
@@ -14,11 +16,14 @@ class TimetableController extends Controller
      */
     public function index()
     {
+        
 
         return inertia('Admin/Timetable',
 
             [
                 'timetable' => Timetable::all(),
+                'holidays' => Holiday::all()
+                
                 
             ]
     

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\Admin\CategoryAdminController;
+use App\Http\Controllers\Admin\HolidayController;
 use App\Http\Controllers\Admin\IndexAdminController;
 use App\Http\Controllers\Admin\TimetableController;
 use App\Http\Controllers\ProfileController;
@@ -60,10 +61,12 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified', 
     Route::resource('menu', CategoryAdminController::class)->parameters(['menu' => 'category']);
     Route::put('menu/{category}/active-category', [CategoryAdminController::class, 'updateActiveCategory'])->name('update.active.category');
 
-    //CRUD Timetable
+    //CRUD Timetable - horário de funcionamento
     Route::resource('timetable', TimetableController::class);
     Route::patch('timetable/{timetable}/active-day', [TimetableController::class, 'updateActiveDay'])->name('update.active.day');
     
+    //CRUD Timetable - feriados
+    Route::resource('timetable/holiday', HolidayController::class);
 });
 
 require __DIR__.'/auth.php';

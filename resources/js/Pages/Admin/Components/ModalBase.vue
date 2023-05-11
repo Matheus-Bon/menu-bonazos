@@ -1,6 +1,5 @@
 <script setup>
-import { computed, ref } from "vue";
-import { onClickOutside } from "@vueuse/core";
+import { ref } from "vue";
 import {
     Dialog,
     DialogPanel,

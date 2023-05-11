@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use Redirect;
+use Carbon\Carbon;
+use App\Models\Holiday;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class HolidayController extends Controller
 {
@@ -11,8 +14,8 @@ class HolidayController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+    {   
+        
     }
 
     /**
@@ -28,7 +31,21 @@ class HolidayController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);
+        $request->validate([
+            'name_of_holiday' => 'required|string|min:3',
+            'date_of_holiday' => 'required|date',
+            'fixed' => 'boolean',
+        ]);
+
+        Holiday::create([
+            'name_of_holiday' => $request->name_of_holiday,
+            'date_of_holiday' => $request->date_of_holiday,
+            'fixed' => false,
+        ]);
+
+        return Redirect::back()->with('succes', 'Feriado criado!');
+
     }
 
     /**

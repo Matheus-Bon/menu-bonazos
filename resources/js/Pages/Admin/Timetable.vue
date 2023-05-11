@@ -8,7 +8,7 @@ import AdminNavbar from "@/Pages/Admin/Layouts/AdminNavbar.vue";
 import CardTimetable from "./Partials/Timetable/CardTimetable.vue";
 import CardHoliday from "./Partials/Timetable/CardHoliday.vue";
 
-const props = defineProps({timetable: Object})
+const props = defineProps({timetable: Object, holidays: Object})
 
 
 
@@ -27,7 +27,7 @@ const props = defineProps({timetable: Object})
                     <CardTimetable :timetable="timetable"/>
                 </div>
                 <div class="basis-1/2">
-                    <CardHoliday />
+                    <CardHoliday :mouths="mouths" :holidays="holidays"/>
                 </div>
                 
                 

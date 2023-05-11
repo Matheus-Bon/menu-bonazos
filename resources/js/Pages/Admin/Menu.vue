@@ -7,8 +7,9 @@ import CardCategories from "./Partials/Menu/CardCategories.vue";
 import { Head } from "@inertiajs/vue3";
 import CardViewDelivery from "./Partials/Menu/CardViewDelivery.vue";
 
-defineProps({ categories: Object });
-
+defineProps({
+    categories: Object,
+});
 </script>
 
 <template>
