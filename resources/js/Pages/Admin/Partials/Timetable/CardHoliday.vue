@@ -1,42 +1,95 @@
 <script setup>
 import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
 import ModalAddHoliday from "../../Components/Timetable/ModalAddHoliday.vue";
- import { ref } from "vue";
-import { getNameDay, getMonthFromDate, formatDate } from "@/Pages/Functions/functionsOfDate";
+import { ref } from "vue";
+import CardMonth from "./CardMonth.vue";
+import {
+    getNameMonth,
+    formatDate,
+    getNameDay,
+} from "@/Pages/Functions/functionsOfDate";
+
+/* 
+    Parte do funcionamento do Modal
+*/
 
 const modal = ref(null); // ref para usar a função do modal
 const toggleModal = () => {
     modal.value.toggleModal();
 }; // função para ativar modal
 
+/* 
+    Fim Parte do funcionamento do Modal
+*/
 
 const props = defineProps({ holidays: Object });
+const holidaysArr = Object.values(props.holidays);
 
+/* 
+    Função para arrumar os dados de holidaysArr (Array que armazena um objeto de cada feriado). 
+    Retorno: Ela retorna um array de objetos de cada mês e seus respectivos feriados dentro de outro array 
+
+        Ex:. 
+            Array(9) [ {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…} ]
+            0: Object { month: "janeiro", holidays: (1) […] } 
+            (···)
+    
+*/
+const holidays = holidaysArr.reduce((acc, holiday) => {
+    const { date_of_holiday, name_of_holiday } = holiday; // Extrai as propriedades 'date_of_holiday' e 'name_of_holiday' do objeto 'holiday'
+    const month = getNameMonth(date_of_holiday); // Obtém o nome do mês correspondente à 'date_of_holiday'
+    const day = getNameDay(date_of_holiday); // Obtém o nome do dia da semana correspondente à 'date_of_holiday'
+
+    const existingMonth = acc.find((item) => item.month === month); // Verifica se já existe um objeto no array 'acc' com o mesmo valor de mês
+
+    if (existingMonth) {
+        // Se existe um objeto para o mês, adiciona o novo feriado ao array 'holidays' desse objeto
+        existingMonth.holidays.push({
+            holiday: name_of_holiday,
+            date: date_of_holiday,
+        });
+    } else {
+        // Se não existe um objeto para o mês, cria um novo objeto com o mês e o primeiro feriado no array 'holidays' e adiciona ao array 'acc'
+        acc.push({
+            month,
+            holidays: [
+                { holiday: name_of_holiday, date: date_of_holiday, day },
+            ],
+        });
+    }
+
+    return acc;
+}, []);
+
+// Array que armazena os meses e seus feriados
 const months = [
-    { monthName: "Janeiro", monthNumber: 1 },
-    { monthName: "Fevereiro", monthNumber: 2 },
-    { monthName: "Março", monthNumber: 3 },
-    { monthName: "Abril", monthNumber: 4 },
-    { monthName: "Maio", monthNumber: 5 },
-    { monthName: "Junho", monthNumber: 6 },
-    { monthName: "Julho", monthNumber: 7 },
-    { monthName: "Agosto", monthNumber: 8 },
-    { monthName: "Setembro", monthNumber: 9 },
-    { monthName: "Outubro", monthNumber: 10 },
-    { monthName: "Novembro", monthNumber: 11 },
-    { monthName: "Dezembro", monthNumber: 12 },
+    { monthName: "janeiro", monthNumber: 1, holidays: [] },
+    { monthName: "fevereiro", monthNumber: 2, holidays: [] },
+    { monthName: "março", monthNumber: 3, holidays: [] },
+    { monthName: "abril", monthNumber: 4, holidays: [] },
+    { monthName: "maio", monthNumber: 5, holidays: [] },
+    { monthName: "junho", monthNumber: 6, holidays: [] },
+    { monthName: "julho", monthNumber: 7, holidays: [] },
+    { monthName: "agosto", monthNumber: 8, holidays: [] },
+    { monthName: "setembro", monthNumber: 9, holidays: [] },
+    { monthName: "outubro", monthNumber: 10, holidays: [] },
+    { monthName: "novembro", monthNumber: 11, holidays: [] },
+    { monthName: "dezembro", monthNumber: 12, holidays: [] },
 ];
 
-const holidays = Object.values(props.holidays);
+holidays.forEach((holiday) => {
+    const { month, holidays: holidayList } = holiday; // Extrai as propriedades 'month' e 'holidays' do objeto 'holiday'
+    const matchingMonth = months.find((m) => m.monthName === month); // Busca o objeto de mês correspondente ao 'month' no array 'months'
 
-
-
-
-console.log(formatDate('2023-12-25'));
+    if (matchingMonth) {
+        // Se encontrou um objeto de mês correspondente, adiciona os feriados do objeto 'holidayList' ao array de feriados desse mês
+        matchingMonth.holidays.push(...holidayList);
+    }
+});
 </script>
 
 <template>
-    <ModalAddHoliday ref="modal" :months="months" />
+    <ModalAddHoliday ref="modal" />
 
     <BoxBorder>
         <template #card-header>
@@ -47,47 +100,21 @@ console.log(formatDate('2023-12-25'));
                 <p>Aqui você irá configurar sua loja nos feriados</p>
             </span>
         </template>
-
-        <section>
-            <div class="mb-5">
-                <button
-                    @click="toggleModal"
-                    class="btn-primary bg-indigo-700 hover:bg-indigo-800"
-                >
-                    Adicionar Feriado
-                </button>
-            </div>
-            <div v-for="month in months" class="mb-5">
-                <div>
-                    <h5 class="text-gray-500 font-medium text-xl">
-                        {{ month.monthName }}
-                    </h5>
-                </div>
-                <div v-for="holiday in holidays">
-                    <div
-                        v-if="
-                            getMonthFromDate(holiday.date_of_holiday)  ==
-                            month.monthNumber
-                        "
-                    >
-                        <div class="flex flex-row justify-between">
-                            <span class="text-gray-300">
-                                {{ holiday.name_of_holiday }}
-                            </span>
-                            <span class="text-gray-400">
-                                {{
-                                    formatDate(holiday.date_of_holiday)
-                                }}
-                                {{
-                                    getNameDay(holiday.date_of_holiday)
-                                        
-                                    
-                                }}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="mb-5">
+            <button
+                @click="toggleModal"
+                class="btn-primary bg-indigo-700 hover:bg-indigo-800"
+            >
+                Adicionar Feriado
+            </button>
+        </div>
     </BoxBorder>
+
+    <div class="grid grid-cols-3 gap-3 mt-5">
+        <CardMonth
+            v-for="month in months"
+            :key="month.monthNumber"
+            :month="month"
+        />
+    </div>
 </template>

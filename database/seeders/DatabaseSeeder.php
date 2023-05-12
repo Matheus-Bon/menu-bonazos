@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -59,16 +60,54 @@ class DatabaseSeeder extends Seeder
             'day_of_week' => 'Domingo'
         ]);
 
+        $currentYear = Carbon::now()->year();
+
         \App\Models\Holiday::factory()->create([
-            'name_of_holiday' => 'Natal',
-            'date_of_holiday' => '2023-12-25',
+            'name_of_holiday' => 'Ano Novo',
+            'date_of_holiday' => '2024-01-01',
             'fixed' => true
         ]);
 
         \App\Models\Holiday::factory()->create([
-            'name_of_holiday' => 'Feriado X',
-            'date_of_holiday' => '2023-12-02',
-            'fixed' => false
+            'name_of_holiday' => 'Paixão de Cristo',
+            'date_of_holiday' => '2023-04-07',
+            'fixed' => true
+        ]);
+
+        \App\Models\Holiday::factory()->create([
+            'name_of_holiday' => 'Tiradentes',
+            'date_of_holiday' => '2023-04-21',
+            'fixed' => true
+        ]);
+
+        \App\Models\Holiday::factory()->create([
+            'name_of_holiday' => 'Dia do Trabalho',
+            'date_of_holiday' => '2023-05-01',
+            'fixed' => true
+        ]);
+
+        \App\Models\Holiday::factory()->create([
+            'name_of_holiday' => 'Corpus Christi',
+            'date_of_holiday' => '2023-06-08',
+            'fixed' => true
+        ]);
+
+        \App\Models\Holiday::factory()->create([
+            'name_of_holiday' => 'Independência',
+            'date_of_holiday' => '2023-09-07',
+            'fixed' => true
+        ]);
+
+        \App\Models\Holiday::factory()->create([
+            'name_of_holiday' => 'Nossa Senhora de Aparecida',
+            'date_of_holiday' => '2023-10-12',
+            'fixed' => true
+        ]);
+
+        \App\Models\Holiday::factory()->create([
+            'name_of_holiday' => 'Dia do Professor',
+            'date_of_holiday' => '2023-10-15',
+            'fixed' => true
         ]);
 
         \App\Models\Holiday::factory()->create([
@@ -84,20 +123,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\Holiday::factory()->create([
-            'name_of_holiday' => 'Nossa Senhora Aparecida',
-            'date_of_holiday' => '2023-10-12',
-            'fixed' => true
-        ]);
-
-        \App\Models\Holiday::factory()->create([
-            'name_of_holiday' => 'Dia do Professor',
-            'date_of_holiday' => '2023-10-15',
-            'fixed' => true
-        ]);
-
-        \App\Models\Holiday::factory()->create([
-            'name_of_holiday' => 'Independência',
-            'date_of_holiday' => Carbon::create(2023, 9, 7),
+            'name_of_holiday' => 'Natal',
+            'date_of_holiday' => '2023-12-25',
             'fixed' => true
         ]);
     }

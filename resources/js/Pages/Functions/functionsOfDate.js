@@ -1,35 +1,44 @@
 export function getNameDay(date) {
-    const day = new Date(date).getDay() + 1;
+    const day = new Date(date).getDay();
 
     const daysOfWeek = [
-        "Domingo",
         "Segunda-Feira",
         "Terça-Feira",
         "Quarta-Feira",
         "Quinta-Feira",
         "Sexta-Feira",
         "Sábado",
+        "Domingo",
     ];
 
     return daysOfWeek[day];
 }
 
-export function getMonthFromDate(date) {
-    return new Date(date).getMonth() + 1;
-}
+export function getNameMonth(date) {
+    const parts = date.split("-");
+    const y = parseInt(parts[0]);
+    const m = parseInt(parts[1]);
+    const d = parseInt(parts[2]);
 
-export function getDayFromDate(date) {
-    return new Date(date).getDay() + 1;
+    const dateObj = new Date(y, m - 1, d);
+    const nameMonth = new Intl.DateTimeFormat("pt-BR", {
+        month: "long",
+    }).format(dateObj);
+
+    return nameMonth;
 }
 
 export function formatDate(date) {
 
-    const d = new Date(date).getDate() + 1
-    const m = new Date(date).getMonth() + 1
-    const y = new Date(date).getFullYear()
+    const parts = date.split("-");
+    const y = parseInt(parts[0]);
+    const m = parseInt(parts[1]);
+    const d = parseInt(parts[2]);
+    const dateObj = new Date(y, m - 1, d);
 
-    const formatDay = (d < 10) ? `0${d}` : `${d}`
-    const formatMonth = (m < 10) ? `0${m}` : `${m}`
+    const lang = document.documentElement.lang
 
-    return `${formatDay}/${formatMonth}/${y}`
+    const formatDate = new Intl.DateTimeFormat(lang).format(dateObj)
+
+    return formatDate
 }
