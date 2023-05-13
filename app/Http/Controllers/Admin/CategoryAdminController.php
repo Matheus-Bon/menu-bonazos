@@ -48,7 +48,7 @@ class CategoryAdminController extends Controller
             'active' => false
         ]);
 
-        return Redirect::back()->with('success', 'Categoria criada!');
+        return Redirect::back()->with('toast', 'Categoria criada com sucesso.');
         
     }
 
@@ -99,7 +99,7 @@ class CategoryAdminController extends Controller
 
         $categoryFound->delete();
 
-        return Redirect::back()->with('success', 'Categoria excluída!');
+        return redirect()->back()->with('toast', 'Categoria excluída com sucesso.');
     }
 
 }

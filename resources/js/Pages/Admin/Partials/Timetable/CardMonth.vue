@@ -1,23 +1,53 @@
 <script setup>
-import BoxBorder from '../../Components/UI/BoxBorder.vue';
+import BoxBorderSecond from "../../Components/UI/BoxBorderSecond.vue";
+import { ref } from "vue";
+import { formatDate, getNameDay } from "@/Pages/Functions/functionsOfDate";
 
+const props = defineProps({ month: Object });
 
-const props = defineProps({month: Object })
+const expandCard = ref(false);
 
+const toggleExpand = () => {
+    expandCard.value = !expandCard.value;
+};
 
-console.log(props.month)
+console.log(document.documentElement.lang)
 </script>
 
 <template>
-    <BoxBorder>
+    <BoxBorderSecond
+        :class="[expandCard ? 'col-span-3' : null]"
+        data-masonry=""
+    >
         <template #card-header>
-            <h2 class="text-gray-400 text-xl capitalize">{{ month.monthName }}</h2>
+            <div class="flex flex-row justify-between">
+                <h2 class="text-gray-500 text-2xl font-medium capitalize">
+                    {{ month.monthName }}
+                </h2>
+                <button @click="toggleExpand" title="Ver os feriados">
+                    <i
+                        class="bi bi-arrows-angle-expand text-secondary-color-400 dark:text-secondary-color-100"
+                    ></i>
+                </button>
+            </div>
         </template>
-        <div v-for="holiday in month.holidays">
-            <span>{{ holiday.holiday }}</span>
-            
+        <div
+            v-if="expandCard"
+            class="p-6 pt-0 transition-all ease-in-out duration-700 delay-75"
+        >
+            <div v-for="holiday in month.holidays" :key="holiday" class="pb-5 flex flex-row justify-between">
+                <div class="flex flex-col justify-between">
+                    <span class="text-lg text-gray-700 dark:text-gray-300">
+                        {{ holiday.holiday }}
+                    </span>
+                    <span class="text-sm text-gray-500 dark:tex-gray-700">
+                        {{ formatDate( holiday.date) }} &nbsp;|&nbsp; {{ holiday.day }}
+                    </span>
+                </div>
+                <button :title="'Editar feriado ' + holiday.holiday">
+                    <i class="bi bi-pencil text-indigo-500"></i>
+                </button>
+            </div>
         </div>
-
-    </BoxBorder>
-    
+    </BoxBorderSecond>
 </template>

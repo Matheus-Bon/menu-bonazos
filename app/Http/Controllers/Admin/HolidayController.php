@@ -44,7 +44,7 @@ class HolidayController extends Controller
             'fixed' => false,
         ]);
 
-        return Redirect::back()->with('succes', 'Feriado criado!');
+        return Redirect::back()->with('toast', 'Feriado criado com sucesso.');
 
     }
 

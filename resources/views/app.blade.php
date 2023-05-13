@@ -19,10 +19,8 @@
 
 
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-
-
-
-
+    
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     @routes
     @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
     @inertiaHead
@@ -31,5 +29,6 @@
 <body class="font-sans antialiased bg-admin-body-light dark:bg-admin-body">
     @inertia
 </body>
+
 
 </html>

@@ -3,7 +3,7 @@
 
 :root {
     --primary: #27272715;
-    --secondary: #00C894;
+    --secondary: #00c894;
 }
 
 /* Firefox */
@@ -32,32 +32,26 @@
 @tailwind utilities;
 
 @layer components {
-
     .btn-primary {
-        @apply p-2 px-4 rounded-md bg-primary-color font-medium text-gray-200 text-center transition-all delay-75 ease-in-out md:px-2 md:text-sm
+        @apply p-2 px-4 rounded-md bg-primary-color font-medium text-gray-200 text-center transition-all delay-75 ease-in-out md:px-2 md:text-sm;
     }
 
     .btn-delete {
-        @apply px-4 py-1 rounded-md uppercase font-medium bg-red-600 dark:bg-red-700 text-gray-300 hover:bg-red-700 dark:hover:bg-red-800 transition delay-75 ease-in-out
+        @apply px-4 py-1 rounded-md uppercase font-medium bg-red-600 dark:bg-red-700 text-gray-300 hover:bg-red-700 dark:hover:bg-red-800 transition delay-75 ease-in-out;
     }
 
     .btn-outline {
-        @apply p-2 px-4 rounded-md font-medium text-center text-gray-600 dark:text-gray-300  hover:text-gray-100  bg-transparent hover:bg-indigo-500 dark:hover:bg-indigo-700 outline outline-1 outline-gray-300 dark:outline-indigo-700 transition delay-75 ease-in-out md:px-2 md:text-sm
+        @apply p-2 px-4 rounded-md font-medium text-center text-gray-600 dark:text-gray-300  hover:text-gray-100  bg-transparent hover:bg-indigo-500 dark:hover:bg-indigo-700 outline outline-1 outline-gray-300 dark:outline-indigo-700 transition delay-75 ease-in-out md:px-2 md:text-sm;
     }
 
     .label-default {
-        @apply pb-2 text-base font-medium text-gray-800 dark:text-gray-300
+        @apply pb-2 text-base font-medium text-gray-800 dark:text-gray-300;
     }
 
     .input-default {
-        @apply rounded-md dark:bg-admin-card border-gray-400 dark:text-gray-300 w-4/6
+        @apply rounded-md dark:bg-admin-card border-gray-400 dark:text-gray-300 w-4/6;
     }
-
-
 }
-
-
-
 
 /* código para girar o svg config da área de admistração */
 #gear-icon:hover {
@@ -70,4 +64,5 @@
     transition: transform 0.5s ease-in-out;
     transform: rotate(0deg);
 }
+
 

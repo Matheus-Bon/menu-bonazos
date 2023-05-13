@@ -2,7 +2,7 @@
 import ModalBase from "@/Pages/Admin/Components/ModalBase.vue";
 import { useForm, Link } from "@inertiajs/vue3";
 import { ref } from "vue";
-import moment from 'moment';
+import { formatDate } from "@/Pages/Functions/functionsOfDate";
 
 // Lógica para abrir o modal no componente pai
 
@@ -45,7 +45,7 @@ defineExpose({ toggleModal, toggleModalAfter });
             </div>
             <div class="pl-6">
                 <p class="text-sm font-light text-gray-500">
-                    Categoria criada em: {{ moment(category.created_at).format('DD/MM/YYYY') }}
+                    Categoria criada em: {{ formatDate(category.created_at) }}
                 </p>
             </div>
         </template>
@@ -69,7 +69,6 @@ defineExpose({ toggleModal, toggleModalAfter });
                     </div>
                 </form>
             </section>
-
         </template>
 
         <template #modal-buttons>

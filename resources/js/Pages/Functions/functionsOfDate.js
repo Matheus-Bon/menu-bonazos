@@ -1,17 +1,11 @@
 export function getNameDay(date) {
-    const day = new Date(date).getDay();
+    const options = { weekday: "long" };
+    const lang = document.documentElement.lang;
+    const event = new Date(date)
 
-    const daysOfWeek = [
-        "Segunda-Feira",
-        "Terça-Feira",
-        "Quarta-Feira",
-        "Quinta-Feira",
-        "Sexta-Feira",
-        "Sábado",
-        "Domingo",
-    ];
+    const dayWeek = new Intl.DateTimeFormat(lang, options).format(event)
 
-    return daysOfWeek[day];
+    return dayWeek;
 }
 
 export function getNameMonth(date) {
@@ -19,9 +13,10 @@ export function getNameMonth(date) {
     const y = parseInt(parts[0]);
     const m = parseInt(parts[1]);
     const d = parseInt(parts[2]);
+    const lang = document.documentElement.lang;
 
     const dateObj = new Date(y, m - 1, d);
-    const nameMonth = new Intl.DateTimeFormat("pt-BR", {
+    const nameMonth = new Intl.DateTimeFormat(lang, {
         month: "long",
     }).format(dateObj);
 
@@ -29,16 +24,15 @@ export function getNameMonth(date) {
 }
 
 export function formatDate(date) {
-
     const parts = date.split("-");
     const y = parseInt(parts[0]);
     const m = parseInt(parts[1]);
     const d = parseInt(parts[2]);
     const dateObj = new Date(y, m - 1, d);
 
-    const lang = document.documentElement.lang
+    const lang = document.documentElement.lang;
 
-    const formatDate = new Intl.DateTimeFormat(lang).format(dateObj)
+    const formatDate = new Intl.DateTimeFormat(lang).format(dateObj);
 
-    return formatDate
+    return formatDate;
 }

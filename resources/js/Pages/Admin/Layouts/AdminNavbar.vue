@@ -2,6 +2,8 @@
 import UserDropdown from "@/Pages/Admin/Components/UserDropdown.vue";
 import { Link, usePage } from "@inertiajs/vue3";
 import { computed, reactive, ref, onMounted } from "vue";
+import ToastList from "../Components/Toasts/ToastList.vue";
+import toast from "@/Stores/toast"
 
 const user = usePage().props.auth.user;
 
@@ -42,21 +44,12 @@ const hourDay = computed(() => {
     }
 });
 
-/* Lógica para desaparecer o flash */
-const showNotif = ref(false)
 
-onMounted(() => {
-    showNotif.value = true;
-    setTimeout(() => {
-        showNotif.value = false;
-        usePage().props.flash.success = null;
-    }, 6000);
-    
-});
 
 </script>
 
 <template>
+    <ToastList />
     <!-- Navbar -->
     <nav
         class="absolute top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4"
@@ -75,24 +68,6 @@ onMounted(() => {
                 </p>
             </div>
 
-            <Transition
-                enter-active-class="animate__animated animate__slideInDown animate__slow"
-                leave-active-class="animate__animated animate__slideOutUp animate__slow"
-                
-            >
-                <div
-                    v-if="$page.props.flash.success && showNotif"
-                    class="fixed top-0 flex flex-row gap-2 p-2 text-lg font-medium text-gray-800 justify-center rounded-b-md bg-secondary-color-dark w-1/5"
-                    style="left: calc(50% - 200px)"
-                >
-                    <div>
-                        <i class="bi bi-check2-all text-2xl"></i>
-                    </div>
-                    <div>
-                        {{ $page.props.flash.success }}
-                    </div>
-                </div>
-            </Transition>
             <!-- User -->
             <UserDropdown />
         </div>
@@ -100,5 +75,4 @@ onMounted(() => {
     <!-- End Navbar -->
 </template>
 
-<!--  -->
-<!-- && isVisible -->
+

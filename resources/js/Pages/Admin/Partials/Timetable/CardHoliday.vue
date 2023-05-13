@@ -3,11 +3,7 @@ import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
 import ModalAddHoliday from "../../Components/Timetable/ModalAddHoliday.vue";
 import { ref } from "vue";
 import CardMonth from "./CardMonth.vue";
-import {
-    getNameMonth,
-    formatDate,
-    getNameDay,
-} from "@/Pages/Functions/functionsOfDate";
+import { getNameMonth, getNameDay } from "@/Pages/Functions/functionsOfDate";
 
 /* 
     Parte do funcionamento do Modal
@@ -100,7 +96,7 @@ holidays.forEach((holiday) => {
                 <p>Aqui você irá configurar sua loja nos feriados</p>
             </span>
         </template>
-        <div class="mb-5">
+        <div>
             <button
                 @click="toggleModal"
                 class="btn-primary bg-indigo-700 hover:bg-indigo-800"
