@@ -48,7 +48,7 @@ class CategoryAdminController extends Controller
             'active' => false
         ]);
 
-        return Redirect::back()->with('toast', 'Categoria criada com sucesso.');
+        return to_route('dashboard.menu.index')->with('toast', 'Categoria criada com sucesso.');
         
     }
 
@@ -94,12 +94,13 @@ class CategoryAdminController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Category $category)
-    {
+    {   
+        //dd($category);
         $categoryFound = Category::findOrFail($category->id);
 
         $categoryFound->delete();
 
-        return redirect()->back()->with('toast', 'Categoria excluída com sucesso.');
+        return Redirect::back()->with('toast', 'Categoria excluída');
     }
 
 }

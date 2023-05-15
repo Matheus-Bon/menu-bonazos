@@ -1,19 +1,17 @@
 <script setup>
 import FooterAdmin from "@/Pages/Admin/Layouts/FooterAdmin.vue";
-import HeaderStats from "@/Pages/Admin/Layouts/HeaderStats.vue";
 import Sidebar from "@/Pages/Admin/Layouts/Sidebar.vue";
 import AdminNavbar from "@/Pages/Admin/Layouts/AdminNavbar.vue";
 </script>
 
 <template>
     <Sidebar />
-    <div class="relative md:ml-64 dark:bg-admin-body">
+    <div class="relative md:ml-64 dark:bg-admin-body h-full min-h-screen">
         <AdminNavbar />
-        <HeaderStats />
 
-        <div class="dark:bg-admin-body">
+        <div class="dark:bg-admin-body" style="min-height: calc(100vh - 60px)">
             <slot class="" />
         </div>
+        <FooterAdmin />
     </div>
-    <FooterAdmin />
 </template>

@@ -18,7 +18,7 @@ const toggleModal = () => {
     modal.value.toggleModal();
 };
 
-const form = useForm({
+/* const form = useForm({
     name: props.category.name,
 });
 
@@ -28,7 +28,9 @@ const update = () =>
         preserveScroll: true,
     });
 
-defineExpose({ toggleModal, toggleModalAfter });
+const deleteCat = () => form.delete(route("dashboard.menu.destroy", props.category.id)) */
+
+defineExpose({ toggleModal });
 </script>
 
 <template>
@@ -104,6 +106,11 @@ defineExpose({ toggleModal, toggleModalAfter });
                 >
                     <i class="bi bi-trash text-lg text-gray-100"></i>
                 </Link>
+                <form @submit.prevent="deleteCat">
+                    <button type="submit">
+                        <i class="bi bi-trash text-lg text-gray-100"></i>
+                    </button>
+                </form>
             </div>
         </template>
     </ModalBase>

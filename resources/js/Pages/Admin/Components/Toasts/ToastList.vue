@@ -20,7 +20,7 @@ function remove(index) {
     toast.remove(index);
 }
 
-console.log(page.props.toast)
+
 </script>
 
 <template>

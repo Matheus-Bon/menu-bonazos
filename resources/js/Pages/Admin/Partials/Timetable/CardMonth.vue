@@ -1,9 +1,11 @@
 <script setup>
 import BoxBorderSecond from "../../Components/UI/BoxBorderSecond.vue";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { formatDate, getNameDay } from "@/Pages/Functions/functionsOfDate";
 
+
 const props = defineProps({ month: Object });
+const emit = defineEmits(['openModalEditHoliday'])
 
 const expandCard = ref(false);
 
@@ -11,7 +13,7 @@ const toggleExpand = () => {
     expandCard.value = !expandCard.value;
 };
 
-console.log(document.documentElement.lang)
+
 </script>
 
 <template>
@@ -41,10 +43,10 @@ console.log(document.documentElement.lang)
                         {{ holiday.holiday }}
                     </span>
                     <span class="text-sm text-gray-500 dark:tex-gray-700">
-                        {{ formatDate( holiday.date) }} &nbsp;|&nbsp; {{ holiday.day }}
+                        {{ formatDate( holiday.date) }} &nbsp;|&nbsp; <span class="capitalize">{{ holiday.day }}</span> 
                     </span>
                 </div>
-                <button :title="'Editar feriado ' + holiday.holiday">
+                <button :title="'Editar feriado ' + holiday.holiday" @click="emit('openModalEditHoliday', holiday)">
                     <i class="bi bi-pencil text-indigo-500"></i>
                 </button>
             </div>

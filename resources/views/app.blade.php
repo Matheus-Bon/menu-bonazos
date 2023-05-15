@@ -26,7 +26,7 @@
     @inertiaHead
 </head>
 
-<body class="font-sans antialiased bg-admin-body-light dark:bg-admin-body">
+<body class="font-sans antialiased bg-admin-body-light dark:bg-admin-body min-h-screen">
     @inertia
 </body>
 

@@ -3,6 +3,7 @@ import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
 import SelectMenu from "@/Pages/Admin/Components/SelectMenu.vue";
 import CardCategory from "@/Pages/Admin/Partials/Menu/CardCategory.vue";
 import ModalAddCategory from "@/Pages/Admin/Components/Menu/ModalAddCategory.vue";
+import ModalUpdateCategory from "@/Pages/Admin/Components/Menu/ModalUpdateCategory.vue";
 
 import { ref } from "vue";
 
@@ -12,10 +13,19 @@ const modal = ref(null);
 const toggleModal = () => {
     modal.value.toggleModal();
 };
+
+const modalEdit = ref(null);
+const categoryInfo = ref(null)
+const toggleModalEdit = (category) => {
+    modalEdit.value.toggleModal();
+    categoryInfo.value = category
+};
+
 </script>
 
 <template>
     <ModalAddCategory ref="modal" />
+    <ModalUpdateCategory ref="modalEdit" :category="categoryInfo" />
 
     <div class="flex flex-col gap-10">
         <BoxBorder>
@@ -81,6 +91,7 @@ const toggleModal = () => {
                     v-for="category in categories"
                     :key="category.id"
                     :category="category"
+                    @open="toggleModalEdit"
                 />
             </div>
         </section>

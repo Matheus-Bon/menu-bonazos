@@ -13,14 +13,8 @@ const props = defineProps({
     product: Object,
 });
 
-/* Constante que armazena uma função de abrir/fechar o modal */
-const toggleModal = () => {
-    modal.value.toggleModal();
-};
+const emit = defineEmits(['open'])
 
-const closeModal = () => {
-    modal.value.toggleModalAfter();
-};
 
 /* Lógica Update para ativar/desativar Categoria */
 // Início
@@ -37,7 +31,7 @@ const activeCategory = () =>
 </script>
 
 <template>
-    <ModalUpdateCategory :category="category" ref="modal" />
+    <!-- <ModalUpdateCategory :category="category" ref="modal" /> -->
     <BoxBorder>
         <template #card-header>
             <div class="flex flex-row gap-2 justify-between items-center">
@@ -47,7 +41,7 @@ const activeCategory = () =>
                         <h2
                             class="text-3xl text-gray-600 dark:text-gray-300 font-semibold"
                         >
-                            {{ category.name }}
+                            {{ props.category.name }}
                         </h2>
                     </div>
                 </div>
@@ -57,12 +51,12 @@ const activeCategory = () =>
                         <input
                             @change="activeCategory"
                             :checked="form.active"
-                            :id="'checkbox-' + category.id"
+                            :id="'checkbox-' + props.category.id"
                             type="checkbox"
                             class="w-4 h-4 bg-gray-100 border-gray-300 rounded focus:ring-secondary-color-light dark:focus:ring-secondary-color-300 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 text-secondary-color-300"
                         />
                         <label
-                            :for="'checkbox-' + category.id"
+                            :for="'checkbox-' + props.category.id"
                             class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
                             Ativar
@@ -76,8 +70,8 @@ const activeCategory = () =>
                     </button>
 
                     <button
-                        @click="toggleModal"
-                        :title="'Detalhes ' + category.name"
+                        @click="emit('open', props.category)"
+                        :title="'Detalhes ' + props.category.name"
                     >
                         <i
                             class="bi bi-three-dots-vertical text-xl text-secondary-color-300"

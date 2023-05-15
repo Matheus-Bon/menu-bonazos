@@ -5,6 +5,6 @@ import LayoutAdmin from "./Layouts/LayoutAdmin.vue";
 
 <template>
     <LayoutAdmin>
-        <h1>TABLE</h1>
+        <h1 class="text-white">TABLE</h1>
     </LayoutAdmin>
 </template>

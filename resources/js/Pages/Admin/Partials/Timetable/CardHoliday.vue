@@ -1,7 +1,8 @@
 <script setup>
 import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
 import ModalAddHoliday from "../../Components/Timetable/ModalAddHoliday.vue";
-import { ref } from "vue";
+import ModalEditHoliday from "../../Components/Timetable/ModalEditHoliday.vue";
+import { ref, computed } from "vue";
 import CardMonth from "./CardMonth.vue";
 import { getNameMonth, getNameDay } from "@/Pages/Functions/functionsOfDate";
 
@@ -9,10 +10,25 @@ import { getNameMonth, getNameDay } from "@/Pages/Functions/functionsOfDate";
     Parte do funcionamento do Modal
 */
 
+// Modal para Add Holiday
 const modal = ref(null); // ref para usar a função do modal
+/* função para ativar modal */
 const toggleModal = () => {
     modal.value.toggleModal();
-}; // função para ativar modal
+};
+/* --------- */
+
+// Modal para Edit Holiday
+const modalEdit = ref(null); // ref para usar a função do modalEdit
+const holidayInfo = ref(null); // ref para pegar informações do holiday vinda de CardMonth
+
+const toSendHoliday = (holiday) => {
+
+    holidayInfo.value = holiday
+
+    modalEdit.value.toggleModal()
+}
+
 
 /* 
     Fim Parte do funcionamento do Modal
@@ -86,6 +102,7 @@ holidays.forEach((holiday) => {
 
 <template>
     <ModalAddHoliday ref="modal" />
+    <ModalEditHoliday ref="modalEdit" :holiday="holidayInfo" />
 
     <BoxBorder>
         <template #card-header>
@@ -111,6 +128,7 @@ holidays.forEach((holiday) => {
             v-for="month in months"
             :key="month.monthNumber"
             :month="month"
+            @open-modal-edit-holiday="toSendHoliday"
         />
     </div>
 </template>
