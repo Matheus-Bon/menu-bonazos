@@ -12,7 +12,7 @@ const toggleExpand = () => {
     expandCard.value = !expandCard.value;
 };
 
-console.log(props.month)
+
 </script>
 
 <template>
@@ -55,7 +55,7 @@ console.log(props.month)
                         route('dashboard.holiday.show', { holiday: holiday.id })
                     "
                     :title="'Editar feriado ' + holiday.holiday"
-                    preserve-state
+                    preserve-state preserve-scroll
                 >
                     <i class="bi bi-pencil text-indigo-500"></i>
                 </Link>

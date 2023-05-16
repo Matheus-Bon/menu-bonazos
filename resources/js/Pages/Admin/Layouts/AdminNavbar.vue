@@ -2,7 +2,7 @@
 import UserDropdown from "@/Pages/Admin/Components/UserDropdown.vue";
 import { Link, usePage } from "@inertiajs/vue3";
 import { computed } from "vue";
-import ToastList from "../Components/Toasts/ToastList.vue";
+
 import toast from "@/Stores/toast";
 
 const user = usePage().props.auth.user;
@@ -55,7 +55,7 @@ const hourDay = computed(() => {
 </script>
 
 <template>
-    <ToastList />
+    
 
     <nav
         class="relative top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4"

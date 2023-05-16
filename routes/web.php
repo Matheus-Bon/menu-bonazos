@@ -66,7 +66,7 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified', 
     Route::patch('timetable/{timetable}/active-day', [TimetableController::class, 'updateActiveDay'])->name('update.active.day');
     
     //CRUD Timetable - feriados
-    Route::resource('timetable/holiday', HolidayController::class)->only(['edit', 'update', 'store', 'show']);
+    Route::resource('timetable/holiday', HolidayController::class)->only(['edit', 'update', 'store', 'show', 'destroy']);
 });
 
 require __DIR__.'/auth.php';

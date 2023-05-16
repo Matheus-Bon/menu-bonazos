@@ -1,12 +1,12 @@
 <script setup>
-import ToastListItem from "./ToastListItem.vue";
-import { onUnmounted, ref } from "vue";
-import { router, usePage } from "@inertiajs/vue3";
+import ToastListItem from "@/Components/Toasts/ToastListItem.vue";
 import toast from "@/Stores/toast";
+import { router, usePage } from "@inertiajs/vue3";
+import { onUnmounted, ref } from "vue";
 
 const page = usePage();
 
-let removeFinshEventListener = router.on("finish", () => {
+let removeFinishEventListener = router.on("finish", () => {
     if (page.props.toast) {
         toast.add({
             message: page.props.toast,
@@ -14,17 +14,15 @@ let removeFinshEventListener = router.on("finish", () => {
     }
 });
 
-onUnmounted(() => removeFinshEventListener());
+onUnmounted(() => removeFinishEventListener());
 
 function remove(index) {
-    toast.remove(index);
+    toast.remove(index)
 }
-
-
 </script>
 
 <template>
-    <TransitionGroup 
+    <TransitionGroup
         tag="div"
         enter-from-class="translate-x-full opacity-0"
         enter-active-class="duration-500"
@@ -36,7 +34,6 @@ function remove(index) {
             v-for="(item, index) in toast.items"
             :key="item.key"
             :message="item.message"
-            
             @remove="remove(index)"
         />
     </TransitionGroup>

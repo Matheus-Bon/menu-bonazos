@@ -7,33 +7,47 @@ import {
     DialogPanel,
     DialogTitle,
 } from "@headlessui/vue";
-import { router, useForm } from '@inertiajs/vue3'
+import { router, useForm } from "@inertiajs/vue3";
+import toast from "@/Stores/toast";
 
-const props = defineProps({holiday: Object})
+const props = defineProps({ holiday: Object });
 
-const isOpen = computed(() => !!props.holiday)
+const isOpen = computed(() => !!props.holiday);
 
 function closeModal() {
-    
-    router.visit(route('dashboard.timetable.index'), {
-        preserveState:true
-    })
+    router.visit(route("dashboard.timetable.index"), {
+        preserveState: true,
+        preserveScroll: true,
+    });
 }
 function openModal() {
     isOpen.value = true;
 }
 
 const form = useForm({
-    name: props.holiday?.name_of_holiday
-})
+    name: props.holiday?.name_of_holiday,
+});
 
-watch(() => props.holiday, (holiday) => {
-
-    if(holiday) {
-        form.name = holiday.name_of_holiday
+watch(
+    () => props.holiday,
+    (holiday) => {
+        if (holiday) {
+            form.name = holiday.name_of_holiday;
+        }
     }
-})
+);
 
+const deleteHoliday = () => {
+    form.delete(route("dashboard.holiday.destroy", props.holiday?.id), {
+        preserveState: true,
+        preserveScroll: true,
+        onSuccess: (page) => {
+            toast.add({
+                message: "Feriado excluído com sucesso.",
+            });
+        },
+    });
+};
 </script>
 <template>
     <TransitionRoot appear :show="isOpen" as="template">
@@ -146,7 +160,21 @@ watch(() => props.holiday, (holiday) => {
                                 </form>
                             </div>
 
-                            <div class="mt-4 flex flex-row justify-end">
+                            <div class="mt-4 flex flex-row justify-end gap-2">
+                                <form
+                                    hidden
+                                    @submit.prevent="deleteHoliday"
+                                ></form>
+
+                                <button
+                                    v-if="!props.holiday?.fixed"
+                                    type="button"
+                                    class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                    @click="deleteHoliday"
+                                    title="Excluir feriado"
+                                >
+                                    Excluir
+                                </button>
                                 <button
                                     type="button"
                                     class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"

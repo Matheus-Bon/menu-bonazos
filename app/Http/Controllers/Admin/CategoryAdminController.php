@@ -48,7 +48,7 @@ class CategoryAdminController extends Controller
             'active' => false
         ]);
 
-        return to_route('dashboard.menu.index')->with('toast', 'Categoria criada com sucesso.');
+        return redirect()->back()->with('toast', 'Categoria criada com sucesso.');
         
     }
 

@@ -46,7 +46,7 @@ class HolidayController extends Controller
             'fixed' => false,
         ]);
 
-        return Redirect::back()->with('toast', 'Feriado criado com sucesso.');
+        return redirect()->back()->with('toast', 'Feriado adicionado com sucesso.');
 
     }
 
@@ -83,7 +83,11 @@ class HolidayController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-    {
-        //
+    {   
+        $holiday = Holiday::findOrFail($id);
+
+        $holiday->delete();
+
+        return to_route('dashboard.timetable.index');
     }
 }
