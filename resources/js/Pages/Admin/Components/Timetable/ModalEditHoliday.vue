@@ -1,82 +1,164 @@
 <script setup>
-import ModalBase from "@/Pages/Admin/Components/ModalBase.vue";
-import { useForm } from "@inertiajs/vue3";
-import { ref, onMounted } from "vue";
+import { ref, computed, watch } from "vue";
+import {
+    TransitionRoot,
+    TransitionChild,
+    Dialog,
+    DialogPanel,
+    DialogTitle,
+} from "@headlessui/vue";
+import { router, useForm } from '@inertiajs/vue3'
 
-/* 
-Parte de funcionamento do Modal 
-*/
+const props = defineProps({holiday: Object})
 
-const modal = ref(null); // referência do modal para utilizar as funções do modal base
-const toggleModalAfter = () => {
-    modal.value.toggleModalAfter();
-}; // função para inverter o toggle
-const toggleModal = () => {
-    modal.value.toggleModal();
-}; // função para ativar o toggle
-defineExpose({ toggleModal }); // função para emitir a função de ativação do modal
+const isOpen = computed(() => !!props.holiday)
 
-/* 
-Fim Parte de funcionamento do Modal 
-*/
+function closeModal() {
+    
+    router.visit(route('dashboard.timetable.index'), {
+        preserveState:true
+    })
+}
+function openModal() {
+    isOpen.value = true;
+}
 
-const props = defineProps({ holiday: Object });
+const form = useForm({
+    name: props.holiday?.name_of_holiday
+})
 
+watch(() => props.holiday, (holiday) => {
+
+    if(holiday) {
+        form.name = holiday.name_of_holiday
+    }
+})
 
 </script>
-
 <template>
-    <ModalBase ref="modal">
-        <template #modal-title>
-            <section class="pl-6 pt-7">
-                <div>Programe o feriado {{ holiday.holiday }}</div>
-                <div>
-                    <p class="text-sm font-light text-gray-500">
-                        Por padrão em feriados a loja fica fechada. Aqui você
-                        poderá modificar isso.
-                    </p>
-                </div>
-            </section>
-        </template>
-
-        <template #modal-body>
-            <section>
-                <form>
-                    <div class="flex flex-col">
-                        <label for="category" class="label-default">
-                            Nome Feriado
-                        </label>
-                        <input
-                            id="category"
-                            type="text"
-                            class="input-default"
-                            disabled
-                        />
-                    </div>
-                </form>
-            </section>
-        </template>
-
-        <template #modal-buttons>
-            <div
-                class="bg-gray-50 dark:bg-admin-body px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"
+    <TransitionRoot appear :show="isOpen" as="template">
+        <Dialog as="div" @close="closeModal" class="relative z-10">
+            <TransitionChild
+                as="template"
+                enter="duration-300 ease-out"
+                enter-from="opacity-0"
+                enter-to="opacity-100"
+                leave="duration-200 ease-in"
+                leave-from="opacity-100"
+                leave-to="opacity-0"
             >
-                <button
-                    type="submit"
-                    class="inline-flex w-full justify-center rounded-md bg-secondary-color-100 dark:bg-secondary-color-dark px-3 py-2 ml-2 text-sm font-medium text-gray-900 shadow-sm hover:bg-opacity-90 dark:hover:bg-secondary-color-300 sm:w-auto transition-all ease-in-out delay-75"
-                    @click="create"
+                <div class="fixed inset-0 bg-black bg-opacity-25" />
+            </TransitionChild>
+
+            <div class="fixed inset-0 overflow-y-auto">
+                <div
+                    class="flex min-h-full items-center justify-center p-4 text-center"
                 >
-                    Editar Feriado
-                </button>
-                <button
-                    @click="toggleModalAfter"
-                    type="button"
-                    class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                    ref="cancelButtonRef"
-                >
-                    Sair
-                </button>
+                    <TransitionChild
+                        as="template"
+                        enter="duration-300 ease-out"
+                        enter-from="opacity-0 scale-95"
+                        enter-to="opacity-100 scale-100"
+                        leave="duration-200 ease-in"
+                        leave-from="opacity-100 scale-100"
+                        leave-to="opacity-0 scale-95"
+                    >
+                        <DialogPanel
+                            class="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white dark:bg-admin-card p-6 text-left align-middle shadow-xl transition-all"
+                        >
+                            <DialogTitle
+                                as="h3"
+                                class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-200"
+                            >
+                                Editando Feriado
+                            </DialogTitle>
+                            <div class="mt-2">
+                                <p class="text-sm text-gray-500">
+                                    Nessa caixa você pode definir o
+                                    comportamento da sua loja nesse feriado.
+                                </p>
+                            </div>
+                            <div class="mt-5">
+                                <form>
+                                    <div class="flex flex-col gap-7">
+                                        <div class="flex flex-col">
+                                            <label
+                                                for="category"
+                                                class="label-default"
+                                            >
+                                                Nome Feriado
+                                            </label>
+                                            <input
+                                                v-model="form.name"
+                                                id="category"
+                                                type="text"
+                                                class="input-default"
+                                            />
+                                        </div>
+
+                                        <div class="flex flex-col">
+                                            <label
+                                                for="category"
+                                                class="label-default"
+                                            >
+                                                Dia da semana
+                                            </label>
+                                            <input
+                                                id="category"
+                                                type="text"
+                                                class="input-default"
+                                            />
+                                        </div>
+
+                                        <div class="flex flex-col">
+                                            <label
+                                                for="category"
+                                                class="label-default"
+                                            >
+                                                Data
+                                            </label>
+                                            <input
+                                                id="category"
+                                                type="date"
+                                                class="input-default"
+                                            />
+                                        </div>
+
+                                        <label
+                                            class="relative inline-flex items-center cursor-pointer w-2/12"
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                value=""
+                                                class="sr-only peer"
+                                                checked
+                                            />
+                                            <div
+                                                class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+                                            ></div>
+                                            <span
+                                                class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                            >
+                                                Abrir
+                                            </span>
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="mt-4 flex flex-row justify-end">
+                                <button
+                                    type="button"
+                                    class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                    @click="closeModal"
+                                >
+                                    Editar
+                                </button>
+                            </div>
+                        </DialogPanel>
+                    </TransitionChild>
+                </div>
             </div>
-        </template>
-    </ModalBase>
+        </Dialog>
+    </TransitionRoot>
 </template>

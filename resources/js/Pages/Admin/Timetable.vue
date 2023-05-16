@@ -2,37 +2,32 @@
 
 <script setup>
 import { Head } from "@inertiajs/vue3";
-import FooterAdmin from "@/Pages/Admin/Layouts/FooterAdmin.vue";
-import Sidebar from "@/Pages/Admin/Layouts/Sidebar.vue";
-import AdminNavbar from "@/Pages/Admin/Layouts/AdminNavbar.vue";
+
 import CardTimetable from "./Partials/Timetable/CardTimetable.vue";
 import CardHoliday from "./Partials/Timetable/CardHoliday.vue";
+import ModalEditHoliday from "@/Pages/Admin/Components/Timetable/ModalEditHoliday.vue";
+import LayoutAdmin from "./Layouts/LayoutAdmin.vue";
 
-const props = defineProps({timetable: Object, holidays: Object})
-
-
-
+const props = defineProps({
+    timetable: Object,
+    holidays: Object,
+    holidayEdit: Object,
+});
 </script>
 
 <template>
     <Head title="Horários" />
 
-    <Sidebar />
-    <div class="relative md:ml-64">
-        <AdminNavbar />
-        <div class="pt-9 dark:bg-admin-body">
-            <div class="flex flex-row pt-20 mx-14 gap-5">
-
-                <div class="basis-1/2">
-                    <CardTimetable :timetable="timetable"/>
-                </div>
-                <div class="basis-1/2">
-                    <CardHoliday :mouths="mouths" :holidays="holidays"/>
-                </div>
-                
-                
+    <LayoutAdmin>
+        <div class="flex flex-row mx-14 gap-5">
+            <div class="basis-1/2">
+                <CardTimetable :timetable="timetable" />
             </div>
+            <div class="basis-1/2">
+                <CardHoliday :holidays="holidays" />
+            </div>
+
+            <ModalEditHoliday :holiday="holidayEdit" />
         </div>
-    </div>
-    <FooterAdmin />
+    </LayoutAdmin>
 </template>

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Redirect;
 use Carbon\Carbon;
+use Inertia\Inertia;
 use App\Models\Holiday;
+use App\Models\Timetable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -53,15 +55,20 @@ class HolidayController extends Controller
      */
     public function show(string $id)
     {
-        //
+        //dd(gettype(Holiday::where('id', $id)->first()) );
+        return Inertia::render('Admin/Timetable', [
+            'holidayEdit' => Holiday::where('id', $id)->first(),
+            'holidays' => Holiday::all(),
+            'timetable' => Timetable::all(),
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id, Holiday $holiday)
     {
-        //
+        
     }
 
     /**

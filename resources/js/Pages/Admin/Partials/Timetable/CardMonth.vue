@@ -2,10 +2,9 @@
 import BoxBorderSecond from "../../Components/UI/BoxBorderSecond.vue";
 import { ref, onMounted } from "vue";
 import { formatDate, getNameDay } from "@/Pages/Functions/functionsOfDate";
-
+import { Link } from "@inertiajs/vue3";
 
 const props = defineProps({ month: Object });
-const emit = defineEmits(['openModalEditHoliday'])
 
 const expandCard = ref(false);
 
@@ -13,13 +12,12 @@ const toggleExpand = () => {
     expandCard.value = !expandCard.value;
 };
 
-
+console.log(props.month)
 </script>
 
 <template>
     <BoxBorderSecond
         :class="[expandCard ? 'col-span-3' : null]"
-        data-masonry=""
     >
         <template #card-header>
             <div class="flex flex-row justify-between">
@@ -37,18 +35,30 @@ const toggleExpand = () => {
             v-if="expandCard"
             class="p-6 pt-0 transition-all ease-in-out duration-700 delay-75"
         >
-            <div v-for="holiday in month.holidays" :key="holiday" class="pb-5 flex flex-row justify-between">
+            <div
+                v-for="holiday in month.holidays"
+                :key="holiday"
+                class="pb-5 flex flex-row justify-between"
+            >
                 <div class="flex flex-col justify-between">
                     <span class="text-lg text-gray-700 dark:text-gray-300">
                         {{ holiday.holiday }}
                     </span>
                     <span class="text-sm text-gray-500 dark:tex-gray-700">
-                        {{ formatDate( holiday.date) }} &nbsp;|&nbsp; <span class="capitalize">{{ holiday.day }}</span> 
+                        {{ formatDate(holiday.date) }} &nbsp;|&nbsp;
+                        <span class="capitalize">{{ holiday.day }}</span>
                     </span>
                 </div>
-                <button :title="'Editar feriado ' + holiday.holiday" @click="emit('openModalEditHoliday', holiday)">
+                <Link
+                    as="button"
+                    :href="
+                        route('dashboard.holiday.show', { holiday: holiday.id })
+                    "
+                    :title="'Editar feriado ' + holiday.holiday"
+                    preserve-state
+                >
                     <i class="bi bi-pencil text-indigo-500"></i>
-                </button>
+                </Link>
             </div>
         </div>
     </BoxBorderSecond>

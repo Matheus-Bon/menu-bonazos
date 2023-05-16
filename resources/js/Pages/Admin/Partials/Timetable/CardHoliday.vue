@@ -1,8 +1,7 @@
 <script setup>
 import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
 import ModalAddHoliday from "../../Components/Timetable/ModalAddHoliday.vue";
-import ModalEditHoliday from "../../Components/Timetable/ModalEditHoliday.vue";
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import CardMonth from "./CardMonth.vue";
 import { getNameMonth, getNameDay } from "@/Pages/Functions/functionsOfDate";
 
@@ -16,29 +15,17 @@ const modal = ref(null); // ref para usar a função do modal
 const toggleModal = () => {
     modal.value.toggleModal();
 };
-/* --------- */
-
-// Modal para Edit Holiday
-const modalEdit = ref(null); // ref para usar a função do modalEdit
-const holidayInfo = ref(null); // ref para pegar informações do holiday vinda de CardMonth
-
-const toSendHoliday = (holiday) => {
-
-    holidayInfo.value = holiday
-
-    modalEdit.value.toggleModal()
-}
-
 
 /* 
     Fim Parte do funcionamento do Modal
 */
 
 const props = defineProps({ holidays: Object });
-const holidaysArr = Object.values(props.holidays);
+
+
 
 /* 
-    Função para arrumar os dados de holidaysArr (Array que armazena um objeto de cada feriado). 
+    Função para arrumar os dados de holidays(Array que armazena um objeto de cada feriado). 
     Retorno: Ela retorna um array de objetos de cada mês e seus respectivos feriados dentro de outro array 
 
         Ex:. 
@@ -47,8 +34,8 @@ const holidaysArr = Object.values(props.holidays);
             (···)
     
 */
-const holidays = holidaysArr.reduce((acc, holiday) => {
-    const { date_of_holiday, name_of_holiday } = holiday; // Extrai as propriedades 'date_of_holiday' e 'name_of_holiday' do objeto 'holiday'
+const holidays = props.holidays.reduce((acc, holiday) => {
+    const { id, name_of_holiday, date_of_holiday, fixed} = holiday; // Extrai as propriedades 'date_of_holiday' e 'name_of_holiday' do objeto 'holiday'
     const month = getNameMonth(date_of_holiday); // Obtém o nome do mês correspondente à 'date_of_holiday'
     const day = getNameDay(date_of_holiday); // Obtém o nome do dia da semana correspondente à 'date_of_holiday'
 
@@ -57,15 +44,17 @@ const holidays = holidaysArr.reduce((acc, holiday) => {
     if (existingMonth) {
         // Se existe um objeto para o mês, adiciona o novo feriado ao array 'holidays' desse objeto
         existingMonth.holidays.push({
+            id: id,
             holiday: name_of_holiday,
             date: date_of_holiday,
+            fixed: fixed,
         });
     } else {
         // Se não existe um objeto para o mês, cria um novo objeto com o mês e o primeiro feriado no array 'holidays' e adiciona ao array 'acc'
         acc.push({
             month,
             holidays: [
-                { holiday: name_of_holiday, date: date_of_holiday, day },
+                { id ,holiday: name_of_holiday, date: date_of_holiday, day, fixed },
             ],
         });
     }
@@ -98,12 +87,12 @@ holidays.forEach((holiday) => {
         matchingMonth.holidays.push(...holidayList);
     }
 });
+
+
 </script>
 
 <template>
     <ModalAddHoliday ref="modal" />
-    <ModalEditHoliday ref="modalEdit" :holiday="holidayInfo" />
-
     <BoxBorder>
         <template #card-header>
             <h4 class="font-semibold text-lg text-gray-900 dark:text-white">
@@ -128,7 +117,7 @@ holidays.forEach((holiday) => {
             v-for="month in months"
             :key="month.monthNumber"
             :month="month"
-            @open-modal-edit-holiday="toSendHoliday"
+            
         />
     </div>
 </template>

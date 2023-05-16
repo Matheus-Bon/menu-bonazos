@@ -7,10 +7,12 @@ import AdminNavbar from "@/Pages/Admin/Layouts/AdminNavbar.vue";
 <template>
     <Sidebar />
     <div class="relative md:ml-64 dark:bg-admin-body h-full min-h-screen">
-        <AdminNavbar />
+        <div class=" h-full" style="min-height: calc(100vh - 60px)">
+            <AdminNavbar />
 
-        <div class="dark:bg-admin-body" style="min-height: calc(100vh - 60px)">
-            <slot class="" />
+            <div class="mt-8 dark:bg-admin-body">
+                <slot class="" />
+            </div>
         </div>
         <FooterAdmin />
     </div>
