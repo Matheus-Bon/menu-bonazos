@@ -1,10 +1,18 @@
-<!-- Página referente a 'Tabelas' -->
+<script>
+import LayoutAdmin from "@/Pages/Admin/Layouts/LayoutAdmin.vue";
+
+export default {
+    
+    layout: (h, page) => h(LayoutAdmin, [page])
+}
+</script>
+
 <script setup>
-import LayoutAdmin from "./Layouts/LayoutAdmin.vue";
+
 </script>
 
 <template>
-    <LayoutAdmin>
-        <h1 class="text-white">TABLE</h1>
-    </LayoutAdmin>
+    
+        <h1 class="text-white">Tabela</h1>
+    
 </template>

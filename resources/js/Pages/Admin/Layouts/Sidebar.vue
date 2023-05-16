@@ -110,10 +110,10 @@ import { Link, usePage } from "@inertiajs/vue3";
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
-                                    $page.url === '/dashboard/pedidos',
+                                    $page.url === '/dashboard/orders',
 
                                 'text-gray-800 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
-                                    $page.url != '/dashboard/pedidos',
+                                    $page.url != '/dashboard/orders',
                             }"
                         >
                             <i class="bi bi-bookmark pr-1"></i>
@@ -127,10 +127,10 @@ import { Link, usePage } from "@inertiajs/vue3";
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
-                                    $page.url === '/dashboard/tabelas',
+                                    $page.url === '/dashboard/tables',
 
                                 'text-gray-800 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
-                                    $page.url != '/dashboard/tabelas',
+                                    $page.url != '/dashboard/tables',
                             }"
                         >
                             <i class="bi bi-table pr-1"></i>
@@ -171,10 +171,10 @@ import { Link, usePage } from "@inertiajs/vue3";
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
-                                    $page.url === '/dashboard/area-entrega',
+                                    $page.url === '/dashboard/delivery-area',
 
                                 'text-gray-800 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
-                                    $page.url != '/dashboard/area-entrega',
+                                    $page.url != '/dashboard/delivery-area',
                             }"
                         >
                             <i class="fa-solid fa-location-dot pr-1"></i>
@@ -189,11 +189,11 @@ import { Link, usePage } from "@inertiajs/vue3";
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90 hover:text-secondary-color':
                                     $page.url ===
-                                    '/dashboard/agendamento-pedido',
+                                    '/dashboard/schedule',
 
                                 'text-gray-800 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
                                     $page.url !=
-                                    '/dashboard/agendamento-pedido',
+                                    '/dashboard/schedule',
                             }"
                         >
                             <i class="bi bi-calendar pr-1"></i>
@@ -226,10 +226,10 @@ import { Link, usePage } from "@inertiajs/vue3";
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
-                                    $page.url === '/dashboard/avaliacoes',
+                                    $page.url === '/dashboard/evaluations',
 
                                 'text-gray-800 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
-                                    $page.url != '/dashboard/avaliacoes',
+                                    $page.url != '/dashboard/evaluations',
                             }"
                         >
                             <i class="bi bi-star pr-1"></i>

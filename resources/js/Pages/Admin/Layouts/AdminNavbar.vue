@@ -1,9 +1,9 @@
 <script setup>
 import UserDropdown from "@/Pages/Admin/Components/UserDropdown.vue";
 import { Link, usePage } from "@inertiajs/vue3";
-import { computed, reactive, ref, onMounted } from "vue";
+import { computed } from "vue";
 import ToastList from "../Components/Toasts/ToastList.vue";
-import toast from "@/Stores/toast"
+import toast from "@/Stores/toast";
 
 const user = usePage().props.auth.user;
 
@@ -26,9 +26,18 @@ const routes = [
 Função com finalidade de buscar a url na matriz routes e comparar com a url que o user está no site
 */
 const nameRoute = computed(() => {
-    const currentRoute = routes.find((route) => route.path === usePage().url);
+    // Encontra a rota atual dentro de um array de rotas
+    const currentRoute = routes.find((route) => {
+        const regularExp = new RegExp(usePage().url); // Cria uma expressão regular com base na URL da página atual
+        const nameRoute = route.path; // Armazena o caminho da rota atual em uma variável
+        const match = nameRoute.search(regularExp); // Verifica se o caminho da rota atual corresponde à expressão regular
 
-    return currentRoute ? currentRoute.name : "";
+        if (match !== -1) {
+            return route; // Retorna a rota atual se houver uma correspondência
+        }
+    });
+
+    return currentRoute.name;
 });
 
 /* Lógica para saudações */
@@ -43,14 +52,11 @@ const hourDay = computed(() => {
         return "Boa noite,";
     }
 });
-
-
-
 </script>
 
 <template>
     <ToastList />
-    <!-- Navbar -->
+
     <nav
         class="relative top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4"
     >
@@ -68,11 +74,7 @@ const hourDay = computed(() => {
                 </p>
             </div>
 
-            <!-- User -->
             <UserDropdown />
         </div>
     </nav>
-    <!-- End Navbar -->
 </template>
-
-

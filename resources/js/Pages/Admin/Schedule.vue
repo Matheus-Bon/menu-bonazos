@@ -1,13 +1,18 @@
-<!-- Página referente a 'Agendar Pedidos' -->
+<script>
+import LayoutAdmin from "@/Pages/Admin/Layouts/LayoutAdmin.vue";
+
+export default {
+    
+    layout: (h, page) => h(LayoutAdmin, [page])
+}
+</script>
 
 <script setup>
-import LayoutAdmin from "@/Pages/Admin/Layouts/LayoutAdmin.vue";
+
 </script>
 
 <template>
-    <LayoutAdmin>
-        <div>
-            Agendamento Pedidos
-        </div>
-    </LayoutAdmin>
+    
+        <h1 class="text-white">Agendar Pedidos</h1>
+    
 </template>

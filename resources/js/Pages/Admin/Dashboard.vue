@@ -1,13 +1,18 @@
-<!-- Página referente a 'Início' -->
-<script setup>
+<script>
 import LayoutAdmin from "@/Pages/Admin/Layouts/LayoutAdmin.vue";
+
+export default {
+    
+    layout: (h, page) => h(LayoutAdmin, [page])
+}
+</script>
+
+<script setup>
+
 </script>
 
 <template>
-    <LayoutAdmin>
-        <div>
-            INÍCIO
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        </div>
-    </LayoutAdmin>
+    
+        <h1 class="text-white">Dashboard</h1>
+    
 </template>

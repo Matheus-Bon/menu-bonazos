@@ -1,12 +1,18 @@
-<!-- Página referente a 'Pedidos' -->
-<script setup>
+<script>
 import LayoutAdmin from "@/Pages/Admin/Layouts/LayoutAdmin.vue";
+
+export default {
+    
+    layout: (h, page) => h(LayoutAdmin, [page])
+}
+</script>
+
+<script setup>
+
 </script>
 
 <template>
-    <LayoutAdmin>
-        <div>
-            Pedidos
-        </div>
-    </LayoutAdmin>
+    
+        <h1 class="text-white">Pedido</h1>
+    
 </template>
