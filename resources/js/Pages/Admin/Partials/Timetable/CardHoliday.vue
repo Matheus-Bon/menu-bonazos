@@ -3,26 +3,17 @@ import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
 import ModalAddHoliday from "../../Components/Timetable/ModalAddHoliday.vue";
 import { ref } from "vue";
 import CardMonth from "./CardMonth.vue";
-import { getNameMonth, getNameDay } from "@/Pages/Functions/functionsOfDate";
+import { formatTime } from "@/Pages/Functions/functionsOfDate";
 
-/* 
-    Parte do funcionamento do Modal
-*/
-
-// Modal para Add Holiday
-const modal = ref(null); // ref para usar a função do modal
-/* função para ativar modal */
-const toggleModal = () => {
-    modal.value.toggleModal();
-};
-
-/* 
-    Fim Parte do funcionamento do Modal
-*/
 
 const props = defineProps({ holidays: Object });
+const modal = ref(null)
 
+console.log(formatTime('2023-05-17', 'dddd'))
 
+const openModal = () => {
+    modal.value.openModal()
+}
 
 /* 
     Função para arrumar os dados de holidays(Array que armazena um objeto de cada feriado). 
@@ -36,25 +27,25 @@ const props = defineProps({ holidays: Object });
 */
 const holidays = props.holidays.reduce((acc, holiday) => {
     const { id, name_of_holiday, date_of_holiday, fixed} = holiday; // Extrai as propriedades 'date_of_holiday' e 'name_of_holiday' do objeto 'holiday'
-    const month = getNameMonth(date_of_holiday); // Obtém o nome do mês correspondente à 'date_of_holiday'
-    const day = getNameDay(date_of_holiday); // Obtém o nome do dia da semana correspondente à 'date_of_holiday'
+
+    const month = formatTime(date_of_holiday, 'MMMM'); // Obtém o nome do mês correspondente à 'date_of_holiday'
 
     const existingMonth = acc.find((item) => item.month === month); // Verifica se já existe um objeto no array 'acc' com o mesmo valor de mês
 
     if (existingMonth) {
         // Se existe um objeto para o mês, adiciona o novo feriado ao array 'holidays' desse objeto
         existingMonth.holidays.push({
-            id: id,
+            id,
             holiday: name_of_holiday,
             date: date_of_holiday,
-            fixed: fixed,
+            fixed,
         });
     } else {
         // Se não existe um objeto para o mês, cria um novo objeto com o mês e o primeiro feriado no array 'holidays' e adiciona ao array 'acc'
         acc.push({
             month,
             holidays: [
-                { id ,holiday: name_of_holiday, date: date_of_holiday, day, fixed },
+                { id ,holiday: name_of_holiday, date: date_of_holiday, fixed },
             ],
         });
     }
@@ -104,7 +95,7 @@ holidays.forEach((holiday) => {
         </template>
         <div>
             <button
-                @click="toggleModal"
+                @click="openModal"
                 class="btn-primary bg-indigo-700 hover:bg-indigo-800"
             >
                 Adicionar Feriado

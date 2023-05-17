@@ -1,11 +1,9 @@
-import { createApp, h } from "vue";
+import { createApp, h, provide } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
 import { router } from "@inertiajs/vue3";
 import NProgress from "nprogress";
-
-
 
 import "animate.css";
 import "../css/app.css";
@@ -34,4 +32,5 @@ createInertiaApp({
         progress: false,
         color: '#00946C'
     },
+
 });

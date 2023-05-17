@@ -18,7 +18,7 @@ class HolidayFactory extends Factory
     {
         return [
             'name_of_holiday' => fake(),
-            'date_of_holiday' => fake()->date(),
+            'date_of_holiday' => fake(),
         ];
     }
 }

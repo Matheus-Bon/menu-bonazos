@@ -46,7 +46,7 @@ class HolidayController extends Controller
             'fixed' => false,
         ]);
 
-        return redirect()->back()->with('toast', 'Feriado adicionado com sucesso.');
+        return to_route('dashboard.timetable.index');
 
     }
 

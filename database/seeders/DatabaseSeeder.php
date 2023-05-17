@@ -60,8 +60,6 @@ class DatabaseSeeder extends Seeder
             'day_of_week' => 'Domingo'
         ]);
 
-        $currentYear = Carbon::now()->year();
-
         \App\Models\Holiday::factory()->create([
             'name_of_holiday' => 'Ano Novo',
             'date_of_holiday' => '2024-01-01',

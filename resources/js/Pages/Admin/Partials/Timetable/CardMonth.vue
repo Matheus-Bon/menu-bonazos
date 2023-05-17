@@ -1,7 +1,7 @@
 <script setup>
 import BoxBorderSecond from "../../Components/UI/BoxBorderSecond.vue";
 import { ref, onMounted } from "vue";
-import { formatDate, getNameDay } from "@/Pages/Functions/functionsOfDate";
+import { formatTime } from "@/Pages/Functions/functionsOfDate";
 import { Link } from "@inertiajs/vue3";
 
 const props = defineProps({ month: Object });
@@ -12,7 +12,7 @@ const toggleExpand = () => {
     expandCard.value = !expandCard.value;
 };
 
-
+console.log(props.month)
 </script>
 
 <template>
@@ -45,8 +45,8 @@ const toggleExpand = () => {
                         {{ holiday.holiday }}
                     </span>
                     <span class="text-sm text-gray-500 dark:tex-gray-700">
-                        {{ formatDate(holiday.date) }} &nbsp;|&nbsp;
-                        <span class="capitalize">{{ holiday.day }}</span>
+                        {{ formatTime(holiday.date, 'DD/MM/YYYY') }} &nbsp;|&nbsp;
+                        <span class="capitalize">{{ formatTime(holiday.date, 'dddd') }}</span>
                     </span>
                 </div>
                 <Link

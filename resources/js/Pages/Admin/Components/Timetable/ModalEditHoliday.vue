@@ -18,6 +18,7 @@ function closeModal() {
     router.visit(route("dashboard.timetable.index"), {
         preserveState: true,
         preserveScroll: true,
+
     });
 }
 function openModal() {
@@ -39,9 +40,9 @@ watch(
 
 const deleteHoliday = () => {
     form.delete(route("dashboard.holiday.destroy", props.holiday?.id), {
-        preserveState: true,
-        preserveScroll: true,
         onSuccess: (page) => {
+
+            closeModal()
             toast.add({
                 message: "Feriado excluído com sucesso.",
             });

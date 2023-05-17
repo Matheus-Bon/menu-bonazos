@@ -34,6 +34,7 @@ function remove(index) {
             v-for="(item, index) in toast.items"
             :key="item.key"
             :message="item.message"
+            :duration="3000"
             @remove="remove(index)"
         />
     </TransitionGroup>

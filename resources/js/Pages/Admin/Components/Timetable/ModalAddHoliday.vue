@@ -1,115 +1,136 @@
 <script setup>
-import ModalBase from "@/Pages/Admin/Components/ModalBase.vue";
-import { useForm } from "@inertiajs/vue3";
 import { ref } from "vue";
+import {
+    TransitionRoot,
+    TransitionChild,
+    Dialog,
+    DialogPanel,
+    DialogTitle,
+} from "@headlessui/vue";
+import { useForm } from "@inertiajs/vue3";
+import toast from "@/Stores/toast";
 
-/* 
-Parte de funcionamento do Modal 
-*/
+const props = defineProps({ holiday: Object });
+const isOpen = ref(false);
 
-const modal = ref(null); // referência do modal para utilizar as funções do modal base
-const toggleModalAfter = () => {
-    modal.value.toggleModalAfter();
-}; // função para inverter o toggle
-const toggleModal = () => {
-    modal.value.toggleModal();
-}; // função para ativar o toggle
-defineExpose({ toggleModal }); // função para emitir a função de ativação do modal
+function closeModal() {
+    isOpen.value = false;
+}
+function openModal() {
+    isOpen.value = true;
+}
 
-/* 
-Fim Parte de funcionamento do Modal 
-*/
-
-const props = defineProps({ months: Array});
-
+defineExpose({ openModal });
 
 const form = useForm({
     name_of_holiday: null,
     date_of_holiday: null,
-})
+});
 
-const create = () => form.post(route('dashboard.holiday.store'),{
-    preserveState: (page) => Object.keys(page.props.errors).length,
-})
+const create = () => {
+    form.post(route("dashboard.holiday.store"), {
 
+        onSuccess: (page) => {
+            toast.add({
+                message: "Feriado criado com sucesso.",
+            });
+        },
+
+    });
+};
 </script>
-
 <template>
-    <ModalBase ref="modal">
-        <template #modal-title>
-            <section class="pl-6 pt-7">
-                <div>
-                    <i
-                        class="fa-regular fa-calendar-check pr-1 text-4xl text-secondary-color-light dark:text-secondary-color-dark"
-                    ></i>
-                    Adicione um feriado não fixo
-                </div>
-                <div>
-                    <p class="text-sm font-light text-gray-500">
-                        Feriados não fixos são feriados regionais ou feriados
-                        que seus dias não são definidos. Exemplo: Carnaval
-                    </p>
-                </div>
-            </section>
-        </template>
-
-        <template #modal-body>
-            <section>
-                <form  @submit.prevent="create">
-                    <div class="flex flex-col gap-10">
-                        <div class="flex flex-col">
-                            <label for="holidayName" class="label-default">
-                                Nome Feriado
-                            </label>
-                            <input
-                                id="holidayName"
-                                type="text"
-                                class="input-default"
-                                v-model="form.name_of_holiday"
-                            />
-                            <div v-if="form.errors.name_of_holiday">
-                                <div class="text-red-500">{{ form.errors.name_of_holiday }}</div>
-                            </div>
-                        </div>
-                        <div class="flex flex-col">
-                            <label for="holidayDate" class="label-default">
-                                Data do Feriado
-                            </label>
-                            <input
-                                id="holidayDate"
-                                type="date"
-                                class="input-default"
-                                v-model="form.date_of_holiday"
-                            />
-                            <div v-if="form.errors.date_of_holiday">
-                                <div class="text-red-500">{{ form.errors.date_of_holiday }}</div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </section>
-        </template>
-
-        <template #modal-buttons>
-            <div
-                class="bg-gray-50 dark:bg-admin-body px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"
+    <TransitionRoot appear :show="isOpen" as="template">
+        <Dialog as="div" @close="closeModal" class="relative z-10">
+            <TransitionChild
+                as="template"
+                enter="duration-300 ease-out"
+                enter-from="opacity-0"
+                enter-to="opacity-100"
+                leave="duration-200 ease-in"
+                leave-from="opacity-100"
+                leave-to="opacity-0"
             >
-                <button
-                    type="submit"
-                    class="inline-flex w-full justify-center rounded-md bg-secondary-color-100 dark:bg-secondary-color-dark px-3 py-2 ml-2 text-sm font-medium text-gray-900 shadow-sm hover:bg-opacity-90 dark:hover:bg-secondary-color-300 sm:w-auto transition-all ease-in-out delay-75"
-                    @click="create"
+                <div class="fixed inset-0 bg-black bg-opacity-25" />
+            </TransitionChild>
+
+            <div class="fixed inset-0 overflow-y-auto">
+                <div
+                    class="flex min-h-full items-center justify-center p-4 text-center"
                 >
-                    Adicionar Feriado
-                </button>
-                <button
-                    @click="toggleModalAfter"
-                    type="button"
-                    class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                    ref="cancelButtonRef"
-                >
-                    Sair
-                </button>
+                    <TransitionChild
+                        as="template"
+                        enter="duration-300 ease-out"
+                        enter-from="opacity-0 scale-95"
+                        enter-to="opacity-100 scale-100"
+                        leave="duration-200 ease-in"
+                        leave-from="opacity-100 scale-100"
+                        leave-to="opacity-0 scale-95"
+                    >
+                        <DialogPanel
+                            class="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white dark:bg-admin-card p-6 text-left align-middle shadow-xl transition-all"
+                        >
+                            <DialogTitle
+                                as="h3"
+                                class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-200"
+                            >
+                                Criando Feriado
+                            </DialogTitle>
+                            <div class="mt-2">
+                                <p class="text-sm text-gray-500">
+                                    Nessa caixa você pode adcionar feriados da
+                                    sua região.
+                                </p>
+                            </div>
+                            <div class="mt-5">
+                                <form @submit.prevent="create">
+                                    <div class="flex flex-col gap-7">
+                                        <div class="flex flex-col">
+                                            <label
+                                                for="category"
+                                                class="label-default"
+                                            >
+                                                Nome Feriado
+                                            </label>
+                                            <input
+                                                v-model="form.name_of_holiday"
+                                                id="category"
+                                                type="text"
+                                                class="input-default"
+                                            />
+                                        </div>
+
+                                        <div class="flex flex-col">
+                                            <label
+                                                for="category"
+                                                class="label-default"
+                                            >
+                                                Data do feriado
+                                            </label>
+                                            <input
+                                                v-model="form.date_of_holiday"
+                                                id="category"
+                                                type="date"
+                                                class="input-default"
+                                            />
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="mt-4 flex flex-row justify-end gap-2">
+                                <button
+                                    type="button"
+                                    class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                    @click="create"
+                                >
+                                    Adicionar
+                                </button>
+                            </div>
+                        </DialogPanel>
+                    </TransitionChild>
+                </div>
             </div>
-        </template>
-    </ModalBase>
+        </Dialog>
+    </TransitionRoot>
 </template>
