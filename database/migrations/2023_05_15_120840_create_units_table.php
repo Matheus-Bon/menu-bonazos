@@ -12,7 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('units', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id');
+            $table->tinyText('name')->nullable();
+            $table->foreignUuid('manager_id');
+            $table->tinyText('street')->nullable();
+            $table->tinyText('district')->nullable();
+            $table->tinyText('city')->nullable();
+            $table->tinyText('state')->nullable();
+            $table->tinyText('zip_code')->nullable();
+            $table->tinyText('phone')->nullable();
+            $table->boolean('isOpen')->default(false);
             $table->timestamps();
         });
     }

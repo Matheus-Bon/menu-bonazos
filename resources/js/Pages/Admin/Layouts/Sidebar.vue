@@ -27,12 +27,15 @@ import { Link, usePage } from "@inertiajs/vue3";
                 :href="route('dashboard.')"
                 class="md:block text-center md:pb-2 text-gray-800 mr-0 inline-block whitespace-nowrap text-3xl uppercase font-semibold p-4 px-0 dark:text-gray-200"
             >
-                NOME - LOJA
+                Delivery
             </Link>
 
-            <div>
+            <div class="flex flex-col gap-1 mt-3">
                 <span class="text-gray-500 text-sm font-thin">
-                    Sua loja está:
+                    Sua loja está: <span class="text-secondary-color-100 font-medium">Aberta</span>
+                </span>
+                <span class="text-gray-500 text-sm font-thin">
+                    Unidade: Belford Roxo
                 </span>
             </div>
 
@@ -234,6 +237,23 @@ import { Link, usePage } from "@inertiajs/vue3";
                         >
                             <i class="bi bi-star pr-1"></i>
                             Avaliações
+                        </Link>
+                    </li>
+
+                    <li class="items-center">
+                        <Link
+                            :href="route('dashboard.unit.index')"
+                            class="text-base py-3 font-normal block"
+                            :class="{
+                                'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
+                                    $page.url === '/dashboard/unit',
+
+                                'text-gray-800 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
+                                    $page.url != '/dashboard/unit',
+                            }"
+                        >
+                            <i class="bi bi-shop"></i>
+                            Unidades
                         </Link>
                     </li>
                 </ul>

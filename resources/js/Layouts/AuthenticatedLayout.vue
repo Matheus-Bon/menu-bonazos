@@ -12,21 +12,21 @@ const user = usePage().props.auth.user;
                 <div class="flex flex-row gap-2">
                     <Link
                         :href="route('home')"
-                        class="text-gray-200 text-xl hover:underline decoration-amber-600"
+                        class="dark:text-gray-200 text-xl hover:underline decoration-amber-600"
                     >
                         Início
                     </Link>
                     <Link
                         :href="route('profile.edit')"
                         v-if="user"
-                        class="text-gray-200 text-xl hover:underline decoration-amber-600"
+                        class="dark:text-gray-200 text-xl hover:underline decoration-amber-600"
                     >
                         Profile
                     </Link>
                     <Link
                         :href="route('dashboard.')"
                         v-if="user"
-                        class="text-gray-200 text-xl hover:underline decoration-amber-600"
+                        class="dark:text-gray-200 text-xl hover:underline decoration-amber-600"
                     >
                         Dasboard
                     </Link>
@@ -35,14 +35,14 @@ const user = usePage().props.auth.user;
                     <Link
                         :href="route('login')"
                         v-if="!user"
-                        class="text-gray-200 text-xl hover:underline decoration-amber-600"
+                        class="dark:text-gray-200 text-xl hover:underline decoration-amber-600"
                     >
                         Login
                     </Link>
                     <Link
                         :href="route('register')"
                         v-if="!user"
-                        class="text-gray-200 text-xl hover:underline decoration-amber-600"
+                        class="dark:text-gray-200 text-xl hover:underline decoration-amber-600"
                     >
                         Register
                     </Link>
@@ -51,7 +51,7 @@ const user = usePage().props.auth.user;
                         v-if="user"
                         method="post"
                         as="button"
-                        class="text-gray-200 text-xl hover:underline decoration-amber-600"
+                        class="dark:text-gray-200 text-xl hover:underline decoration-amber-600"
                     >
                         Logout
                     </Link>

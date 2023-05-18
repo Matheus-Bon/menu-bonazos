@@ -62,13 +62,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\Holiday::factory()->create([
             'name_of_holiday' => 'Ano Novo',
-            'date_of_holiday' => '2024-01-01',
-            'fixed' => true
-        ]);
-
-        \App\Models\Holiday::factory()->create([
-            'name_of_holiday' => 'Paixão de Cristo',
-            'date_of_holiday' => '2023-04-07',
+            'date_of_holiday' => '2023-01-01',
             'fixed' => true
         ]);
 
@@ -85,12 +79,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\Holiday::factory()->create([
-            'name_of_holiday' => 'Corpus Christi',
-            'date_of_holiday' => '2023-06-08',
-            'fixed' => true
-        ]);
-
-        \App\Models\Holiday::factory()->create([
             'name_of_holiday' => 'Independência',
             'date_of_holiday' => '2023-09-07',
             'fixed' => true
@@ -99,12 +87,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\Holiday::factory()->create([
             'name_of_holiday' => 'Nossa Senhora de Aparecida',
             'date_of_holiday' => '2023-10-12',
-            'fixed' => true
-        ]);
-
-        \App\Models\Holiday::factory()->create([
-            'name_of_holiday' => 'Dia do Professor',
-            'date_of_holiday' => '2023-10-15',
             'fixed' => true
         ]);
 
@@ -125,5 +107,7 @@ class DatabaseSeeder extends Seeder
             'date_of_holiday' => '2023-12-25',
             'fixed' => true
         ]);
+
+        
     }
 }

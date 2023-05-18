@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CategoryAdminController;
 use App\Http\Controllers\Admin\HolidayController;
 use App\Http\Controllers\Admin\IndexAdminController;
 use App\Http\Controllers\Admin\TimetableController;
+use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StandardAddressChange;
 use Illuminate\Foundation\Application;
@@ -56,17 +57,20 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified', 
     Route::get('/schedule', [IndexAdminController::class, 'schedule'])->name('schedule');
     Route::get('/evaluations', [IndexAdminController::class, 'evaluations'])->name('evaluations');
 
-    /* Rotas de CRUD */
-    //CRUD Menu
+    
+    //Rotas Menu
     Route::resource('menu', CategoryAdminController::class)->parameters(['menu' => 'category']);
     Route::put('menu/{category}/active-category', [CategoryAdminController::class, 'updateActiveCategory'])->name('update.active.category');
 
-    //CRUD Timetable - horário de funcionamento
+    //Rotas Timetable - horário de funcionamento
     Route::resource('timetable', TimetableController::class);
     Route::patch('timetable/{timetable}/active-day', [TimetableController::class, 'updateActiveDay'])->name('update.active.day');
     
-    //CRUD Timetable - feriados
+    //Rotas Timetable - feriados
     Route::resource('timetable/holiday', HolidayController::class)->only(['edit', 'update', 'store', 'show', 'destroy']);
+
+    //Rotas Unidade 
+    Route::resource('unit', UnitController::class)->only(['index']);
 });
 
 require __DIR__.'/auth.php';

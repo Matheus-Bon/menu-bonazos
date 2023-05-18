@@ -1,7 +1,7 @@
 <script setup>
 import UserDropdown from "@/Pages/Admin/Components/UserDropdown.vue";
 import { Link, usePage } from "@inertiajs/vue3";
-import { computed } from "vue";
+import { computed, watch } from "vue";
 
 import toast from "@/Stores/toast";
 
@@ -20,6 +20,7 @@ const routes = [
     { path: "/dashboard/schedule", name: "Agendamento de Pedidos" },
     { path: "/dashboard/timetable", name: "Horários" },
     { path: "/dashboard/evaluations", name: "Avaliações" },
+    { path: "/dashboard/unit", name: "Unidades"}
 ];
 
 /* 
@@ -52,6 +53,8 @@ const hourDay = computed(() => {
         return "Boa noite,";
     }
 });
+
+
 </script>
 
 <template>

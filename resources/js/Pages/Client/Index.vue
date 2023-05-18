@@ -10,7 +10,7 @@ const props = defineProps({ user: Object });
 
     <AuthenticatedLayout>
         <header class="mt-3">
-           <h1 class="text-4xl text-gray-100"><i class="bi bi-house-door-fill"></i>HOME</h1>
+           <h1 class="text-4xl dark:text-gray-100"><i class="bi bi-house-door-fill"></i>HOME</h1>
         </header>
 
         

@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Authenticatable
 {
@@ -54,6 +55,11 @@ class User extends Authenticatable
     public function addresses(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Address::class);
+    }
+
+    public function unit(): HasOne
+    {
+        return $this->hasOne(Unit::class, 'manager_id');
     }
 
 }

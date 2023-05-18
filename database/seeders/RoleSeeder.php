@@ -15,11 +15,12 @@ class RoleSeeder extends Seeder
     {
         /* 
         
-            Aqui eu eu crio o cargos (Role) que existirão no meu app, no caso serão: 'admin' e 'user'
+            Aqui eu eu crio o cargos (Role) que existirão no meu app, no caso serão: 'admin' , 'manager' , 'user'
 
         */
         
         Role::create(['name' => 'admin']);
+        Role::create(['name' => 'manager']);
         Role::create(['name' => 'user']);
     }
 }

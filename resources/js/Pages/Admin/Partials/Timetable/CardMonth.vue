@@ -1,6 +1,6 @@
 <script setup>
 import BoxBorderSecond from "../../Components/UI/BoxBorderSecond.vue";
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import { formatTime } from "@/Pages/Functions/functionsOfDate";
 import { Link } from "@inertiajs/vue3";
 

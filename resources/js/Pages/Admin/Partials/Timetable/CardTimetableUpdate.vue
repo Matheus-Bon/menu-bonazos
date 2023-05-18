@@ -1,6 +1,6 @@
 <script setup>
 import { useForm } from "@inertiajs/vue3";
-
+import toast from "@/Stores/toast"
 
 const props = defineProps({
     day: Object,
@@ -173,6 +173,12 @@ const update = () =>
     form.put(route("dashboard.timetable.update", { timetable: props.day.id }), {
         preserveState: (page) => Object.keys(page.props.errors).length,
         preserveScroll: true,
+
+        onSuccess: (page) => {
+            toast.add({
+                message: "Horário atualizado com sucesso.",
+            });
+        },
     });
 
 // Função para atualizar o dia de funcionamento
