@@ -1,7 +1,34 @@
 <script setup>
 import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
-import { ref } from "vue";
-import { formatTime } from "@/Pages/Functions/functionsOfDate";
+import { useForm } from "@inertiajs/vue3";
+import toast from "@/Stores/toast";
+import intus from "intus";
+import { isEmail, isRequired, isMin, isSame } from "intus/rules";
+
+const props = defineProps({ manager: Object });
+
+const form = useForm({
+    name: null,
+    email: null,
+    password: null,
+    password_confirmation: null,
+});
+
+const submit = () => {
+    form.clearErrors();
+
+    form.post(route("dashboard.unit.store"), {
+        preserveScroll: true,
+        preserveState: true,
+        onSuccess: (page) => {
+            form.reset();
+
+            toast.add({
+                message: "Gerente criado com sucesso.",
+            });
+        },
+    });
+};
 </script>
 
 <template>
@@ -15,52 +42,106 @@ import { formatTime } from "@/Pages/Functions/functionsOfDate";
             </span>
         </template>
         <div>
-            <form>
+            <form @submit.prevent="submit" autocomplete="off">
                 <div class="flex flex-wrap gap-7 items-center">
                     <div class="flex flex-col basis-4/12">
-                        <label for="category" class="label-default">
-                            Nome Gerente
-                        </label>
+                        <div>
+                            <label for="category" class="label-default">
+                                Nome Gerente
+                            </label>
+                            <span
+                                v-if="form.errors.name"
+                                class="text-red-500 dark:text-red-700 font-thin"
+                            >
+                                *
+                            </span>
+                        </div>
                         <input
+                            required
+                            v-model="form.name"
                             id="category"
                             type="text"
                             class="input-default"
                         />
+                        <span
+                            v-if="form.errors.name"
+                            class="text-red-500 dark:text-red-700 font-thin"
+                        >
+                            {{ form.errors.name }}
+                        </span>
                     </div>
                     <div class="flex flex-col basis-7/12">
-                        <label for="category" class="label-default">
-                            Email
-                        </label>
+                        <div>
+                            <label for="category" class="label-default">
+                                Email
+                            </label>
+                            <span
+                                v-if="form.errors.email"
+                                class="text-red-500 dark:text-red-700 font-thin"
+                            >
+                                *
+                            </span>
+                        </div>
                         <input
+                            required
+                            v-model="form.email"
                             id="category"
                             type="text"
                             class="input-default"
                         />
+                        <span
+                            v-if="form.errors.email"
+                            class="text-red-500 dark:text-red-700 font-thin"
+                        >
+                            {{ form.errors.email }}
+                        </span>
                     </div>
                     <div class="flex flex-col basis-4/12">
-                        <label for="category" class="label-default">
-                            Senha
-                        </label>
+                        <div>
+                            <label for="category" class="label-default">
+                                Senha
+                            </label>
+                            <span
+                                v-if="form.errors.password"
+                                class="text-red-500 dark:text-red-700 font-thin"
+                            >
+                                *
+                            </span>
+                        </div>
+
                         <input
+                            v-model="form.password"
                             id="category"
-                            type="text"
+                            type="password"
                             class="input-default"
                         />
                     </div>
                     <div class="flex flex-col basis-4/12">
-                        <label for="category" class="label-default">
-                            Confirme a senha
-                        </label>
+                        <div>
+                            <label for="category" class="label-default">
+                                Confirme a senha
+                            </label>
+                            <span
+                                v-if="form.errors.password_confirmation"
+                                class="text-red-500 dark:text-red-700 font-thin"
+                            >
+                                *
+                            </span>
+                        </div>
+
                         <input
+                            required
+                            v-model="form.password_confirmation"
                             id="category"
-                            type="text"
+                            type="password"
                             class="input-default"
                         />
                     </div>
 
                     <button
-                        type="button"
+                        type="submit"
                         class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 self-end"
+                        :disabled="form.processing"
                     >
                         Enviar
                     </button>

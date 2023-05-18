@@ -70,7 +70,7 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified', 
     Route::resource('timetable/holiday', HolidayController::class)->only(['edit', 'update', 'store', 'show', 'destroy']);
 
     //Rotas Unidade 
-    Route::resource('unit', UnitController::class)->only(['index']);
+    Route::resource('unit', UnitController::class)->only(['index', 'store']);
 });
 
 require __DIR__.'/auth.php';

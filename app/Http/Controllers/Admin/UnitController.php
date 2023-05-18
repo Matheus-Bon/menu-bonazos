@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
+use Illuminate\Validation\Rules;
 
 class UnitController extends Controller
 {
@@ -12,8 +15,12 @@ class UnitController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        return Inertia::render('Admin/Unit');
+    {   
+        return Inertia::render('Admin/Unit',
+            [
+                'managers' => User::role('manager')->get(),
+            ]
+        );
     }
 
     /**
@@ -29,7 +36,23 @@ class UnitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+
+        $request->validate([
+            'name' => 'required|string|min:3|max:40',
+            'email' => 'required|email|string|unique:users,email',
+            'password' => ['required', 'confirmed',  Rules\Password::defaults()]
+        ], [
+            'password' => 'Erro'
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
+        ])->assignRole('manager', 'user');
+
+        return to_route('dashboard.unit.index');
     }
 
     /**
