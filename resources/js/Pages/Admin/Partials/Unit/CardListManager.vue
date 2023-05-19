@@ -6,7 +6,7 @@ const props = defineProps({managers : Object})
 </script>
 
 <template>
-    <BoxBorder class="max-h-[322px]">
+    <BoxBorder class="h-[322px]">
         <template #card-header>
             <h4 class="font-semibold text-lg text-gray-900 dark:text-white">
                 Tabela dos Gerente
@@ -25,7 +25,7 @@ const props = defineProps({managers : Object})
                     class="w-full text-sm text-left text-gray-500 dark:text-gray-400 border-collapse"
                 >
                     <thead
-                        class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-zinc-700 dark:text-gray-400 sticky top-0"
+                        class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-zinc-700 dark:text-gray-400 sticky top-0"
                     >
                         <tr>
                             <th scope="col" class="px-6 py-3">Unidade</th>
@@ -53,9 +53,9 @@ const props = defineProps({managers : Object})
                             <td class="px-6 py-4 text-right">
                                 <a
                                     href="#"
-                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                    class="font-medium text-indigo-600 dark:text-indigo-500 hover:underline"
                                 >
-                                    Edit
+                                    <i class="bi bi-pencil"></i>
                                 </a>
                             </td>
                         </tr>

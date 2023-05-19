@@ -2,7 +2,7 @@
 import LayoutAdmin from "@/Pages/Admin/Layouts/LayoutAdmin.vue";
 export default {
     layout: (h, page) => h(LayoutAdmin, [page]),
-    components: { CardManager },
+    components: { CardManager, CardListUnit },
 };
 </script>
 
@@ -11,8 +11,17 @@ import { Head } from "@inertiajs/vue3";
 import CardManager from "@/Pages/Admin/Partials/Unit/CardManager.vue";
 import CardListManager from "@/Pages/Admin/Partials/Unit/CardListManager.vue";
 import CardUnit from "@/Pages/Admin/Partials/Unit/CardUnit.vue";
+import CardListUnit from "@/Pages/Admin/Partials/Unit/CardListUnit.vue";
+import { provide, ref } from "vue";
 
 const props = defineProps({ managers: Object });
+
+const cardUnit = ref(null)
+
+
+//provide('form', cardUnit)
+
+
 </script>
 
 <template>
@@ -26,7 +35,10 @@ const props = defineProps({ managers: Object });
             <CardListManager :managers="managers"/>
         </div>
         <div class="basis-1/2">
-            <CardUnit />
+            <CardUnit ref="cardUnit"/>
+        </div>
+        <div class="basis-1/2">
+            <CardListUnit :form-sent-by-card-unit="cardUnit"/>
         </div>
     </div>
 </template>

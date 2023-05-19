@@ -2,8 +2,6 @@
 import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
 import { useForm } from "@inertiajs/vue3";
 import toast from "@/Stores/toast";
-import intus from "intus";
-import { isEmail, isRequired, isMin, isSame } from "intus/rules";
 
 const props = defineProps({ manager: Object });
 
@@ -32,7 +30,7 @@ const submit = () => {
 </script>
 
 <template>
-    <BoxBorder>
+    <BoxBorder class="h-[322px]">
         <template #card-header>
             <h4 class="font-semibold text-lg text-gray-900 dark:text-white">
                 Criação do Gerente

@@ -2,22 +2,40 @@
 import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
 import { useForm } from "@inertiajs/vue3";
 import toast from "@/Stores/toast";
-import intus from "intus";
-import { isEmail, isRequired, isMin, isSame } from "intus/rules";
 
 const props = defineProps({ manager: Object });
 
 const form = useForm({
     name: null,
-    manager_id: null,
+    manager: null,
     street: null,
     district: null,
     city: null,
     state: null,
     zip_code: null,
     phone: null,
-
 });
+
+defineExpose({ form });
+
+const fetchAddress = async () => {
+    if (form.zip_code && form.zip_code.length === 8) {
+        try {
+            const response = await fetch(
+                `https://viacep.com.br/ws/${form.zip_code}/json/`
+            );
+            const data = await response.json();
+            if (!data.erro) {
+                form.street = data.logradouro;
+                form.district = data.bairro;
+                form.city = data.localidade;
+                form.state = data.uf;
+            }
+        } catch (error) {
+            console.error("Erro ao buscar o endereço:", error);
+        }
+    }
+};
 
 const submit = () => {
     form.clearErrors();
@@ -46,189 +64,177 @@ const submit = () => {
                 <p>Nessa caixa você cria as unidades.</p>
             </span>
         </template>
-        <div class="grid grid-cols-2 gap-6 content-center">
-            
+        <div class="gap-6 content-center">
             <form @submit.prevent="submit" autocomplete="off">
-                <div class="flex flex-wrap gap-7 items-center">
-                    <div class="flex flex-col w-full">
-                        <div>
-                            <label for="category" class="label-default">
-                                Unidade
-                            </label>
-                            <span
-                                v-if="form.errors.name"
-                                class="text-red-500 dark:text-red-700 font-thin"
-                            >
-                                *
-                            </span>
+                <div class="grid grid-cols-2 gap-7 items-center">
+                    <div class="flex flex-col gap-5">
+                        <div class="flex flex-col w-full">
+                            <div>
+                                <label for="category" class="label-default">
+                                    Unidade
+                                </label>
+                                <span
+                                    v-if="form.errors.name"
+                                    class="text-red-500 dark:text-red-700 font-thin"
+                                >
+                                    *
+                                </span>
+                            </div>
+                            <input
+                                required
+                                v-model="form.name"
+                                id="category"
+                                type="text"
+                                class="input-default"
+                            />
                         </div>
-                        <input
-                            required
-                            v-model="form.name"
-                            id="category"
-                            type="text"
-                            class="input-default"
-                        />
+                        <div class="flex flex-col w-full">
+                            <div>
+                                <label for="category" class="label-default">
+                                    Gerente
+                                </label>
+                                <span
+                                    v-if="form.errors.manager"
+                                    class="text-red-500 dark:text-red-700 font-thin"
+                                >
+                                    *
+                                </span>
+                            </div>
+                            <input
+                                required
+                                v-model="form.manager"
+                                id="category"
+                                type="text"
+                                class="input-default"
+                            />
+                        </div>
+                        <div class="flex flex-col w-full">
+                            <div>
+                                <label for="category" class="label-default">
+                                    Telefone da Unidade (Whatsapp)
+                                </label>
+                                <span
+                                    v-if="form.errors.phone"
+                                    class="text-red-500 dark:text-red-700 font-thin"
+                                >
+                                    *
+                                </span>
+                            </div>
+                            <input
+                                required
+                                v-model="form.phone"
+                                id="category"
+                                type="text"
+                                class="input-default"
+                            />
+                        </div>
+                        <div class="flex flex-col w-full">
+                            <div>
+                                <label for="category" class="label-default">
+                                    CEP
+                                </label>
+                                <span
+                                    v-if="form.errors.zip_code"
+                                    class="text-red-500 dark:text-red-700 font-thin"
+                                >
+                                    *
+                                </span>
+                            </div>
+                            <input
+                                required
+                                v-model="form.zip_code"
+                                @blur="fetchAddress"
+                                id="category"
+                                type="text"
+                                class="input-default"
+                            />
+                        </div>
                     </div>
-                    <div class="flex flex-col w-full">
-                        <div>
-                            <label for="category" class="label-default">
-                                Gerente
-                            </label>
-                            <span
-                                v-if="form.errors.name"
-                                class="text-red-500 dark:text-red-700 font-thin"
-                            >
-                                *
-                            </span>
+
+                    <div class="flex flex-col gap-5">
+                        <div class="flex flex-col w-full">
+                            <div>
+                                <label for="category" class="label-default">
+                                    Logradouro
+                                </label>
+                                <span
+                                    v-if="form.errors.street"
+                                    class="text-red-500 dark:text-red-700 font-thin"
+                                >
+                                    *
+                                </span>
+                            </div>
+                            <input
+                                required
+                                v-model="form.street"
+                                id="category"
+                                type="text"
+                                class="input-default"
+                            />
                         </div>
-                        <input
-                            required
-                            
-                            id="category"
-                            type="text"
-                            class="input-default"
-                        />
-                    </div>
-                    <div class="flex flex-col w-full">
-                        <div>
-                            <label for="category" class="label-default">
-                                Telefone da Unidade (Whatsapp)
-                            </label>
-                            <span
-                                v-if="form.errors.name"
-                                class="text-red-500 dark:text-red-700 font-thin"
-                            >
-                                *
-                            </span>
+                        <div class="flex flex-col w-full">
+                            <div>
+                                <label for="category" class="label-default">
+                                    Bairro
+                                </label>
+                                <span
+                                    v-if="form.errors.district"
+                                    class="text-red-500 dark:text-red-700 font-thin"
+                                >
+                                    *
+                                </span>
+                            </div>
+                            <input
+                                required
+                                v-model="form.district"
+                                id="category"
+                                type="text"
+                                class="input-default"
+                            />
                         </div>
-                        <input
-                            required
-                            
-                            id="category"
-                            type="text"
-                            class="input-default"
-                        />
-                    </div>
-                    <div class="flex flex-col w-full">
-                        <div>
-                            <label for="category" class="label-default">
-                                CEP
-                            </label>
-                            <span
-                                v-if="form.errors.name"
-                                class="text-red-500 dark:text-red-700 font-thin"
-                            >
-                                *
-                            </span>
+                        <div class="flex flex-col w-full">
+                            <div>
+                                <label for="category" class="label-default">
+                                    Cidade
+                                </label>
+                                <span
+                                    v-if="form.errors.city"
+                                    class="text-red-500 dark:text-red-700 font-thin"
+                                >
+                                    *
+                                </span>
+                            </div>
+                            <input
+                                required
+                                v-model="form.city"
+                                id="category"
+                                type="text"
+                                class="input-default"
+                            />
                         </div>
-                        <input
-                            required
-                            
-                            id="category"
-                            type="text"
-                            class="input-default"
-                        />
-                    </div>
-                    <div class="flex flex-col w-full">
-                        <div>
-                            <label for="category" class="label-default">
-                                Logradouro
-                            </label>
-                            <span
-                                v-if="form.errors.name"
-                                class="text-red-500 dark:text-red-700 font-thin"
-                            >
-                                *
-                            </span>
+                        <div class="flex flex-col w-full">
+                            <div>
+                                <label for="category" class="label-default">
+                                    Estado
+                                </label>
+                                <span
+                                    v-if="form.errors.state"
+                                    class="text-red-500 dark:text-red-700 font-thin"
+                                >
+                                    *
+                                </span>
+                            </div>
+                            <input
+                                required
+                                v-model="form.state"
+                                id="category"
+                                type="text"
+                                class="input-default"
+                            />
                         </div>
-                        <input
-                            required
-                            
-                            id="category"
-                            type="text"
-                            class="input-default"
-                        />
-                    </div>
-                    <div class="flex flex-col w-full">
-                        <div>
-                            <label for="category" class="label-default">
-                                Bairro
-                            </label>
-                            <span
-                                v-if="form.errors.name"
-                                class="text-red-500 dark:text-red-700 font-thin"
-                            >
-                                *
-                            </span>
-                        </div>
-                        <input
-                            required
-                            
-                            id="category"
-                            type="text"
-                            class="input-default"
-                        />
-                    </div>
-                    <div class="flex flex-col w-full">
-                        <div>
-                            <label for="category" class="label-default">
-                                Cidade
-                            </label>
-                            <span
-                                v-if="form.errors.name"
-                                class="text-red-500 dark:text-red-700 font-thin"
-                            >
-                                *
-                            </span>
-                        </div>
-                        <input
-                            required
-                            
-                            id="category"
-                            type="text"
-                            class="input-default"
-                        />
-                    </div>
-                    <div class="flex flex-col w-full">
-                        <div>
-                            <label for="category" class="label-default">
-                                Estado
-                            </label>
-                            <span
-                                v-if="form.errors.name"
-                                class="text-red-500 dark:text-red-700 font-thin"
-                            >
-                                *
-                            </span>
-                        </div>
-                        <input
-                            required
-                            
-                            id="category"
-                            type="text"
-                            class="input-default"
-                        />
                     </div>
                 </div>
             </form>
-
-            <div
-                class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 max-h-60 self-center"
-            >
-                <i class="bi bi-shop text-[40px] mb-2 text-gray-500 dark:text-secondary-color-300"></i>
-                <a href="#">
-                    <h5
-                        class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white"
-                    >
-                        {{ form.name }}
-                    </h5>
-                </a>
-                <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">
-                    Go to this step by step guideline process on how to certify
-                    for your weekly benefits:
-                </p>
-            </div>
         </div>
     </BoxBorder>
 </template>
