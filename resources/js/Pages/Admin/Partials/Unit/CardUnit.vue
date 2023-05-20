@@ -3,11 +3,11 @@ import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
 import { useForm } from "@inertiajs/vue3";
 import toast from "@/Stores/toast";
 
-const props = defineProps({ manager: Object });
+const props = defineProps({ managers: Object });
 
 const form = useForm({
     name: null,
-    manager: null,
+    manager_id: null,
     street: null,
     district: null,
     city: null,
@@ -47,7 +47,7 @@ const submit = () => {
             form.reset();
 
             toast.add({
-                message: "Gerente criado com sucesso.",
+                message: "Unidade criada com sucesso.",
             });
         },
     });
@@ -68,9 +68,9 @@ const submit = () => {
             <form @submit.prevent="submit" autocomplete="off">
                 <div class="grid grid-cols-2 gap-7 items-center">
                     <div class="flex flex-col gap-5">
-                        <div class="flex flex-col w-full">
+                        <div class="flex flex-col gap-2 w-full">
                             <div>
-                                <label for="category" class="label-default">
+                                <label for="unit" class="label-default">
                                     Unidade
                                 </label>
                                 <span
@@ -83,14 +83,14 @@ const submit = () => {
                             <input
                                 required
                                 v-model="form.name"
-                                id="category"
+                                id="unit"
                                 type="text"
                                 class="input-default"
                             />
                         </div>
-                        <div class="flex flex-col w-full">
+                        <div class="flex flex-col gap-2 w-full">
                             <div>
-                                <label for="category" class="label-default">
+                                <label for="manager" class="label-default">
                                     Gerente
                                 </label>
                                 <span
@@ -100,18 +100,19 @@ const submit = () => {
                                     *
                                 </span>
                             </div>
-                            <input
-                                required
-                                v-model="form.manager"
-                                id="category"
-                                type="text"
-                                class="input-default"
-                            />
+                            <select
+                                id="manager"
+                                class="block w-full input-default"
+                                v-model="form.manager_id"
+                            >
+                                <option disabled value>Escolha um gerente</option>
+                                <option v-for="manager in managers" :value="manager.id">{{ manager.name }}</option>
+                            </select>
                         </div>
-                        <div class="flex flex-col w-full">
+                        <div class="flex flex-col gap-2 w-full">
                             <div>
-                                <label for="category" class="label-default">
-                                    Telefone da Unidade (Whatsapp)
+                                <label for="phone" class="label-default">
+                                    Contato
                                 </label>
                                 <span
                                     v-if="form.errors.phone"
@@ -123,14 +124,14 @@ const submit = () => {
                             <input
                                 required
                                 v-model="form.phone"
-                                id="category"
+                                id="phone"
                                 type="text"
                                 class="input-default"
                             />
                         </div>
-                        <div class="flex flex-col w-full">
+                        <div class="flex flex-col gap-2 w-full">
                             <div>
-                                <label for="category" class="label-default">
+                                <label for="zip" class="label-default">
                                     CEP
                                 </label>
                                 <span
@@ -144,7 +145,7 @@ const submit = () => {
                                 required
                                 v-model="form.zip_code"
                                 @blur="fetchAddress"
-                                id="category"
+                                id="zip"
                                 type="text"
                                 class="input-default"
                             />
@@ -152,9 +153,9 @@ const submit = () => {
                     </div>
 
                     <div class="flex flex-col gap-5">
-                        <div class="flex flex-col w-full">
+                        <div class="flex flex-col gap-2 w-full">
                             <div>
-                                <label for="category" class="label-default">
+                                <label for="street" class="label-default">
                                     Logradouro
                                 </label>
                                 <span
@@ -167,14 +168,14 @@ const submit = () => {
                             <input
                                 required
                                 v-model="form.street"
-                                id="category"
+                                id="street"
                                 type="text"
                                 class="input-default"
                             />
                         </div>
-                        <div class="flex flex-col w-full">
+                        <div class="flex flex-col gap-2 w-full">
                             <div>
-                                <label for="category" class="label-default">
+                                <label for="district" class="label-default">
                                     Bairro
                                 </label>
                                 <span
@@ -187,14 +188,14 @@ const submit = () => {
                             <input
                                 required
                                 v-model="form.district"
-                                id="category"
+                                id="district"
                                 type="text"
                                 class="input-default"
                             />
                         </div>
-                        <div class="flex flex-col w-full">
+                        <div class="flex flex-col gap-2 w-full">
                             <div>
-                                <label for="category" class="label-default">
+                                <label for="city" class="label-default">
                                     Cidade
                                 </label>
                                 <span
@@ -207,14 +208,14 @@ const submit = () => {
                             <input
                                 required
                                 v-model="form.city"
-                                id="category"
+                                id="city"
                                 type="text"
                                 class="input-default"
                             />
                         </div>
-                        <div class="flex flex-col w-full">
+                        <div class="flex flex-col gap-2 w-full">
                             <div>
-                                <label for="category" class="label-default">
+                                <label for="state" class="label-default">
                                     Estado
                                 </label>
                                 <span
@@ -227,13 +228,17 @@ const submit = () => {
                             <input
                                 required
                                 v-model="form.state"
-                                id="category"
+                                id="state"
                                 type="text"
                                 class="input-default"
                             />
                         </div>
                     </div>
                 </div>
+
+                <button class="btn-primary">
+                    Criar Unidade
+                </button>
             </form>
         </div>
     </BoxBorder>

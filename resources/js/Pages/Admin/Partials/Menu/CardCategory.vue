@@ -1,9 +1,7 @@
 <script setup>
 import { ref } from "vue";
-import { useForm } from "@inertiajs/vue3";
+import { useForm, Link } from "@inertiajs/vue3";
 import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
-import ModalUpdateCategory from "@/Pages/Admin/Components/Menu/ModalUpdateCategory.vue";
-
 
 const modal = ref(null); // Referência do ModalUpdateCategory - Final: Pegar atributos e funções do ModalUpdateCategory
 
@@ -13,9 +11,6 @@ const props = defineProps({
     product: Object,
 });
 
-const emit = defineEmits(['open'])
-
-
 /* Lógica Update para ativar/desativar Categoria */
 // Início
 const form = useForm({
@@ -23,8 +18,8 @@ const form = useForm({
 });
 
 const activeCategory = () =>
-    form.put(route("dashboard.update.active.category", props.category.id),{
-        preserveScroll:true
+    form.put(route("dashboard.update.active.category", props.category.id), {
+        preserveScroll: true,
     });
 
 // Fim
@@ -35,7 +30,6 @@ const activeCategory = () =>
     <BoxBorder>
         <template #card-header>
             <div class="flex flex-row gap-2 justify-between items-center">
-
                 <div class="flex flex-row gap-5 align-middle">
                     <div>
                         <h2
@@ -46,7 +40,7 @@ const activeCategory = () =>
                     </div>
                 </div>
 
-                <div class="flex flex-row gap-4 ">
+                <div class="flex flex-row gap-4">
                     <form @submit.prevent="activeCategory">
                         <input
                             @change="activeCategory"
@@ -69,14 +63,21 @@ const activeCategory = () =>
                         ></i>
                     </button>
 
-                    <button
-                        @click="emit('open', props.category)"
-                        :title="'Detalhes ' + props.category.name"
+                    <Link
+                        as="button"
+                        :href="
+                            route('dashboard.menu.show', {
+                                category: category.id,
+                            })
+                        "
+                        :title="'Editar categoria ' + category.name"
+                        preserve-state
+                        preserve-scroll
                     >
                         <i
                             class="bi bi-three-dots-vertical text-xl text-secondary-color-300"
                         ></i>
-                    </button>
+                    </Link>
                 </div>
             </div>
         </template>

@@ -1,7 +1,14 @@
 <script setup>
-import ModalBase from "@/Pages/Admin/Components/ModalBase.vue";
-import { useForm } from "@inertiajs/vue3";
 import { ref } from "vue";
+import {
+    TransitionRoot,
+    TransitionChild,
+    Dialog,
+    DialogPanel,
+    DialogTitle,
+} from "@headlessui/vue";
+import { useForm } from "@inertiajs/vue3";
+import toast from "@/Stores/toast";
 
 /* Lógica Create para Categoria */
 // Início
@@ -12,84 +19,118 @@ const form = useForm({
 
 const create = () =>
     form.post(route("dashboard.menu.store"), {
-        preserveState: (page) => Object.keys(page.props.errors).length,
+        preserveState: true,
+        preserveScroll: true,
+        onSuccess: (page) => {
+            toast.add({
+                message: "Categoria criada com sucesso.",
+            });
+            form.reset();
+            closeModal();
+        },
     });
 //Fim
 
-const open = ref(false);
-const modal = ref(null);
+const isOpen = ref(false);
 
-const toggleModalAfter = () => {
-    modal.value.toggleModalAfter()
-};
-
-const toggleModal = () => {
-    modal.value.toggleModal()
+function closeModal() {
+    isOpen.value = false;
+}
+function openModal() {
+    isOpen.value = true;
 }
 
-defineExpose({ toggleModal, toggleModalAfter });
-
+defineExpose({ openModal });
 </script>
 
 <template>
-    <ModalBase :modal-active="open" ref="modal">
-        <template #modal-title>
-            <section class="pl-6 pt-7">
-                <div>
-                    <i
-                        class="bx bx-category pr-1 text-4xl text-secondary-color-light dark:text-secondary-color-dark"
-                    ></i>
-                    Nova Categoria
-                </div>
-                <div>
-                    <p class="text-sm font-light text-gray-500">
-                        Crie sua nova categoria
-                    </p>
-                </div>
-            </section>
-        </template>
-
-        <template #modal-body >
-            <section>
-                <form id="category-form" @submit.prevent="create">
-                    <div class="flex flex-col">
-                        <label for="category" class="label-default">
-                            Nome Categoria
-                        </label>
-                        <input
-                            v-model="form.name"
-                            id="category"
-                            type="text"
-                            class="input-default"
-                        />
-                        <div v-if="form.errors.name">
-                            {{ form.errors.name }}
-                        </div>
-                    </div>
-                </form>
-            </section>
-        </template>
-
-        <template #modal-buttons>
-            <div
-                class="bg-gray-50 dark:bg-admin-body px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"
+    <TransitionRoot appear :show="isOpen" as="template">
+        <Dialog as="div" @close="closeModal" class="relative z-10">
+            <TransitionChild
+                as="template"
+                enter="duration-300 ease-out"
+                enter-from="opacity-0"
+                enter-to="opacity-100"
+                leave="duration-200 ease-in"
+                leave-from="opacity-100"
+                leave-to="opacity-0"
             >
-                <button
-                    type="submit"
-                    class="inline-flex w-full justify-center rounded-md bg-secondary-color-100 dark:bg-secondary-color-dark px-3 py-2 ml-2 text-sm font-medium text-gray-900 shadow-sm hover:bg-opacity-90 dark:hover:bg-secondary-color-300 sm:w-auto transition-all ease-in-out delay-75"
-                    @click="create"
+                <div class="fixed inset-0 bg-black bg-opacity-25" />
+            </TransitionChild>
+
+            <div class="fixed inset-0 overflow-y-auto">
+                <div
+                    class="flex min-h-full items-center justify-center p-4 text-center"
                 >
-                    Criar Categoria
-                </button>
-                <button
-                    @click="toggleModalAfter"
-                    type="button"
-                    class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                    ref="cancelButtonRef"
-                >
-                    Sair
-                </button>
+                    <TransitionChild
+                        as="template"
+                        enter="duration-300 ease-out"
+                        enter-from="opacity-0 scale-95"
+                        enter-to="opacity-100 scale-100"
+                        leave="duration-200 ease-in"
+                        leave-from="opacity-100 scale-100"
+                        leave-to="opacity-0 scale-95"
+                    >
+                        <DialogPanel
+                            class="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white dark:bg-admin-card p-6 text-left align-middle shadow-xl transition-all"
+                        >
+                            <DialogTitle
+                                as="h3"
+                                class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-200"
+                            >
+                                Criando Categoria
+                            </DialogTitle>
+                            <div class="mt-2">
+                                <p class="text-sm text-gray-500">
+                                    Nessa parte você irá criar a categoria para
+                                    colocar seus produtos.
+                                </p>
+                            </div>
+                            <div class="mt-5">
+                                <form @submit.prevent="create">
+                                    <div class="flex flex-col">
+                                        <label
+                                            for="category"
+                                            class="label-default"
+                                        >
+                                            Nome Categoria
+                                        </label>
+                                        <input
+                                            v-model="form.name"
+                                            id="category"
+                                            type="text"
+                                            class="input-default"
+                                        />
+                                        <div v-if="form.errors.name">
+                                            {{ form.errors.name }}
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="mt-4 flex flex-row justify-end gap-2">
+                                <button
+                                    type="button"
+                                    class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                    @click="closeModal"
+                                >
+                                    Sair
+                                </button>
+                                <button
+                                    type="button"
+                                    class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                    @click="create"
+                                    :disabled="form.processing"
+                                >
+                                    Criar categoria
+                                </button>
+                            </div>
+
+                            
+                        </DialogPanel>
+                    </TransitionChild>
+                </div>
             </div>
-        </template>
-    </ModalBase>
+        </Dialog>
+    </TransitionRoot>
 </template>

@@ -35,7 +35,7 @@ const cardUnit = ref(null)
             <CardListManager :managers="managers"/>
         </div>
         <div class="basis-1/2">
-            <CardUnit ref="cardUnit"/>
+            <CardUnit ref="cardUnit" :managers="managers"/>
         </div>
         <div class="basis-1/2">
             <CardListUnit :form-sent-by-card-unit="cardUnit"/>

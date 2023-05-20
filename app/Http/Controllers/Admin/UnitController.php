@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Unit;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UnitCreateRequest;
 
 class UnitController extends Controller
 {
@@ -34,24 +37,30 @@ class UnitController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UnitCreateRequest $request)
     {
-        
+          
+        $managers = User::role('manager')->get();
+        $manager = $managers->where('id', $request->manager_id)->first();
 
-        $request->validate([
-            'name' => 'required|string|min:3|max:40',
-            'email' => 'required|email|string|unique:users,email',
-            'password' => ['required', 'confirmed',  Rules\Password::defaults()]
-        ], [
-            'password' => 'Erro'
+        
+        //dd($manager);
+        $manager->unit()->create([
+
+            'name' => $request->name,
+            'manager_id' => $manager->id,
+            'street' => $request->street,
+            'district' => $request->district,
+            'city' => $request->city,
+            'state' => $request->state,
+            'zip_code' => $request->zip_code,
+            'phone' => $request->phone
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ])->assignRole('manager', 'user');
+        $manager->unit_id = $manager->unit->id;
 
+        $manager->save();
+        
         return to_route('dashboard.unit.index');
     }
 

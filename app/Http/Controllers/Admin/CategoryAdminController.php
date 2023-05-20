@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use Redirect;
+use Inertia\Inertia;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Redirect;
+use App\Http\Controllers\Controller;
 
 class CategoryAdminController extends Controller
 {
@@ -57,7 +58,11 @@ class CategoryAdminController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Inertia::render('Admin/Menu', [
+            'categoryForEdit' => Category::where('id', $id)->first(),
+            'categories' => Category::all()
+            
+        ]);
     }
 
     /**

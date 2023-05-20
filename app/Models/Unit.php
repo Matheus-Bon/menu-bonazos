@@ -11,7 +11,7 @@ class Unit extends Model
 {
     use HasFactory;
     protected $table = 'units';
-
+    protected $fillable = ['name','street', 'district', 'city', 'state', 'zip_code', 'phone', 'isOpen', 'manager_id'];
 
 
     public function timetable(): HasOne
@@ -21,6 +21,6 @@ class Unit extends Model
 
     public function manager(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'unit_id');
     }
 }

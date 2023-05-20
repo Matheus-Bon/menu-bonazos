@@ -12,7 +12,6 @@ const toggleExpand = () => {
     expandCard.value = !expandCard.value;
 };
 
-console.log(props.month)
 </script>
 
 <template>

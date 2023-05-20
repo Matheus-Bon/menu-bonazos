@@ -1,117 +1,145 @@
 <script setup>
-import ModalBase from "@/Pages/Admin/Components/ModalBase.vue";
-import { useForm, Link } from "@inertiajs/vue3";
-import { ref } from "vue";
-import { formatDate } from "@/Pages/Functions/functionsOfDate";
-
-// Lógica para abrir o modal no componente pai
-
-const modal = ref(null);
+import { ref, computed, watch } from "vue";
+import {
+    TransitionRoot,
+    TransitionChild,
+    Dialog,
+    DialogPanel,
+    DialogTitle,
+} from "@headlessui/vue";
+import { router, useForm } from "@inertiajs/vue3";
+import toast from "@/Stores/toast";
 
 const props = defineProps({ category: Object });
 
-const toggleModalAfter = () => {
-    modal.value.toggleModalAfter();
-};
+const isOpen = computed(() => !!props.category);
 
-const toggleModal = () => {
-    modal.value.toggleModal();
-};
-
-/* const form = useForm({
-    name: props.category.name,
-});
-
-const update = () =>
-    form.put(route("dashboard.menu.update", { category: props.category.id }), {
-        preserveState: (page) => Object.keys(page.props.errors).length,
+function closeModal() {
+    router.visit(route("dashboard.menu.index"), {
+        preserveState: true,
         preserveScroll: true,
     });
+}
+function openModal() {
+    isOpen.value = true;
+}
 
-const deleteCat = () => form.delete(route("dashboard.menu.destroy", props.category.id)) */
+const form = useForm({
+    name: props.category?.name,
+});
 
-defineExpose({ toggleModal });
+watch(
+    () => props.category,
+    (category) => {
+        if (category) {
+            form.name = category.name;
+        }
+    }
+);
+
+const deleteCategory = () => {
+    form.delete(route("dashboard.category.destroy", props.category?.id), {
+        onSuccess: (page) => {
+            closeModal();
+            toast.add({
+                message: "Categoria excluída com sucesso.",
+            });
+        },
+    });
+};
 </script>
 
 <template>
-    <ModalBase ref="modal">
-        <template #modal-title>
-            <div class="pl-6 pt-7">
-                <i
-                    class="bx bx-category text-4xl text-secondary-color-100 pr-1"
-                ></i>
-                Detalhes da Categoria
-                <span class="text-secondary-color-100">{{
-                    category.name
-                }}</span>
-            </div>
-            <div class="pl-6">
-                <p class="text-sm font-light text-gray-500">
-                    Categoria criada em: {{ formatDate(category.created_at) }}
-                </p>
-            </div>
-        </template>
-
-        <template #modal-body>
-            <section>
-                <form @submit.prevent="update">
-                    <div class="flex flex-col">
-                        <label for="category" class="label-default">
-                            Nome Categoria
-                        </label>
-                        <input
-                            v-model="form.name"
-                            id="category"
-                            type="text"
-                            class="input-default"
-                        />
-                    </div>
-                    <div v-if="form.errors.name">
-                        {{ form.errors.name }}
-                    </div>
-                </form>
-            </section>
-        </template>
-
-        <template #modal-buttons>
-            <div
-                class="flex flex-row-reverse gap-2 bg-gray-50 dark:bg-admin-body px-4 py-3"
+    <TransitionRoot appear :show="isOpen" as="template">
+        <Dialog as="div" @close="closeModal" class="relative z-10">
+            <TransitionChild
+                as="template"
+                enter="duration-300 ease-out"
+                enter-from="opacity-0"
+                enter-to="opacity-100"
+                leave="duration-200 ease-in"
+                leave-from="opacity-100"
+                leave-to="opacity-0"
             >
-                <button
-                    type="submit"
-                    class="inline-flex w-full justify-center rounded-md bg-secondary-color-100 dark:bg-secondary-color-dark px-3 py-2 ml-2 text-sm font-medium text-gray-900 shadow-sm hover:bg-opacity-90 dark:hover:bg-secondary-color-300 sm:w-auto transition-all ease-in-out delay-75"
-                    @click="update"
+                <div class="fixed inset-0 bg-black bg-opacity-25" />
+            </TransitionChild>
+
+            <div class="fixed inset-0 overflow-y-auto">
+                <div
+                    class="flex min-h-full items-center justify-center p-4 text-center"
                 >
-                    Salvar Mudanças
-                </button>
-                <button
-                    @click="toggleModalAfter"
-                    type="button"
-                    class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                    ref="cancelButtonRef"
-                >
-                    Sair
-                </button>
-                <Link
-                    as="button"
-                    type="submit"
-                    :title="'Excluir ' + category.name"
-                    class="btn-delete"
-                    :href="
-                        route('dashboard.menu.destroy', {
-                            category: props.category.id,
-                        })
-                    "
-                    method="DELETE"
-                >
-                    <i class="bi bi-trash text-lg text-gray-100"></i>
-                </Link>
-                <form @submit.prevent="deleteCat">
-                    <button type="submit">
-                        <i class="bi bi-trash text-lg text-gray-100"></i>
-                    </button>
-                </form>
+                    <TransitionChild
+                        as="template"
+                        enter="duration-300 ease-out"
+                        enter-from="opacity-0 scale-95"
+                        enter-to="opacity-100 scale-100"
+                        leave="duration-200 ease-in"
+                        leave-from="opacity-100 scale-100"
+                        leave-to="opacity-0 scale-95"
+                    >
+                        <DialogPanel
+                            class="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white dark:bg-admin-card p-6 text-left align-middle shadow-xl transition-all"
+                        >
+                            <DialogTitle
+                                as="h3"
+                                class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-200"
+                            >
+                                Editando Categoria {{ category?.name }}
+                            </DialogTitle>
+                            <div class="mt-2">
+                                <p class="text-sm text-gray-500">
+                                    Nessa caixa você edita as categorias, bem como poderá ver algumas informações sobre a categoria.
+                                </p>
+                            </div>
+                            <div class="mt-5">
+                                <form @submit.prevent="update">
+                                    <div class="flex flex-col">
+                                        <label
+                                            for="category"
+                                            class="label-default"
+                                        >
+                                            Nome Categoria
+                                        </label>
+                                        <input
+                                            v-model="form.name"
+                                            id="category"
+                                            type="text"
+                                            class="input-default"
+                                        />
+                                    </div>
+                                    <div v-if="form.errors.name">
+                                        {{ form.errors.name }}
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="mt-4 flex flex-row justify-end gap-2">
+                                <form
+                                    hidden
+                                    @submit.prevent="deleteCategory"
+                                ></form>
+
+                                <button
+                                    type="button"
+                                    class="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                                    @click="deleteCategory"
+                                    title="Excluir categoria"
+                                >
+                                    Excluir
+                                </button>
+                                <button
+                                    type="button"
+                                    class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                    @click="closeModal"
+                                >
+                                    Editar
+                                </button>
+                            </div>
+                            
+                        </DialogPanel>
+                    </TransitionChild>
+                </div>
             </div>
-        </template>
-    </ModalBase>
+        </Dialog>
+    </TransitionRoot>
 </template>

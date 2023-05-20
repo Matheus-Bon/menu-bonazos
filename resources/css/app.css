@@ -45,11 +45,11 @@
     }
 
     .label-default {
-        @apply pb-2 text-base font-medium text-gray-800 dark:text-gray-300;
+        @apply pb-3 text-base font-medium text-gray-800 dark:text-gray-300;
     }
 
     .input-default {
-        @apply rounded-md dark:bg-admin-card border-gray-400 dark:text-gray-300;
+        @apply border border-gray-300 rounded-lg bg-transparent focus:ring-indigo-500 focus:border-indigo-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500;
     }
 }
 

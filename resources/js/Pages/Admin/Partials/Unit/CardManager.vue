@@ -15,7 +15,7 @@ const form = useForm({
 const submit = () => {
     form.clearErrors();
 
-    form.post(route("dashboard.unit.store"), {
+    form.post(route("dashboard.manager.store"), {
         preserveScroll: true,
         preserveState: true,
         onSuccess: (page) => {
@@ -42,7 +42,7 @@ const submit = () => {
         <div>
             <form @submit.prevent="submit" autocomplete="off">
                 <div class="flex flex-wrap gap-7 items-center">
-                    <div class="flex flex-col basis-4/12">
+                    <div class="flex flex-col gap-2 basis-4/12">
                         <div>
                             <label for="category" class="label-default">
                                 Nome Gerente
@@ -68,7 +68,7 @@ const submit = () => {
                             {{ form.errors.name }}
                         </span>
                     </div>
-                    <div class="flex flex-col basis-7/12">
+                    <div class="flex flex-col gap-2 basis-7/12">
                         <div>
                             <label for="category" class="label-default">
                                 Email
@@ -94,7 +94,7 @@ const submit = () => {
                             {{ form.errors.email }}
                         </span>
                     </div>
-                    <div class="flex flex-col basis-4/12">
+                    <div class="flex flex-col gap-2 basis-4/12">
                         <div>
                             <label for="category" class="label-default">
                                 Senha
@@ -114,7 +114,7 @@ const submit = () => {
                             class="input-default"
                         />
                     </div>
-                    <div class="flex flex-col basis-4/12">
+                    <div class="flex flex-col gap-2 basis-4/12">
                         <div>
                             <label for="category" class="label-default">
                                 Confirme a senha

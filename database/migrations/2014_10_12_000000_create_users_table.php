@@ -21,6 +21,7 @@ return new class extends Migration
             $table->tinyText('phone')->nullable();
             $table->rememberToken();
             $table->foreignUuid('unit_id')->nullable();
+            $table->set('plan', ['Pro', 'Standard'])->nullable();
             $table->timestamps();
         });
     }

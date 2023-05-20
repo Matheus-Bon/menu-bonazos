@@ -9,8 +9,6 @@ import { formatTime } from "@/Functions/functionsOfDate";
 const props = defineProps({ holidays: Object });
 const modal = ref(null)
 
-console.log(formatTime('2023-05-17', 'dddd'))
-
 const openModal = () => {
     modal.value.openModal()
 }

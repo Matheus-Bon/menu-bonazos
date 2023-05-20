@@ -4,6 +4,7 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\Admin\CategoryAdminController;
 use App\Http\Controllers\Admin\HolidayController;
 use App\Http\Controllers\Admin\IndexAdminController;
+use App\Http\Controllers\Admin\ManagerController;
 use App\Http\Controllers\Admin\TimetableController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\ProfileController;
@@ -47,7 +48,7 @@ Route::resource('address', AddressController::class);
 
 Route::name('addressStandard.change')->put('addressStandard/{address}/change', StandardAddressChange::class);
 
-Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified', 'role:admin'])->group(function () {
+Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified', 'role:admin|manager'])->group(function () {
 
     /* Rotas de Visualização */
     Route::get('', [IndexAdminController::class, 'index']);
@@ -71,6 +72,9 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified', 
 
     //Rotas Unidade 
     Route::resource('unit', UnitController::class)->only(['index', 'store']);
+
+    //Rotas Unidade - Manager 
+    Route::resource('unit/manager', ManagerController::class)->only(['store']);
 });
 
 require __DIR__.'/auth.php';

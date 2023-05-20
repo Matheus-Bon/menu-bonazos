@@ -30,9 +30,16 @@ const props = defineProps({ formSentByCardUnit: Object });
                     ></i>
                     <div href="#">
                         <h5
+                            v-if="formSentByCardUnit?.form.name"
                             class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white"
                         >
                             Unidade - {{ formSentByCardUnit?.form.name }}
+                        </h5>
+                        <h5
+                            v-else
+                            class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white"
+                        >
+                            Unidade 
                         </h5>
                     </div>
                     <div
@@ -75,7 +82,7 @@ const props = defineProps({ formSentByCardUnit: Object });
                 
             </div>
 
-            <div
+            <!-- <div
                 class="grid grid-cols-2 gap-10 w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-zinc-800 dark:border-gray-700 max-h-60 self-center"
             >
 
@@ -128,7 +135,7 @@ const props = defineProps({ formSentByCardUnit: Object });
                     </div>
                 </div>
                 
-            </div>
+            </div> -->
         </div>
     </BoxBorder>
 </template>
