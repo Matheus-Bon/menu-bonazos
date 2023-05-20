@@ -1,7 +1,7 @@
 <script setup>
 import BoxBorderSecond from "../../Components/UI/BoxBorderSecond.vue";
 import { ref } from "vue";
-import { formatTime } from "@/Functions/functionsOfDate";
+import { formatTime } from "@/Pages/Functions/functionsOfDate";
 import { Link } from "@inertiajs/vue3";
 
 const props = defineProps({ month: Object });

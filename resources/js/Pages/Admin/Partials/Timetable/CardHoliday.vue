@@ -3,7 +3,7 @@ import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
 import ModalAddHoliday from "../../Components/Timetable/ModalAddHoliday.vue";
 import { ref } from "vue";
 import CardMonth from "./CardMonth.vue";
-import { formatTime } from "@/Functions/functionsOfDate";
+import { formatTime } from "@/Pages/Functions/functionsOfDate";
 
 
 const props = defineProps({ holidays: Object });
