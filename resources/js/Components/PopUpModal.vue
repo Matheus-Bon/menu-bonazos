@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 
+const props = defineProps({ message: String })
+
 const emit = defineEmits(['delete'])
 const isOpen = ref(false);
 
@@ -66,7 +68,7 @@ defineExpose({openModal})
                     <h3
                         class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400"
                     >
-                        Você tem certeza que deseja excluir essa categoria?
+                        {{props.message}}
                     </h3>
                     <button
                         type="button"

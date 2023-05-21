@@ -37,6 +37,7 @@ watch(
 
 const deleteCategory = () => {
     form.delete(route("dashboard.menu.destroy", props.category?.id), {
+        preserveScroll:true,
         onSuccess: (page) => {
             closeModal();
             toast.add({
@@ -51,6 +52,7 @@ function openPopUp() {
     popUp.value.openModal();
 }
 
+const messagePopUp = 'Você deseja excluir essa categoria?'
 
 </script>
 
@@ -142,7 +144,7 @@ function openPopUp() {
                                 </button>
                             </div>
 
-                            <PopUpModal ref="popUp" @delete="deleteCategory" />
+                            <PopUpModal ref="popUp" :message="messagePopUp" @delete="deleteCategory"/>
                         </DialogPanel>
                     </TransitionChild>
                 </div>
