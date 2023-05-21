@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch,  onMounted, onBeforeUnmount } from "vue";
 import {
     TransitionRoot,
     TransitionChild,
@@ -9,6 +9,7 @@ import {
 } from "@headlessui/vue";
 import { router, useForm } from "@inertiajs/vue3";
 import toast from "@/Stores/toast";
+import PopUpModal from "@/Components/PopUpModal.vue";
 
 const props = defineProps({ category: Object });
 
@@ -19,9 +20,6 @@ function closeModal() {
         preserveState: true,
         preserveScroll: true,
     });
-}
-function openModal() {
-    isOpen.value = true;
 }
 
 const form = useForm({
@@ -38,7 +36,7 @@ watch(
 );
 
 const deleteCategory = () => {
-    form.delete(route("dashboard.category.destroy", props.category?.id), {
+    form.delete(route("dashboard.menu.destroy", props.category?.id), {
         onSuccess: (page) => {
             closeModal();
             toast.add({
@@ -47,6 +45,13 @@ const deleteCategory = () => {
         },
     });
 };
+
+const popUp = ref(null);
+function openPopUp() {
+    popUp.value.openModal();
+}
+
+
 </script>
 
 <template>
@@ -88,7 +93,9 @@ const deleteCategory = () => {
                             </DialogTitle>
                             <div class="mt-2">
                                 <p class="text-sm text-gray-500">
-                                    Nessa caixa você edita as categorias, bem como poderá ver algumas informações sobre a categoria.
+                                    Nessa caixa você edita as categorias, bem
+                                    como poderá ver algumas informações sobre
+                                    ela.
                                 </p>
                             </div>
                             <div class="mt-5">
@@ -122,8 +129,7 @@ const deleteCategory = () => {
                                 <button
                                     type="button"
                                     class="btn-delete-style-1"
-                                    @click="deleteCategory"
-                                    
+                                    @click="openPopUp"
                                 >
                                     Excluir
                                 </button>
@@ -135,7 +141,8 @@ const deleteCategory = () => {
                                     Editar
                                 </button>
                             </div>
-                            
+
+                            <PopUpModal ref="popUp" @delete="deleteCategory" />
                         </DialogPanel>
                     </TransitionChild>
                 </div>
