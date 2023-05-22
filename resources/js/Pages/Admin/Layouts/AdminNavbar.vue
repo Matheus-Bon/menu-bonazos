@@ -1,7 +1,7 @@
 <script setup>
 import UserDropdown from "@/Pages/Admin/Components/UserDropdown.vue";
 import { Link, usePage } from "@inertiajs/vue3";
-import { computed, watch } from "vue";
+import { computed, ref, watch, onMounted } from "vue";
 
 import toast from "@/Stores/toast";
 
@@ -20,7 +20,7 @@ const routes = [
     { path: "/dashboard/schedule", name: "Agendamento de Pedidos" },
     { path: "/dashboard/timetable", name: "Horários" },
     { path: "/dashboard/evaluations", name: "Avaliações" },
-    { path: "/dashboard/unit", name: "Unidades"}
+    { path: "/dashboard/unit", name: "Unidades" },
 ];
 
 /* 
@@ -42,6 +42,8 @@ const nameRoute = computed(() => {
 });
 
 /* Lógica para saudações */
+const salutation = ref("");
+
 const hourDay = computed(() => {
     const hour = new Date().getHours();
 
@@ -54,12 +56,18 @@ const hourDay = computed(() => {
     }
 });
 
+watch(hourDay, (newValue) => {
+    console.log(newValue);
+    salutation.value = newValue;
+});
 
+onMounted(() => {
+    salutation.value = hourDay.value;
+});
+/* Fim Lógica para Saudações */
 </script>
 
 <template>
-    
-
     <nav
         class="relative top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4"
     >
@@ -70,10 +78,10 @@ const hourDay = computed(() => {
                 <p
                     class="mb-3 text-base text-secondary-color-light dark:text-secondary-color-dark"
                 >
-                    {{ nameRoute }}
+                    <!-- {{ nameRoute }} -->
                 </p>
                 <p class="text-xl font-medium text-gray-700 dark:text-gray-300">
-                    {{ hourDay }} {{ user.name }}!
+                    {{ salutation }} {{ user.name }}!
                 </p>
             </div>
 
