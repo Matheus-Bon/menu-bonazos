@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
+use Inertia\Inertia;
+use App\Models\Holiday;
 use App\Models\Timetable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Holiday;
 use Illuminate\Support\Facades\Redirect;
 
 class TimetableController extends Controller
@@ -18,11 +19,12 @@ class TimetableController extends Controller
     {
         
 
-        return inertia('Admin/Timetable',
+        return Inertia::render('Admin/Timetable',
 
             [
                 'timetable' => Timetable::all(),
-                'holidays' => Holiday::all()
+                'holidays' => Holiday::all(),
+                'holidays2' => Inertia::lazy(fn () => Holiday::get())
                 
                 
             ]

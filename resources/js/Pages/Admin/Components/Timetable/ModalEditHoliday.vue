@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, onBeforeUnmount } from "vue";
 import {
     TransitionRoot,
     TransitionChild,
@@ -8,32 +8,35 @@ import {
     DialogTitle,
 } from "@headlessui/vue";
 import { router, useForm } from "@inertiajs/vue3";
+import PopUpModal from "@/Components/PopUpModal.vue";
 import toast from "@/Stores/toast";
+import {formatTime} from "@/Pages/Functions/functionsOfDate"
 
 const props = defineProps({ holiday: Object });
 
 const isOpen = computed(() => !!props.holiday);
 
-function closeModal() {
-    router.visit(route("dashboard.timetable.index"), {
-        preserveState: true,
-        preserveScroll: true,
 
-    });
-}
-function openModal() {
-    isOpen.value = true;
+function closeModal() {
+    router.visit(route("dashboard.timetable.index"),
+        {
+            preserveState:true
+        }
+    );
+    form.clearErrors()
 }
 
 const form = useForm({
     name: props.holiday?.name_of_holiday,
+    date: props.holiday?.date_of_holiday
 });
 
 watch(
     () => props.holiday,
     (holiday) => {
         if (holiday) {
-            form.name = holiday.name_of_holiday;
+            form.name = holiday?.name_of_holiday;
+            form.date = holiday?.date_of_holiday;
         }
     }
 );
@@ -41,14 +44,35 @@ watch(
 const deleteHoliday = () => {
     form.delete(route("dashboard.holiday.destroy", props.holiday?.id), {
         onSuccess: (page) => {
-
-            closeModal()
             toast.add({
                 message: "Feriado excluído com sucesso.",
             });
+
         },
+
     });
 };
+
+const updateHoliday = () => {
+    form.put(route("dashboard.holiday.update", props.holiday?.id), {
+        preserveState: (page) => Object.keys(page.props.errors).length,
+        onSuccess: (page) => {
+            toast.add({
+                message: "Feriado editado com sucesso.",
+            });
+
+        },
+
+    });
+};
+
+
+const messagePopUp = 'Você deseja excluir esse feriado?'
+const modalPopUp = ref(null)
+
+const openPopUp = () => {
+    modalPopUp.value.openModal()
+}
 </script>
 <template>
     <TransitionRoot appear :show="isOpen" as="template">
@@ -81,11 +105,16 @@ const deleteHoliday = () => {
                         <DialogPanel
                             class="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white dark:bg-admin-card p-6 text-left align-middle shadow-xl transition-all"
                         >
-                            <DialogTitle
+                        <DialogTitle
                                 as="h3"
-                                class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-200"
+                                class="flex flex-row justify-between text-lg font-medium leading-6 text-gray-900 dark:text-gray-200"
                             >
                                 Editando Feriado
+
+                                <button class="text-gray-500 hover:text-gray-300" title="Fechar" @click="closeModal">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+
                             </DialogTitle>
                             <div class="mt-2">
                                 <p class="text-sm text-gray-500">
@@ -109,6 +138,9 @@ const deleteHoliday = () => {
                                                 type="text"
                                                 class="input-default"
                                             />
+                                            <span v-if="form.errors.name">
+                                                {{ form.errors.name }}
+                                            </span>
                                         </div>
 
                                         <div class="flex flex-col">
@@ -121,7 +153,9 @@ const deleteHoliday = () => {
                                             <input
                                                 id="category"
                                                 type="text"
-                                                class="input-default"
+                                                class="input-default capitalize"
+                                                :value="formatTime(form.date, 'dddd')"
+                                                disabled
                                             />
                                         </div>
 
@@ -136,6 +170,8 @@ const deleteHoliday = () => {
                                                 id="category"
                                                 type="date"
                                                 class="input-default"
+                                                v-model="form.date"
+                                                :disabled="props.holiday?.fixed"
                                             />
                                         </div>
 
@@ -170,20 +206,22 @@ const deleteHoliday = () => {
                                 <button
                                     v-if="!props.holiday?.fixed"
                                     type="button"
-                                    class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                                    @click="deleteHoliday"
-                                    title="Excluir feriado"
+                                    class="btn-delete-style-1"
+                                    @click="openPopUp"
+                                    
                                 >
                                     Excluir
                                 </button>
                                 <button
                                     type="button"
-                                    class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                                    @click="closeModal"
+                                    class="btn-primary-style-1"
+                                    @click="updateHoliday"
                                 >
                                     Editar
                                 </button>
                             </div>
+
+                            <PopUpModal ref="modalPopUp" :message="messagePopUp" @delete="deleteHoliday"/>
                         </DialogPanel>
                     </TransitionChild>
                 </div>

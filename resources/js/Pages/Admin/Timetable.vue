@@ -8,17 +8,17 @@ export default {
 
 <script setup>
 import { Head } from "@inertiajs/vue3";
-
+import { watch } from "vue";
 import CardTimetable from "./Partials/Timetable/CardTimetable.vue";
 import CardHoliday from "./Partials/Timetable/CardHoliday.vue";
 import ModalEditHoliday from "@/Pages/Admin/Components/Timetable/ModalEditHoliday.vue";
-
 
 const props = defineProps({
     timetable: Object,
     holidays: Object,
     holidayEdit: Object,
 });
+
 
 </script>
 

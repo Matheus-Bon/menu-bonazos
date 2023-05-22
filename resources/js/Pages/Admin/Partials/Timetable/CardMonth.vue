@@ -15,9 +15,7 @@ const toggleExpand = () => {
 </script>
 
 <template>
-    <BoxBorderSecond
-        :class="[expandCard ? 'col-span-3' : null]"
-    >
+    <BoxBorderSecond :class="[expandCard ? 'col-span-3' : null]">
         <template #card-header>
             <div class="flex flex-row justify-between">
                 <h2 class="text-gray-500 text-2xl font-medium capitalize">
@@ -44,8 +42,13 @@ const toggleExpand = () => {
                         {{ holiday.holiday }}
                     </span>
                     <span class="text-sm text-gray-500 dark:tex-gray-700">
-                        {{ formatTime(holiday.date, 'DD/MM/YYYY') }} &nbsp;|&nbsp;
-                        <span class="capitalize">{{ formatTime(holiday.date, 'dddd') }}</span>
+                        {{
+                            formatTime(holiday.date, "DD/MM/YYYY")
+                        }}
+                        &nbsp;|&nbsp;
+                        <span class="capitalize">{{
+                            formatTime(holiday.date, "dddd")
+                        }}</span>
                     </span>
                 </div>
                 <Link
@@ -54,7 +57,8 @@ const toggleExpand = () => {
                         route('dashboard.holiday.show', { holiday: holiday.id })
                     "
                     :title="'Editar feriado ' + holiday.holiday"
-                    preserve-state preserve-scroll
+                    preserve-state
+                    preserve-scroll
                 >
                     <i class="bi bi-pencil text-indigo-500"></i>
                 </Link>

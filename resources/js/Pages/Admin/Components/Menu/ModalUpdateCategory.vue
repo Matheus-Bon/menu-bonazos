@@ -47,6 +47,18 @@ const deleteCategory = () => {
     });
 };
 
+const updateCategory = () => {
+    form.put(route("dashboard.menu.update", props.category?.id), {
+        preserveScroll:true,
+        onSuccess: (page) => {
+            closeModal();
+            toast.add({
+                message: "Categoria editada com sucesso.",
+            });
+        },
+    });
+};
+
 const popUp = ref(null);
 function openPopUp() {
     popUp.value.openModal();
@@ -86,12 +98,17 @@ const messagePopUp = 'Você deseja excluir essa categoria?'
                     >
                         <DialogPanel
                             class="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white dark:bg-admin-card p-6 text-left align-middle shadow-xl transition-all"
-                        >
+                        >   
                             <DialogTitle
                                 as="h3"
-                                class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-200"
+                                class="flex flex-row justify-between text-lg font-medium leading-6 text-gray-900 dark:text-gray-200"
                             >
                                 Editando Categoria
+
+                                <button class="text-gray-500 hover:text-gray-300" title="Fechar" @click="closeModal">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+
                             </DialogTitle>
                             <div class="mt-2">
                                 <p class="text-sm text-gray-500">
@@ -127,7 +144,6 @@ const messagePopUp = 'Você deseja excluir essa categoria?'
                                     hidden
                                     @submit.prevent="deleteCategory"
                                 ></form>
-
                                 <button
                                     type="button"
                                     class="btn-delete-style-1"
@@ -138,7 +154,7 @@ const messagePopUp = 'Você deseja excluir essa categoria?'
                                 <button
                                     type="button"
                                     class="btn-primary-style-1"
-                                    @click="closeModal"
+                                    @click="updateCategory"
                                 >
                                     Editar
                                 </button>

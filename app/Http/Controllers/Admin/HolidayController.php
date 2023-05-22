@@ -58,7 +58,7 @@ class HolidayController extends Controller
         //dd(gettype(Holiday::where('id', $id)->first()) );
         return Inertia::render('Admin/Timetable', [
             'holidayEdit' => Holiday::where('id', $id)->first(),
-            'holidays' => Holiday::all(),
+            'holidays' => Inertia::lazy(fn () => Holiday::get()),
             'timetable' => Timetable::all(),
         ]);
     }
@@ -74,9 +74,21 @@ class HolidayController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Holiday $holiday)
     {
-        //
+        //dd($request->name);
+        $holidayFound = Holiday::findOrFail($holiday->id);
+
+        $request->validate([
+            'name' => 'required|string|min:3', // 'name' aqui se referencia ao 'name_of_holiday' do form em ModalEditHoliday
+            'date' => 'date|required'          // 'date' aqui se referencia ao 'date_of_holiday' do form em ModalEditHoliday
+        ]);
+
+        $holidayFound->name_of_holiday = $request->name; // 'name' aqui se referencia ao 'name_of_holiday' do form em ModalEditHoliday
+        $holidayFound->date_of_holiday = $request->date;  // 'date' aqui se referencia ao 'date_of_holiday' do form em ModalEditHoliday
+        $holidayFound->save();
+        
+        return to_route('dashboard.timetable.index');
     }
 
     /**

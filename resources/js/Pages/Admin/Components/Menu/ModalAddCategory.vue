@@ -76,9 +76,14 @@ defineExpose({ openModal });
                         >
                             <DialogTitle
                                 as="h3"
-                                class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-200"
+                                class="flex flex-row justify-between text-lg font-medium leading-6 text-gray-900 dark:text-gray-200"
                             >
                                 Criando Categoria
+
+                                <button class="text-gray-500 hover:text-gray-300" title="Fechar" @click="closeModal">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+
                             </DialogTitle>
                             <div class="mt-2">
                                 <p class="text-sm text-gray-500">

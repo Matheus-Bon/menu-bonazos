@@ -29,13 +29,16 @@ const form = useForm({
 
 const create = () => {
     form.post(route("dashboard.holiday.store"), {
-
+        preserveState: true,
+        preserveScroll: true,
         onSuccess: (page) => {
             toast.add({
                 message: "Feriado criado com sucesso.",
             });
-        },
 
+            
+        },
+        
     });
 };
 </script>
@@ -72,9 +75,17 @@ const create = () => {
                         >
                             <DialogTitle
                                 as="h3"
-                                class="text-lg font-medium leading-6 text-gray-900 dark:text-gray-200"
+                                class="flex flex-row justify-between text-lg font-medium leading-6 text-gray-900 dark:text-gray-200"
                             >
-                                Criando Feriado
+                                Adicionando Feriado
+
+                                <button
+                                    class="text-gray-500 hover:text-gray-300"
+                                    title="Fechar"
+                                    @click="closeModal"
+                                >
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
                             </DialogTitle>
                             <div class="mt-2">
                                 <p class="text-sm text-gray-500">
@@ -119,6 +130,13 @@ const create = () => {
                             </div>
 
                             <div class="mt-4 flex flex-row justify-end gap-2">
+                                <button
+                                    type="button"
+                                    class="btn-normal-style-1"
+                                    @click="create"
+                                >
+                                    Sair
+                                </button>
                                 <button
                                     type="button"
                                     class="btn-primary-style-1"

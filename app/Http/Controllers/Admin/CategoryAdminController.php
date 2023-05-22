@@ -80,10 +80,15 @@ class CategoryAdminController extends Controller
     {   
         $categoryFound = Category::findOrFail($category->id);
 
+
+        $request->validate([
+            'name' => 'required|string|min:3', 
+        ]);
+
         $categoryFound->name = $request->name;
         $categoryFound->save();
         
-        return back();
+        return to_route('dashboard.menu.index');
     }
 
     public function updateActiveCategory(Request $request, Category $category)
