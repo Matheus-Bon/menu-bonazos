@@ -35,12 +35,11 @@ const create = () => {
             toast.add({
                 message: "Feriado criado com sucesso.",
             });
-
-            
         },
-        
     });
 };
+
+
 </script>
 <template>
     <TransitionRoot appear :show="isOpen" as="template">
@@ -77,7 +76,7 @@ const create = () => {
                                 as="h3"
                                 class="flex flex-row justify-between text-lg font-medium leading-6 text-gray-900 dark:text-gray-200"
                             >
-                                Adicionando Feriado
+                                {{ $t('message.hello') }}
 
                                 <button
                                     class="text-gray-500 hover:text-gray-300"
