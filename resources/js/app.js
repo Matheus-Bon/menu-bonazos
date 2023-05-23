@@ -2,20 +2,32 @@ import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
-import "animate.css";
-import "../css/app.css";
 import { createI18n } from "vue-i18n";
 import { enMessages } from "@/constants/en";
 import { ptMessages } from "@/constants/pt";
+import "animate.css";
+import "../css/app.css";
 
+/* 
+    Define a variável 'messages' como um objeto com duas propriedades:
+    'pt' e 'en', que contêm as mensagens em português e inglês, respectivamente.
+*/
 const messages = {
     pt: ptMessages,
     en: enMessages,
 };
 
+
+/* 
+    legacy: Define a opção 'legacy' como false, indicando que não será utilizado o modo de compatibilidade com versões anteriores.
+    locale: Define a opção 'locale' como o valor da propriedade 'lang' do elemento raiz do documento HTML, que especifica o idioma da página.
+    fallbackLocale: Define o idioma padrão (fallback) como "en" (inglês), que será usado caso a tradução para o idioma atual não esteja disponível.
+    messages: Define as mensagens disponíveis para a internacionalização usando o objeto 'messages' definido acima.
+*/
 const i18n = createI18n({
-    legacy: false,
-    locale: document.documentElement.lang,
+
+    legacy: false,  
+    locale: document.documentElement.lang, 
     fallbackLocale: "en",
     messages,
 });

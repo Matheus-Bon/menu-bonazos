@@ -15,7 +15,7 @@ const form = useForm({
 const submit = () => {
     form.clearErrors();
 
-    form.post(route("dashboard.manager.store"), {
+    form.post(route("dashboard.unit.manager.store"), {
         preserveScroll: true,
         preserveState: true,
         onSuccess: (page) => {

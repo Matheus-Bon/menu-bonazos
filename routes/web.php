@@ -70,21 +70,31 @@ Route::group(
     
         
         //Rotas Menu
-        Route::resource('menu', CategoryAdminController::class)->parameters(['menu' => 'category']);
-        Route::put('menu/{category}/active-category', [CategoryAdminController::class, 'updateActiveCategory'])->name('update.active.category');
-    
-        //Rotas Timetable - horário de funcionamento
-        Route::resource('timetable', TimetableController::class);
-        Route::patch('timetable/{timetable}/active-day', [TimetableController::class, 'updateActiveDay'])->name('update.active.day');
+        Route::prefix('menu')->name('menu.')->group(function(){
+
+            Route::resource('', CategoryAdminController::class)->parameters(['' => 'category'])->except(['create', 'edit']); // Rotas referente ao CRUD de categorias
+            Route::put('menu/{category}/active-category', [CategoryAdminController::class, 'updateActiveCategory'])->name('update.active.category'); // Rota para ativar categoria
+
+        });
         
-        //Rotas Timetable - feriados
-        Route::resource('timetable/holiday', HolidayController::class)->only(['edit', 'update', 'store', 'show', 'destroy']);
+        
+        //Rotas Timetable 
+        Route::prefix('timetable')->name('timetable.')->group(function(){
+
+            Route::resource('', TimetableController::class)->except(['destroy', 'show', 'edit'])->parameters(['' => 'timetable']); // Rotas referente ao CRUD de timetable (Horario de Funcionamento)
+            Route::resource('holiday', HolidayController::class)->only(['edit', 'update', 'store', 'show', 'destroy']); // Rotas referente ao CRUD de holiday
+            Route::patch('{timetable}/active-day', [TimetableController::class, 'updateActiveDay'])->name('active-day'); // Rota para ativar o dia de trabalho
+
+        });
     
         //Rotas Unidade 
-        Route::resource('unit', UnitController::class)->only(['index', 'store']);
+        Route::prefix('unit')->name('unit.')->group(function(){
+
+            Route::resource('', UnitController::class)->only(['index', 'store']);   // Rotas referente ao CRUD de unidade
+            Route::resource('manager', ManagerController::class)->only(['store']);  // Rotas referente ao CRUD de manager
+
+        });
     
-        //Rotas Unidade - Manager 
-        Route::resource('unit/manager', ManagerController::class)->only(['store']);
     });
 
 

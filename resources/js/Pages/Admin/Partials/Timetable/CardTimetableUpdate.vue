@@ -183,7 +183,7 @@ const update = () =>
 
 // Função para atualizar o dia de funcionamento
 const updateActiveDay = () =>
-    formActiveDay.patch(route("dashboard.update.active.day", props.day.id), {
+    formActiveDay.patch(route("dashboard.timetable.active-day", props.day.id), {
         preserveState: (page) => Object.keys(page.props.errors).length,
         preserveScroll: true,
     });
