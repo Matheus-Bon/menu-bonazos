@@ -10,7 +10,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 
 class User extends Authenticatable
 {
@@ -26,7 +27,7 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
-        'unit_id'
+        
         
     ];
 
@@ -51,6 +52,7 @@ class User extends Authenticatable
 
     protected $with = ['addresses'];
 
+    protected $keyType = 'string';
 
 
     public function addresses(): BelongsToMany
@@ -58,9 +60,9 @@ class User extends Authenticatable
         return $this->belongsToMany(\App\Models\Address::class);
     }
 
-    public function unit(): HasOne
+    public function unit(): BelongsTo
     {
-        return $this->hasOne(Unit::class, 'manager_id');
+        return $this->belongsTo(Unit::class);
     }
 
 }

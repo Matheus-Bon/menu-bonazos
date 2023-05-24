@@ -2,8 +2,9 @@
 import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
 import { useForm } from "@inertiajs/vue3";
 import toast from "@/Stores/toast";
+import CardItemListUnit from "@/Pages/Admin/Partials/Unit/CardItemListUnit.vue"
 
-const props = defineProps({ formSentByCardUnit: Object });
+const props = defineProps({ infoSentByCardUnit: Object, managers: Object, units: Object });
 
 
 </script>
@@ -20,7 +21,10 @@ const props = defineProps({ formSentByCardUnit: Object });
         </template>
 
         <div class="flex flex-wrap gap-5">
+
+            <!-- Card de criação da unidade -->
             <div
+                v-show="infoSentByCardUnit?.showCard"
                 class="grid grid-cols-2 gap-10 w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-zinc-800 dark:border-gray-700 max-h-60 self-center"
             >
 
@@ -30,10 +34,10 @@ const props = defineProps({ formSentByCardUnit: Object });
                     ></i>
                     <div href="#">
                         <h5
-                            v-if="formSentByCardUnit?.form.name"
+                            v-if="infoSentByCardUnit?.form.name"
                             class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white"
                         >
-                            Unidade - {{ formSentByCardUnit?.form.name }}
+                            Unidade - {{ infoSentByCardUnit?.form.name }}
                         </h5>
                         <h5
                             v-else
@@ -46,13 +50,13 @@ const props = defineProps({ formSentByCardUnit: Object });
                         class="flex flex-col mb-3 font-normal text-gray-500 dark:text-gray-400"
                     >
                         <span>
-                            {{ formSentByCardUnit?.form.street }}
+                            {{ infoSentByCardUnit?.form.street }}
                         </span>
                         <span>
-                            CEP {{ formSentByCardUnit?.form.zip_code }} - {{ formSentByCardUnit?.form.district }}, {{ formSentByCardUnit?.form.state }}
+                            CEP {{ infoSentByCardUnit?.form.zip_code }} - {{ infoSentByCardUnit?.form.district }}, {{ infoSentByCardUnit?.form.state }}
                         </span>
                         <span>
-                            TEL {{ formSentByCardUnit?.form.phone }}
+                            TEL {{ infoSentByCardUnit?.form.phone }}
                         </span>
                         
                     </div>
@@ -65,9 +69,16 @@ const props = defineProps({ formSentByCardUnit: Object });
                     
                     <div href="#">
                         <h5
+                            v-if="infoSentByCardUnit?.form.manager_id"
                             class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white"
                         >
-                            Gerente - Matheus
+                            Gerente - 
+                        </h5>
+                        <h5
+                            v-else
+                            class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white"
+                        >
+                            Gerente
                         </h5>
                     </div>
                     <div
@@ -82,60 +93,9 @@ const props = defineProps({ formSentByCardUnit: Object });
                 
             </div>
 
-            <!-- <div
-                class="grid grid-cols-2 gap-10 w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-zinc-800 dark:border-gray-700 max-h-60 self-center"
-            >
 
-                <div class="border border-y-0 border-l-0 border-dashed text-left">
-                    <i
-                        class="bi bi-shop text-[40px] mb-2 text-secondary-color-100 dark:text-secondary-color-300"
-                    ></i>
-                    <div href="#">
-                        <h5
-                            class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white"
-                        >
-                            Unidade - Unamar
-                        </h5>
-                    </div>
-                    <div
-                        class="flex flex-col mb-3 font-normal text-gray-500 dark:text-gray-400"
-                    >
-                        <span>
-                            Rua Coelho Pardo
-                        </span>
-                        <span>
-                            CEP 28925698 - Unamar, RJ
-                        </span>
-                        <span>
-                            TEL 21967444770
-                        </span>
-                        
-                    </div>
-                </div>
-
-                <div class="justify-self-start text-left">
-                    <i
-                        class="bi bi-person text-[40px] mb-2  text-secondary-color-100 dark:text-secondary-color-300"
-                    ></i>
-                    
-                    <div href="#">
-                        <h5
-                            class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white"
-                        >
-                            Gerente - Carlos
-                        </h5>
-                    </div>
-                    <div
-                        class="flex flex-col mb-3 font-normal text-gray-500 dark:text-gray-400"
-                    >
-                        <span>
-                            Gerente desde 23/05/2021
-                        </span>
-                    
-                    </div>
-                </div>
-                
-            </div> -->
+            <!-- Lista dos Gerentes -->
+            <CardItemListUnit v-for="unit in units" :key="unit.id" :unit="unit"/>
         </div>
     </BoxBorder>
 </template>

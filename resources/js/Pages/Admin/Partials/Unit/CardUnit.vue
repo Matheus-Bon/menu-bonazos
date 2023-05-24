@@ -1,9 +1,10 @@
 <script setup>
 import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
 import { useForm } from "@inertiajs/vue3";
+import { ref } from "vue";
 import toast from "@/Stores/toast";
 
-const props = defineProps({ managers: Object });
+const showCard = ref(false);
 
 const form = useForm({
     name: null,
@@ -16,7 +17,15 @@ const form = useForm({
     phone: null,
 });
 
-defineExpose({ form });
+const openCardManager = () => {
+    showCard.value = true;
+};
+
+const closeCardManager = () => {
+    showCard.value = false;
+};
+
+defineExpose({ form, showCard });
 
 const fetchAddress = async () => {
     if (form.zip_code && form.zip_code.length === 8) {
@@ -49,6 +58,8 @@ const submit = () => {
             toast.add({
                 message: "Unidade criada com sucesso.",
             });
+
+            closeCardManager()
         },
     });
 };
@@ -86,6 +97,8 @@ const submit = () => {
                                 id="unit"
                                 type="text"
                                 class="input-default"
+                                @focusin="openCardManager"
+
                             />
                         </div>
                         <div class="flex flex-col gap-2 w-full">
@@ -105,8 +118,16 @@ const submit = () => {
                                 class="block w-full input-default"
                                 v-model="form.manager_id"
                             >
-                                <option disabled value>Escolha um gerente</option>
-                                <option v-for="manager in managers" :value="manager.id">{{ manager.name }}</option>
+                                <option disabled value>
+                                    Escolha um gerente
+                                </option>
+                                <option
+                                    v-for="manager in managers"
+                                    :value="manager.id"
+                                    
+                                >
+                                    {{ manager.name }}
+                                </option>
                             </select>
                         </div>
                         <div class="flex flex-col gap-2 w-full">
@@ -235,11 +256,18 @@ const submit = () => {
                         </div>
                     </div>
                 </div>
+            </form>
 
-                <button class="btn-primary">
+            <div class="mt-5">
+                <button
+                    type="submit"
+                    class="btn-submit-admin"
+                    @click="submit"
+                    :disabled="form.processing"
+                >
                     Criar Unidade
                 </button>
-            </form>
+            </div>
         </div>
     </BoxBorder>
 </template>

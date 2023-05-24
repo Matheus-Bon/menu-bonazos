@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('password');
             $table->tinyText('phone')->nullable();
             $table->rememberToken();
-            $table->foreignUuid('unit_id')->nullable();
             $table->set('plan', ['Pro', 'Standard'])->nullable();
+            $table->uuid('unit_id')->nullable();
             $table->timestamps();
         });
     }

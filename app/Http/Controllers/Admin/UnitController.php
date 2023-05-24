@@ -19,9 +19,11 @@ class UnitController extends Controller
      */
     public function index()
     {   
+        
         return Inertia::render('Admin/Unit',
             [
                 'managers' => User::role('manager')->get(),
+                'units' => Unit::with('manager')->get()
             ]
         );
     }
@@ -39,16 +41,13 @@ class UnitController extends Controller
      */
     public function store(UnitCreateRequest $request)
     {
-          
+        
         $managers = User::role('manager')->get();
         $manager = $managers->where('id', $request->manager_id)->first();
 
-        
-        //dd($manager);
-        $manager->unit()->create([
-
+        //dd(Unit::with('manager')->get());
+        $unit = Unit::create([
             'name' => $request->name,
-            'manager_id' => $manager->id,
             'street' => $request->street,
             'district' => $request->district,
             'city' => $request->city,
@@ -57,10 +56,11 @@ class UnitController extends Controller
             'phone' => $request->phone
         ]);
 
-        $manager->unit_id = $manager->unit->id;
-
+        // Atribuindo o relacionamento entre Manager e Unit
+        $manager->unit()->associate($unit);
         $manager->save();
         
+
         return to_route('dashboard.unit.index');
     }
 

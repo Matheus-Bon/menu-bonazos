@@ -38,7 +38,7 @@ const categoryInfo = ref(null);
                     <div>
                         <button
                             @click="openModal"
-                            class="btn-primary bg-indigo-500 hover:bg-indigo-700 hover:dark:bg-indigo-800 dark:bg-indigo-700"
+                            class="btn-submit-admin"
                         >
                             <i class="fa-solid fa-plus pr-1"></i>
                             Adicionar Categoria

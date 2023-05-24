@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('units', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id');
             $table->tinyText('name')->nullable();
-            $table->foreignUuid('manager_id');
             $table->tinyText('street')->nullable();
             $table->tinyText('district')->nullable();
             $table->tinyText('city')->nullable();

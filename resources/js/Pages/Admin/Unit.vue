@@ -14,13 +14,9 @@ import CardUnit from "@/Pages/Admin/Partials/Unit/CardUnit.vue";
 import CardListUnit from "@/Pages/Admin/Partials/Unit/CardListUnit.vue";
 import { provide, ref } from "vue";
 
-const props = defineProps({ managers: Object });
+const props = defineProps({ units: Object });
 
 const cardUnit = ref(null)
-
-
-//provide('form', cardUnit)
-
 
 </script>
 
@@ -32,13 +28,13 @@ const cardUnit = ref(null)
             <CardManager />
         </div>
         <div class="basis-1/2">
-            <CardListManager :managers="managers"/>
+            <CardListManager  :units="units"/>
         </div>
         <div class="basis-1/2">
-            <CardUnit ref="cardUnit" :managers="managers"/>
+            <CardUnit ref="cardUnit"/>
         </div>
         <div class="basis-1/2">
-            <CardListUnit :form-sent-by-card-unit="cardUnit"/>
+            <CardListUnit :info-sent-by-card-unit="cardUnit"  :units="units"/>
         </div>
     </div>
 </template>

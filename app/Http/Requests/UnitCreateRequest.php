@@ -34,7 +34,7 @@ class UnitCreateRequest extends FormRequest
             'city' => ['string', 'required'],
             'state' => ['string', 'required'],
             'zip_code' => ['string', 'required', 'min:8'],
-            'phone' => ['string', 'required','min:10', 'max:11'],
+            'phone' => ['string', 'required','min:10', 'max:11', 'unique:units,phone'],
         ];
     }
 }
