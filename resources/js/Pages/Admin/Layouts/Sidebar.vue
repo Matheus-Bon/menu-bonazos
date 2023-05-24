@@ -3,8 +3,9 @@ import NotificationDropdown from "@/Pages/Admin/Components/NotificationDropdown.
 import UserDropdown from "@/Pages/Admin/Components/UserDropdown.vue";
 import { Link, usePage } from "@inertiajs/vue3";
 
+const user = usePage().props.auth.user
 
-
+console.log(user)
 </script>
 
 <template>
@@ -32,10 +33,16 @@ import { Link, usePage } from "@inertiajs/vue3";
 
             <div class="flex flex-col gap-1 mt-3">
                 <span class="text-gray-500 text-sm font-thin">
-                    Sua loja está: <span class="text-secondary-color-100 font-medium">Aberta</span>
+                    Sua loja está: 
+                    <span v-if="user.unit?.isOpen" class="text-secondary-color-100 font-medium">
+                        Aberta
+                    </span>
+                    <span v-else class="text-red-500 font-medium">
+                        Fechada
+                    </span>
                 </span>
                 <span class="text-gray-500 text-sm font-thin">
-                    Unidade: Belford Roxo
+                    Unidade: {{ user.unit?.name }}
                 </span>
             </div>
 

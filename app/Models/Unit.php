@@ -12,12 +12,14 @@ class Unit extends Model
 {
     use HasFactory, HasUlids;
     protected $table = 'units';
-    protected $fillable = ['name','street', 'district', 'city', 'state', 'zip_code', 'phone', 'isOpen', 'manager_id'];
+    protected $fillable = ['name','street', 'district', 'city', 'state', 'zip_code', 'phone', 'isOpen'];
     protected $primaryKey = 'id';
     protected $keyType = 'string';
     public $incrementing = false;
 
-    
+    protected $hidden = [
+        
+    ];
 
     public function timetable(): HasOne
     {

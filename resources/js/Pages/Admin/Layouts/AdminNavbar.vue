@@ -42,7 +42,6 @@ const nameRoute = computed(() => {
     return currentRoute.name;
 });
 
-console.log(new RegExp(usePage().url))
 /* Lógica para saudações */
 const salutation = ref("");
 

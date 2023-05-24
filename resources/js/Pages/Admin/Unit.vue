@@ -14,7 +14,7 @@ import CardUnit from "@/Pages/Admin/Partials/Unit/CardUnit.vue";
 import CardListUnit from "@/Pages/Admin/Partials/Unit/CardListUnit.vue";
 import { ref } from "vue";
 
-const props = defineProps({ units: Object, managersWhitoutUnit: Object, managers: Object });
+const props = defineProps({ units: Object, managers: Object });
 
 const cardUnit = ref(null)
 
@@ -35,7 +35,7 @@ const cardUnit = ref(null)
             <CardUnit ref="cardUnit" :managers="managers"/>
         </div>
         <div class="basis-1/2">
-            <CardListUnit :info-sent-by-card-unit="cardUnit"  :units="units"/>
+            <CardListUnit :info-sent-by-card-unit="cardUnit"  :units="units" :managers="managers"/>
         </div>
     </div>
 </template>

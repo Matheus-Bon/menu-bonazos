@@ -135,14 +135,13 @@ const submit = () => {
                             class="input-default"
                         />
                     </div>
-
-                    <button
-                        type="submit"
-                        class="btn-submit-admin"
-                        :disabled="form.processing"
-                    >
-                        Enviar
-                    </button>
+                        <button
+                            type="submit"
+                            class="btn-submit-admin relative top-[1rem]"
+                            :disabled="form.processing"
+                        >
+                            Enviar
+                        </button>
                 </div>
             </form>
         </div>

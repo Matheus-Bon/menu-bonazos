@@ -32,7 +32,7 @@ watch(showCard, (newValue) => {
     if(newValue){
         setTimeout(() => {
             closeCardUnit()
-        }, 30000);
+        }, 60000);
     }
 
 }, {immediate:true})

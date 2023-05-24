@@ -39,6 +39,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'phone',
+        'plan'
     ];
 
     /**
@@ -50,7 +52,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $with = ['addresses'];
+    protected $with = ['addresses', 'unit'];
 
     protected $keyType = 'string';
 
