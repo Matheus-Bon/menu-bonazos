@@ -1,7 +1,7 @@
 <script setup>
 import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
 
-const props = defineProps({ units: Object });
+const props = defineProps({ units: Object, managers: Object });
 </script>
 
 <template>
@@ -39,17 +39,17 @@ const props = defineProps({ units: Object });
                     <tbody class="max-h-100 overflow-y-auto">
                         <tr
                             class="bg-white border-b dark:bg-neutral-800 dark:border-admin-card hover:bg-gray-50 dark:hover:bg-zinc-600"
-                            v-for="unit in units"
-                            :key="unit.id"
+                            v-for="manager in managers"
+                            :key="manager.id"
                         >
                             <th
                                 scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                             >
-                                {{ unit?.name }}
+                                {{ manager.unit?.name }}
                             </th>
-                            <td class="px-6 py-4">{{ unit.manager?.name }}</td>
-                            <td class="px-6 py-4">{{ unit.manager?.email }}</td>
+                            <td class="px-6 py-4">{{ manager.name }}</td>
+                            <td class="px-6 py-4">{{ manager.email }}</td>
                             <td class="px-6 py-4 text-right">
                                 <a
                                     href="#"

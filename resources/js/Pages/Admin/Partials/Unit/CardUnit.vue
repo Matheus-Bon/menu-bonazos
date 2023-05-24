@@ -1,10 +1,12 @@
 <script setup>
 import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
 import { useForm } from "@inertiajs/vue3";
-import { ref } from "vue";
+import { computed, ref, watch } from "vue";
 import toast from "@/Stores/toast";
 
+const props = defineProps({managers: Object})
 const showCard = ref(false);
+const focus = ref(true)
 
 const form = useForm({
     name: null,
@@ -17,13 +19,23 @@ const form = useForm({
     phone: null,
 });
 
-const openCardManager = () => {
+const openCardUnit = () => {
     showCard.value = true;
 };
 
-const closeCardManager = () => {
+const closeCardUnit = () => {
     showCard.value = false;
 };
+
+watch(showCard, (newValue) => {
+
+    if(newValue){
+        setTimeout(() => {
+            closeCardUnit()
+        }, 30000);
+    }
+
+}, {immediate:true})
 
 defineExpose({ form, showCard });
 
@@ -59,10 +71,15 @@ const submit = () => {
                 message: "Unidade criada com sucesso.",
             });
 
-            closeCardManager()
+            closeCardManager();
         },
     });
 };
+
+const filterManagers = computed(() => {
+
+    return props.managers.filter(manager => manager.unit_id === null)
+})
 </script>
 
 <template>
@@ -97,8 +114,8 @@ const submit = () => {
                                 id="unit"
                                 type="text"
                                 class="input-default"
-                                @focusin="openCardManager"
-
+                                @focusin="openCardUnit"
+                                @focus="focus"
                             />
                         </div>
                         <div class="flex flex-col gap-2 w-full">
@@ -122,9 +139,8 @@ const submit = () => {
                                     Escolha um gerente
                                 </option>
                                 <option
-                                    v-for="manager in managers"
+                                    v-for="manager in filterManagers"
                                     :value="manager.id"
-                                    
                                 >
                                     {{ manager.name }}
                                 </option>

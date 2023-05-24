@@ -22,8 +22,9 @@ class UnitController extends Controller
         
         return Inertia::render('Admin/Unit',
             [
-                'managers' => User::role('manager')->get(),
-                'units' => Unit::with('manager')->get()
+                'managersWhitoutUnit' => User::role('manager')->where('unit_id', null)->get(),
+                'units' => Unit::with('manager')->get(),
+                'managers' => User::role('manager')->with('unit')->get()
             ]
         );
     }

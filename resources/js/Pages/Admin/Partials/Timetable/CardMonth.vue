@@ -54,7 +54,7 @@ const toggleExpand = () => {
                 <Link
                     as="button"
                     :href="
-                        route('dashboard.holiday.show', { holiday: holiday.id })
+                        route('dashboard.timetable.holiday.show', { holiday: holiday.id })
                     "
                     :title="'Editar feriado ' + holiday.holiday"
                     preserve-state

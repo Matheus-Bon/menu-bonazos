@@ -21,7 +21,8 @@ return new class extends Migration
             $table->tinyText('phone')->nullable();
             $table->rememberToken();
             $table->set('plan', ['Pro', 'Standard'])->nullable();
-            $table->uuid('unit_id')->nullable();
+            $table->set('region', ['EUA', 'BR'])->nullable();
+            $table->uuid('unit_id')->nullable()->unique();
             $table->timestamps();
         });
     }

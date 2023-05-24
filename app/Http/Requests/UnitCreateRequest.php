@@ -12,11 +12,7 @@ class UnitCreateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        if(Auth::check()){
-            return true;
-        }else{
-            return false;
-        }
+        return Auth::check() ? true : false;
     }
 
     /**

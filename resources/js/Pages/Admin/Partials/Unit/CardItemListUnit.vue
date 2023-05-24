@@ -1,5 +1,5 @@
 <script setup>
-import { formatTime } from '@/Pages/Functions/functionsOfDate';
+import { formatTime } from "@/Pages/Functions/functionsOfDate";
 
 const props = defineProps({ unit: Object });
 </script>
@@ -22,8 +22,10 @@ const props = defineProps({ unit: Object });
             <div
                 class="flex flex-col mb-3 font-normal text-gray-500 dark:text-gray-400"
             >
-                <span> {{unit.street}} </span>
-                <span> CEP {{ unit.zip_code }} - {{unit.city}}, {{ unit.state }} </span>
+                <span> {{ unit.street }} </span>
+                <span>
+                    CEP {{ unit.zip_code }} - {{ unit.city }}, {{ unit.state }}
+                </span>
                 <span> TEL {{ unit.phone }} </span>
             </div>
         </div>
@@ -43,7 +45,10 @@ const props = defineProps({ unit: Object });
             <div
                 class="flex flex-col mb-3 font-normal text-gray-500 dark:text-gray-400"
             >
-                <span> Gerente desde {{ formatTime(unit.created_at, 'DD/MM/YYYY') }} </span>
+                <span>
+                    Gerente desde
+                    {{ formatTime(unit.created_at, "DD/MM/YYYY") }}
+                </span>
             </div>
         </div>
     </div>

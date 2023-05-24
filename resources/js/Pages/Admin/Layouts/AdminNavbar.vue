@@ -12,15 +12,15 @@ Lógica para mudar o nome da página quando acessá-la.
 Assim que criar uma nova página é recomendado que adicione em routes a nova rota.
 */
 const routes = [
-    { path: "/dashboard", name: "Início" },
-    { path: "/dashboard/orders", name: "Pedidos" },
-    { path: "/dashboard/tables", name: "Tabelas" },
-    { path: "/dashboard/menu", name: "Cardápio" },
-    { path: "/dashboard/delivery-area", name: "Área de Entrega" },
-    { path: "/dashboard/schedule", name: "Agendamento de Pedidos" },
-    { path: "/dashboard/timetable", name: "Horários" },
-    { path: "/dashboard/evaluations", name: "Avaliações" },
-    { path: "/dashboard/unit", name: "Unidades" },
+    { path: "", name: "Início" },
+    { path: "orders", name: "Pedidos" },
+    { path: "tables", name: "Tabelas" },
+    { path: "menu", name: "Cardápio" },
+    { path: "delivery-area", name: "Área de Entrega" },
+    { path: "schedule", name: "Agendamento de Pedidos" },
+    { path: "timetable", name: "Horários" },
+    { path: "evaluations", name: "Avaliações" },
+    { path: "unit", name: "Unidades" },
 ];
 
 /* 
@@ -29,18 +29,20 @@ Função com finalidade de buscar a url na matriz routes e comparar com a url qu
 const nameRoute = computed(() => {
     // Encontra a rota atual dentro de um array de rotas
     const currentRoute = routes.find((route) => {
-        const regularExp = new RegExp(usePage().url); // Cria uma expressão regular com base na URL da página atual
-        const nameRoute = route.path; // Armazena o caminho da rota atual em uma variável
-        const match = nameRoute.search(regularExp); // Verifica se o caminho da rota atual corresponde à expressão regular
+        const regularExp = new RegExp(route.path, 'g'); // Cria uma expressão regular com base na URL da página atual
+        const nameRoute = usePage().url; // Armazena o caminho da rota atual em uma variável
+        const match = regularExp.test(nameRoute) // Verifica se o caminho da rota atual corresponde à expressão regular
 
-        if (match !== -1) {
-            return route; // Retorna a rota atual se houver uma correspondência
+        if(match){
+            
+            return route
         }
     });
 
     return currentRoute.name;
 });
 
+console.log(new RegExp(usePage().url))
 /* Lógica para saudações */
 const salutation = ref("");
 
@@ -78,7 +80,7 @@ onMounted(() => {
                 <p
                     class="mb-3 text-base text-secondary-color-light dark:text-secondary-color-dark"
                 >
-                    <!-- {{ nameRoute }} -->
+                    {{ nameRoute }}
                 </p>
                 <p class="text-xl font-medium text-gray-700 dark:text-gray-300">
                     {{ salutation }} {{ user.name }}!

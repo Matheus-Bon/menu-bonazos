@@ -4,7 +4,7 @@ import { useForm } from "@inertiajs/vue3";
 import toast from "@/Stores/toast";
 import CardItemListUnit from "@/Pages/Admin/Partials/Unit/CardItemListUnit.vue"
 
-const props = defineProps({ infoSentByCardUnit: Object, managers: Object, units: Object });
+const props = defineProps({ infoSentByCardUnit: Object, units: Object });
 
 
 </script>
@@ -80,14 +80,6 @@ const props = defineProps({ infoSentByCardUnit: Object, managers: Object, units:
                         >
                             Gerente
                         </h5>
-                    </div>
-                    <div
-                        class="flex flex-col mb-3 font-normal text-gray-500 dark:text-gray-400"
-                    >
-                        <span>
-                            Gerente desde 20/10/2020
-                        </span>
-                    
                     </div>
                 </div>
                 
