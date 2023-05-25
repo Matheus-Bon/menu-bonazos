@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 
@@ -21,9 +22,9 @@ class Unit extends Model
         
     ];
 
-    public function timetable(): HasOne
+    public function timetables(): HasMany
     {
-        return $this->hasOne(Timetable::class);
+        return $this->hasMany(Timetable::class, 'unit_id');
     }
 
     public function manager(): HasOne

@@ -24,7 +24,7 @@ class TimetableController extends Controller
             [
                 'timetable' => Timetable::all(),
                 'holidays' => Holiday::all(),
-                'holidays2' => Inertia::lazy(fn () => Holiday::get())
+        
                 
                 
             ]

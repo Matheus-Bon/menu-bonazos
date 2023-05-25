@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('timetables', function (Blueprint $table) {
             $table->id();
+            $table->ulid('unit_id');
             
             $table->enum('opens_at', [
                 "00:00",

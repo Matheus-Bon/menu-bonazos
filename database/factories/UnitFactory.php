@@ -17,7 +17,13 @@ class UnitFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->name(),
+            'street' => fake()->streetAddress(),
+            'district' => fake()->citySuffix(),
+            'city' => fake()->city(),
+            'state' => fake()->state(),
+            'zip_code' => fake()->postcode(),
+            'phone' => fake()->phoneNumber(),
         ];
     }
 }
