@@ -9,6 +9,7 @@ use App\Models\Holiday;
 use App\Models\Timetable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class HolidayController extends Controller
 {
@@ -33,17 +34,20 @@ class HolidayController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
+        $unitId = Auth::user()->unit->id;
+
         $request->validate([
             'name_of_holiday' => 'required|string|min:3',
             'date_of_holiday' => 'required|date',
             'fixed' => 'boolean',
+            'unit_id' => 'nullable'
         ]);
 
         Holiday::create([
             'name_of_holiday' => $request->name_of_holiday,
             'date_of_holiday' => $request->date_of_holiday,
             'fixed' => false,
+            'unit_id' => $unitId,
         ]);
 
         return to_route('dashboard.timetable.index');

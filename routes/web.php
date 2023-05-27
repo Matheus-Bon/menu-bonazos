@@ -35,13 +35,15 @@ Route::group(
     
 ], function(){
 
+    
     Route::get('/', function () {
         return Inertia::render('Client/Index', [
             'canLogin' => Route::has('login'),
             'canRegister' => Route::has('register'),
             'laravelVersion' => Application::VERSION,
             'phpVersion' => PHP_VERSION,
-            'user' => Auth::user()
+            'user' => Auth::user(),
+             
             
         ]);
     })->name('home');

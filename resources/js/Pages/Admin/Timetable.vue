@@ -8,14 +8,11 @@ export default {
 
 <script setup>
 import { Head } from "@inertiajs/vue3";
-import { watch } from "vue";
 import CardTimetable from "./Partials/Timetable/CardTimetable.vue";
 import CardHoliday from "./Partials/Timetable/CardHoliday.vue";
 import ModalEditHoliday from "@/Pages/Admin/Components/Timetable/ModalEditHoliday.vue";
 
 const props = defineProps({
-    timetable: Object,
-    holidays: Object,
     holidayEdit: Object,
 });
 
@@ -27,10 +24,10 @@ const props = defineProps({
 
     <div class="flex flex-row mx-14 gap-5">
         <div class="basis-1/2">
-            <CardTimetable :timetable="timetable" />
+            <CardTimetable />
         </div>
         <div class="basis-1/2">
-            <CardHoliday :holidays="holidays" />
+            <CardHoliday />
         </div>
 
         <ModalEditHoliday :holiday="holidayEdit" />

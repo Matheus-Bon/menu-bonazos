@@ -42,7 +42,7 @@ watch(
 );
 
 const deleteHoliday = () => {
-    form.delete(route("dashboard.holiday.destroy", props.holiday?.id), {
+    form.delete(route("dashboard.timetable.holiday.destroy", props.holiday?.id), {
         onSuccess: (page) => {
             toast.add({
                 message: "Feriado excluído com sucesso.",
@@ -54,7 +54,7 @@ const deleteHoliday = () => {
 };
 
 const updateHoliday = () => {
-    form.put(route("dashboard.holiday.update", props.holiday?.id), {
+    form.put(route("dashboard.timetable.holiday.update", props.holiday?.id), {
         preserveState: (page) => Object.keys(page.props.errors).length,
         onSuccess: (page) => {
             toast.add({

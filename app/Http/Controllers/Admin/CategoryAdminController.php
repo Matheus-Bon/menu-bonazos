@@ -7,6 +7,8 @@ use Inertia\Inertia;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Unit;
+use Auth;
 
 class CategoryAdminController extends Controller
 {
@@ -37,19 +39,22 @@ class CategoryAdminController extends Controller
      */
     public function store(Request $request)
     {
-        //dd(Category::all());
-        
+        $unitId = Auth::user()->unit->id;
+    
         $request->validate([
-            'name' => 'required|min:2|max:40',
-            'active' => 'boolean'
+            'name' => 'required|min:3|max:40',
+            'active' => 'boolean',
+            'unit_id' => 'nullable',
         ]);
 
         Category::create([
             'name' => $request->name,
-            'active' => false
+            'active' => false,
+            'unit_id' => $unitId
         ]);
 
-        return redirect()->back()->with('toast', 'Categoria criada com sucesso.');
+
+        return to_route('dashboard.menu.index');
         
     }
 

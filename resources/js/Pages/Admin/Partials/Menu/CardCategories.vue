@@ -4,10 +4,12 @@ import SelectMenu from "@/Pages/Admin/Components/SelectMenu.vue";
 import CardCategory from "@/Pages/Admin/Partials/Menu/CardCategory.vue";
 import ModalAddCategory from "@/Pages/Admin/Components/Menu/ModalAddCategory.vue";
 import ModalUpdateCategory from "@/Pages/Admin/Components/Menu/ModalUpdateCategory.vue";
-
+import { usePage } from "@inertiajs/vue3";
 import { ref } from "vue";
 
 defineProps({ categories: Object });
+
+const user = usePage().props.auth.user
 const modal = ref(null);
 
 const openModal = () => {
@@ -83,7 +85,7 @@ const categoryInfo = ref(null);
         <section>
             <div class="flex flex-col gap-6">
                 <CardCategory
-                    v-for="category in categories"
+                    v-for="category in user.unit.categories"
                     :key="category.id"
                     :category="category"
                     @open="toggleModalEdit"

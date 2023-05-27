@@ -22,6 +22,8 @@ class Unit extends Model
         
     ];
 
+    protected $with =['timetables', 'categories', 'holidays'];
+
     public function timetables(): HasMany
     {
         return $this->hasMany(Timetable::class, 'unit_id');
@@ -29,6 +31,16 @@ class Unit extends Model
 
     public function manager(): HasOne
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(User::class, 'unit_id');
+    }
+
+    public function holidays(): HasMany
+    {
+        return $this->hasMany(Holiday::class, 'unit_id');
+    }
+
+    public function categories(): HasMany
+    {
+        return $this->hasMany(Category::class, 'unit_id');
     }
 }

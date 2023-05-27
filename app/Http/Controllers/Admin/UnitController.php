@@ -11,6 +11,8 @@ use Illuminate\Validation\Rules;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UnitCreateRequest;
+use Database\Seeders\HolidaySeeder;
+use Database\Seeders\TimetablesTableSeeder;
 
 class UnitController extends Controller
 {
@@ -40,12 +42,10 @@ class UnitController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(UnitCreateRequest $request)
-    {
-        
+    {   
         $managers = User::role('manager')->get();
         $manager = $managers->where('id', $request->manager_id)->first();
 
-        //dd(Unit::with('manager')->get());
         $unit = Unit::create([
             'name' => $request->name,
             'street' => $request->street,
@@ -60,6 +60,11 @@ class UnitController extends Controller
         $manager->unit()->associate($unit);
         $manager->save();
         
+        $seederTimetable = new TimetablesTableSeeder(); //Semeador instanceado de forma dinâmica para criar dia da semana para cada unidade
+        $seederTimetable->run($unit->id); // Semeador chama a função run() e passa o id da unidade criada para semear o BD com os horarios da unidade
+
+        $seederHoliday = new HolidaySeeder();
+        $seederHoliday->run($unit->id);
 
         return to_route('dashboard.unit.index');
     }

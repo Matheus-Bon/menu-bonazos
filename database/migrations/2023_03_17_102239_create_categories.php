@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->ulid('unit_id');
             $table->tinyText('name');
             $table->boolean('active');
             $table->timestamps();

@@ -3,6 +3,8 @@ import { ref } from "vue";
 import { Link, usePage } from "@inertiajs/vue3";
 
 const user = usePage().props.auth.user;
+
+console.log(user)
 </script>
 
 <template>
@@ -54,6 +56,16 @@ const user = usePage().props.auth.user;
                         class="dark:text-gray-200 text-xl hover:underline decoration-amber-600"
                     >
                         Logout
+                    </Link>
+                </div>
+            </nav>
+            <nav class="flex justify-between mx-2">
+                <div class="flex flex-row gap-2">
+                    <Link
+                        :href="route('home')"
+                        class="dark:text-gray-200 text-xl hover:underline decoration-amber-600"
+                    >
+                        Início
                     </Link>
                 </div>
             </nav>

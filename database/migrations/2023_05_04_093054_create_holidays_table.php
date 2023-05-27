@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('holidays', function (Blueprint $table) {
             $table->id();
+            $table->ulid('unit_id');
             $table->tinyText('name_of_holiday');
             $table->date('date_of_holiday');
             $table->boolean('fixed');

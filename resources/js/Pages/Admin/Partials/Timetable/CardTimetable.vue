@@ -1,8 +1,10 @@
 <script setup>
 import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
 import CardTimetableUpdate from "@/Pages/Admin/Partials/Timetable/CardTimetableUpdate.vue";
+import { usePage } from "@inertiajs/vue3";
 
-defineProps({ timetable: Object });
+const user = usePage().props.auth.user;
+
 </script>
 
 <template>
@@ -44,7 +46,7 @@ defineProps({ timetable: Object });
 
             <div class="flex flex-col gap-5">
                 <CardTimetableUpdate
-                    v-for="day in timetable"
+                    v-for="day in user.unit.timetables"
                     :key="day.id"
                     :day="day"
                 />

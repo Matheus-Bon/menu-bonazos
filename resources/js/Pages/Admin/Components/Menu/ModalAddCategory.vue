@@ -10,6 +10,7 @@ import {
 import { useForm } from "@inertiajs/vue3";
 import toast from "@/Stores/toast";
 
+
 /* Lógica Create para Categoria */
 // Início
 const form = useForm({
@@ -19,7 +20,7 @@ const form = useForm({
 
 const create = () =>
     form.post(route("dashboard.menu.store"), {
-        preserveState: true,
+        preserveState: false,
         preserveScroll: true,
         onSuccess: (page) => {
             toast.add({

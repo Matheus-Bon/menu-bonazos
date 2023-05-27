@@ -4,14 +4,17 @@ import ModalAddHoliday from "../../Components/Timetable/ModalAddHoliday.vue";
 import { ref } from "vue";
 import CardMonth from "./CardMonth.vue";
 import { formatTime } from "@/Pages/Functions/functionsOfDate";
+import { usePage } from "@inertiajs/vue3";
 
 
-const props = defineProps({ holidays: Object });
 const modal = ref(null)
 
 const openModal = () => {
     modal.value.openModal()
 }
+
+const user = usePage().props.auth.user
+
 
 /* 
     Função para arrumar os dados de holidays(Array que armazena um objeto de cada feriado). 
@@ -23,7 +26,7 @@ const openModal = () => {
             (···)
     
 */
-const holidays = props.holidays.reduce((acc, holiday) => {
+const holidays = user.unit.holidays.reduce((acc, holiday) => {
     const { id, name_of_holiday, date_of_holiday, fixed} = holiday; // Extrai as propriedades 'date_of_holiday' e 'name_of_holiday' do objeto 'holiday'
 
     const month = formatTime(date_of_holiday, 'MMMM'); // Obtém o nome do mês correspondente à 'date_of_holiday'

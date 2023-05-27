@@ -23,10 +23,7 @@ class TimetableController extends Controller
 
             [
                 'timetable' => Timetable::all(),
-                'holidays' => Holiday::all(),
-        
-                
-                
+              
             ]
     
         );

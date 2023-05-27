@@ -28,7 +28,7 @@ const form = useForm({
 });
 
 const create = () => {
-    form.post(route("dashboard.holiday.store"), {
+    form.post(route("dashboard.timetable.holiday.store"), {
         preserveState: true,
         preserveScroll: true,
         onSuccess: (page) => {
