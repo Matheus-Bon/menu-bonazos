@@ -13,20 +13,20 @@ console.log(user)
             <nav class="flex justify-between mx-2">
                 <div class="flex flex-row gap-2">
                     <Link
-                        :href="route('home')"
+                        :href="route('unit.home')"
                         class="dark:text-gray-200 text-xl hover:underline decoration-amber-600"
                     >
                         Início
                     </Link>
                     <Link
-                        :href="route('profile.edit')"
+                        :href="route('unit.profile.edit')"
                         v-if="user"
                         class="dark:text-gray-200 text-xl hover:underline decoration-amber-600"
                     >
                         Profile
                     </Link>
                     <Link
-                        :href="route('dashboard.')"
+                        :href="route('unit.dashboard.')"
                         v-if="user"
                         class="dark:text-gray-200 text-xl hover:underline decoration-amber-600"
                     >
@@ -35,7 +35,7 @@ console.log(user)
                 </div>
                 <div class="flex flex-row gap-2">
                     <Link
-                        :href="route('login')"
+                        :href="'/login'"
                         v-if="!user"
                         class="dark:text-gray-200 text-xl hover:underline decoration-amber-600"
                     >
@@ -59,17 +59,6 @@ console.log(user)
                     </Link>
                 </div>
             </nav>
-            <nav class="flex justify-between mx-2">
-                <div class="flex flex-row gap-2">
-                    <Link
-                        :href="route('home')"
-                        class="dark:text-gray-200 text-xl hover:underline decoration-amber-600"
-                    >
-                        Início
-                    </Link>
-                </div>
-            </nav>
-
             <!-- Page Heading -->
             <header
                 class="bg-white shadow dark:bg-gray-900"

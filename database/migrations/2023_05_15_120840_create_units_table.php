@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('units', function (Blueprint $table) {
             $table->ulid('id');
             $table->tinyText('name')->nullable();
+            $table->tinyText('slug');
             $table->tinyText('street')->nullable();
             $table->tinyText('district')->nullable();
             $table->tinyText('city')->nullable();

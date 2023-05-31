@@ -61,7 +61,7 @@ const fetchAddress = async () => {
 const submit = () => {
     form.clearErrors();
 
-    form.post(route("dashboard.unit.store"), {
+    form.post(route("unit.dashboard.unit.store"), {
         preserveScroll: true,
         preserveState: true,
         onSuccess: (page) => {

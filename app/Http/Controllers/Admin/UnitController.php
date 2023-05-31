@@ -66,7 +66,7 @@ class UnitController extends Controller
         $seederHoliday = new HolidaySeeder();
         $seederHoliday->run($unit->id);
 
-        return to_route('dashboard.unit.index');
+        return back();
     }
 
     /**

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-
+use Illuminate\Support\Str;
 
 class Unit extends Model
 {
@@ -21,6 +21,15 @@ class Unit extends Model
     protected $hidden = [
         
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function($unit) {
+            $unit->slug = Str::of($unit->name)->slug('-');
+        });
+    }
 
     protected $with =['timetables', 'categories', 'holidays'];
 

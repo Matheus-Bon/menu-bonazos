@@ -38,9 +38,6 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
                 
             ],
-            'units' => [
-                'units' => Unit::pluck('name')
-            ],
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
                     'location' => $request->url(),

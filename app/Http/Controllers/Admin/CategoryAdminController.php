@@ -20,6 +20,7 @@ class CategoryAdminController extends Controller
         return inertia('Admin/Menu',
 
             [
+                dd(Auth::guard('web')->user()),
                 'categories' => Category::all()
             ]
                 
@@ -39,6 +40,7 @@ class CategoryAdminController extends Controller
      */
     public function store(Request $request)
     {
+        
         $unitId = Auth::user()->unit->id;
     
         $request->validate([

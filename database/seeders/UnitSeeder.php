@@ -13,13 +13,13 @@ class UnitSeeder extends Seeder
     public function run(): void
     {
         \App\Models\Unit::factory()->create([
-            'name' => '1',
-            'street' => fake()->streetAddress(),
-            'district' => fake()->citySuffix(),
-            'city' => fake()->city(),
-            'state' => fake()->state(),
-            'zip_code' => fake()->postcode(),
-            'phone' => fake()->phoneNumber(),
+            'name' => 'Principal',
+            'street' => 'Av. Leão Nobre',
+            'district' => 'Fenda',
+            'city' => 'Mar',
+            'state' => 'FB',
+            'zip_code' => '28138758',
+            'phone' => '21964805493',
             
         ]);
     }

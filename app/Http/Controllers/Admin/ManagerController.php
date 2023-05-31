@@ -36,7 +36,7 @@ class ManagerController extends Controller
             'password' => Hash::make($request->password)
         ])->assignRole('manager', 'user');
 
-        return to_route('dashboard.unit.index');
+        return back();
     }
 
     /**

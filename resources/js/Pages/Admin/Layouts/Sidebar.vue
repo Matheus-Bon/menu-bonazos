@@ -25,7 +25,7 @@ console.log(user)
             </button>
             <!-- Brand -->
             <Link
-                :href="route('dashboard.')"
+                :href="route('unit.dashboard.')"
                 class="md:block text-center md:pb-2 text-gray-800 mr-0 inline-block whitespace-nowrap text-3xl uppercase font-semibold p-4 px-0 dark:text-gray-200"
             >
                 Delivery
@@ -99,7 +99,7 @@ console.log(user)
                 <ul class="md:flex-col md:min-w-full flex flex-col list-none">
                     <li class="items-center">
                         <Link
-                            :href="route('dashboard.')"
+                            :href="route('unit.dashboard.')"
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
@@ -116,7 +116,7 @@ console.log(user)
 
                     <li class="items-center">
                         <Link
-                            :href="route('dashboard.orders')"
+                            :href="route('unit.dashboard.orders')"
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
@@ -133,7 +133,7 @@ console.log(user)
 
                     <li class="items-center">
                         <Link
-                            :href="route('dashboard.tables')"
+                            :href="route('unit.dashboard.tables')"
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
@@ -150,7 +150,7 @@ console.log(user)
 
                     <li class="items-center">
                         <Link
-                            :href="route('dashboard.menu.index')"
+                            :href="route('unit.dashboard.menu.index')"
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
@@ -177,7 +177,7 @@ console.log(user)
                 <ul class="md:flex-col md:min-w-full flex flex-col list-none">
                     <li class="items-center">
                         <Link
-                            :href="route('dashboard.delivery')"
+                            :href="route('unit.dashboard.delivery')"
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
@@ -194,7 +194,7 @@ console.log(user)
 
                     <li class="items-center">
                         <Link
-                            :href="route('dashboard.schedule')"
+                            :href="route('unit.dashboard.schedule')"
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90 hover:text-secondary-color':
@@ -213,7 +213,7 @@ console.log(user)
 
                     <li class="items-center">
                         <Link
-                            :href="route('dashboard.timetable.index')"
+                            :href="route('unit.dashboard.timetable.index')"
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
@@ -232,7 +232,7 @@ console.log(user)
 
                     <li class="items-center">
                         <Link
-                            :href="route('dashboard.evaluations')"
+                            :href="route('unit.dashboard.evaluations')"
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
@@ -249,7 +249,7 @@ console.log(user)
 
                     <li class="items-center">
                         <Link
-                            :href="route('dashboard.unit.index')"
+                            :href="route('unit.dashboard.unit.index')"
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
