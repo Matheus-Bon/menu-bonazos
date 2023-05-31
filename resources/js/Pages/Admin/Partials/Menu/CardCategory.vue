@@ -1,9 +1,10 @@
 <script setup>
 import { ref } from "vue";
-import { useForm, Link } from "@inertiajs/vue3";
+import { useForm, Link, usePage } from "@inertiajs/vue3";
 import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
 
 const modal = ref(null); // Referência do ModalUpdateCategory - Final: Pegar atributos e funções do ModalUpdateCategory
+const user = usePage().props.auth.user
 
 /* Constante que pega as informações do BD para usar no front  */
 const props = defineProps({
@@ -18,7 +19,7 @@ const form = useForm({
 });
 
 const activeCategory = () =>
-    form.put(route("dashboard.update.active.category", props.category.id), {
+    form.put(route("unit.dashboard.menu.update.active.category", {category: props.category.id, unit: user.unit.slug}), {
         preserveScroll: true,
     });
 
@@ -66,8 +67,9 @@ const activeCategory = () =>
                     <Link
                         as="button"
                         :href="
-                            route('dashboard.menu.show', {
+                            route('unit.dashboard.menu.show', {
                                 category: category.id,
+                                unit: user.unit.slug
                             })
                         "
                         :title="'Editar categoria ' + category.name"

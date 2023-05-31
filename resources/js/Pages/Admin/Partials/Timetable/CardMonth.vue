@@ -2,10 +2,10 @@
 import BoxBorderSecond from "../../Components/UI/BoxBorderSecond.vue";
 import { ref } from "vue";
 import { formatTime } from "@/Pages/Functions/functionsOfDate";
-import { Link } from "@inertiajs/vue3";
+import { Link, usePage } from "@inertiajs/vue3";
 
 const props = defineProps({ month: Object });
-
+const user = usePage().props.auth.user
 const expandCard = ref(false);
 
 const toggleExpand = () => {
@@ -54,7 +54,7 @@ const toggleExpand = () => {
                 <Link
                     as="button"
                     :href="
-                        route('dashboard.timetable.holiday.show', { holiday: holiday.id })
+                        route('unit.dashboard.timetable.holiday.show', { holiday: holiday.id, unit:user.unit.slug })
                     "
                     :title="'Editar feriado ' + holiday.holiday"
                     preserve-state

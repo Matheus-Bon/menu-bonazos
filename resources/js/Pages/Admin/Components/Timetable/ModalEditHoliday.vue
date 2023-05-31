@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch, onBeforeUnmount } from "vue";
+import { ref, computed, watch } from "vue";
 import {
     TransitionRoot,
     TransitionChild,
@@ -7,28 +7,25 @@ import {
     DialogPanel,
     DialogTitle,
 } from "@headlessui/vue";
-import { router, useForm } from "@inertiajs/vue3";
+import { router, useForm, usePage } from "@inertiajs/vue3";
 import PopUpModal from "@/Components/PopUpModal.vue";
 import toast from "@/Stores/toast";
-import {formatTime} from "@/Pages/Functions/functionsOfDate"
+import { formatTime } from "@/Pages/Functions/functionsOfDate";
 
 const props = defineProps({ holiday: Object });
-
+const user = usePage().props.auth.user
 const isOpen = computed(() => !!props.holiday);
 
-
 function closeModal() {
-    router.visit(route("dashboard.timetable.index"),
-        {
-            preserveState:true
-        }
-    );
-    form.clearErrors()
+    router.visit(route("unit.dashboard.timetable.index", user.unit.slug), {
+        preserveState: true,
+    });
+    form.clearErrors();
 }
 
 const form = useForm({
     name: props.holiday?.name_of_holiday,
-    date: props.holiday?.date_of_holiday
+    date: props.holiday?.date_of_holiday,
 });
 
 watch(
@@ -42,37 +39,38 @@ watch(
 );
 
 const deleteHoliday = () => {
-    form.delete(route("dashboard.timetable.holiday.destroy", props.holiday?.id), {
-        onSuccess: (page) => {
-            toast.add({
-                message: "Feriado excluído com sucesso.",
-            });
-
-        },
-
-    });
+    form.delete(
+        route("unit.dashboard.timetable.holiday.destroy", {holiday:props.holiday?.id, unit:user.unit.slug}),
+        {   
+            preserveState:false,
+            preserveScroll:true,
+            onSuccess: (page) => {
+                toast.add({
+                    message: "Feriado excluído com sucesso.",
+                });
+            },
+        }
+    );
 };
 
 const updateHoliday = () => {
-    form.put(route("dashboard.timetable.holiday.update", props.holiday?.id), {
+    form.put(route("unit.dashboard.timetable.holiday.update", {holiday:props.holiday?.id, unit:user.unit.slug}), {
         preserveState: (page) => Object.keys(page.props.errors).length,
+        preserveScroll:true,
         onSuccess: (page) => {
             toast.add({
                 message: "Feriado editado com sucesso.",
             });
-
         },
-
     });
 };
 
-
-const messagePopUp = 'Você deseja excluir esse feriado?'
-const modalPopUp = ref(null)
+const messagePopUp = "Você deseja excluir esse feriado?";
+const modalPopUp = ref(null);
 
 const openPopUp = () => {
-    modalPopUp.value.openModal()
-}
+    modalPopUp.value.openModal();
+};
 </script>
 <template>
     <TransitionRoot appear :show="isOpen" as="template">
@@ -105,16 +103,19 @@ const openPopUp = () => {
                         <DialogPanel
                             class="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white dark:bg-admin-card p-6 text-left align-middle shadow-xl transition-all"
                         >
-                        <DialogTitle
+                            <DialogTitle
                                 as="h3"
                                 class="flex flex-row justify-between text-lg font-medium leading-6 text-gray-900 dark:text-gray-200"
                             >
                                 Editando Feriado
 
-                                <button class="text-gray-500 hover:text-gray-300" title="Fechar" @click="closeModal">
+                                <button
+                                    class="text-gray-500 hover:text-gray-300"
+                                    title="Fechar"
+                                    @click="closeModal"
+                                >
                                     <i class="fa-solid fa-xmark"></i>
                                 </button>
-
                             </DialogTitle>
                             <div class="mt-2">
                                 <p class="text-sm text-gray-500">
@@ -154,7 +155,12 @@ const openPopUp = () => {
                                                 id="category"
                                                 type="text"
                                                 class="input-default capitalize"
-                                                :value="formatTime(form.date, 'dddd')"
+                                                :value="
+                                                    formatTime(
+                                                        form.date,
+                                                        'dddd'
+                                                    )
+                                                "
                                                 disabled
                                             />
                                         </div>
@@ -208,7 +214,6 @@ const openPopUp = () => {
                                     type="button"
                                     class="btn-delete-style-1"
                                     @click="openPopUp"
-                                    
                                 >
                                     Excluir
                                 </button>
@@ -221,7 +226,11 @@ const openPopUp = () => {
                                 </button>
                             </div>
 
-                            <PopUpModal ref="modalPopUp" :message="messagePopUp" @delete="deleteHoliday"/>
+                            <PopUpModal
+                                ref="modalPopUp"
+                                :message="messagePopUp"
+                                @delete="deleteHoliday"
+                            />
                         </DialogPanel>
                     </TransitionChild>
                 </div>

@@ -50,7 +50,7 @@ class HolidayController extends Controller
             'unit_id' => $unitId,
         ]);
 
-        return to_route('dashboard.timetable.index');
+        return back();
 
     }
 
@@ -92,7 +92,7 @@ class HolidayController extends Controller
         $holidayFound->date_of_holiday = $request->date;  // 'date' aqui se referencia ao 'date_of_holiday' do form em ModalEditHoliday
         $holidayFound->save();
         
-        return to_route('dashboard.timetable.index');
+        return back();
     }
 
     /**
@@ -104,6 +104,6 @@ class HolidayController extends Controller
 
         $holiday->delete();
 
-        return to_route('dashboard.timetable.index');
+        return back();
     }
 }

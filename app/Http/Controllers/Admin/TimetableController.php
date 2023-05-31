@@ -86,7 +86,7 @@ class TimetableController extends Controller
             ])
         );
 
-        return Redirect::back()->with('success', 'Horário atualizado!');
+        return back();
     }
 
     public function updateActiveDay(Request $request, Timetable $timetable)

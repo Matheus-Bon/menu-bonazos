@@ -26,7 +26,7 @@ console.log(user)
                         Profile
                     </Link>
                     <Link
-                        :href="route('unit.dashboard.')"
+                        :href="route('unit.dashboard.', user.unit.slug)"
                         v-if="user"
                         class="dark:text-gray-200 text-xl hover:underline decoration-amber-600"
                     >

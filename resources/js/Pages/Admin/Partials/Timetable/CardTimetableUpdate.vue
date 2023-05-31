@@ -1,10 +1,11 @@
 <script setup>
-import { useForm } from "@inertiajs/vue3";
+import { useForm, usePage } from "@inertiajs/vue3";
 import toast from "@/Stores/toast"
 
 const props = defineProps({
     day: Object,
 });
+const user = usePage().props.auth.user
 
 // Constante que armazena em um array as horas de 15 em 15 minutos
 const hours = [
@@ -170,7 +171,7 @@ const formActiveDay = useForm({
 
 // Função para atualizar o horário de funcionamento
 const update = () =>
-    form.put(route("dashboard.timetable.update", { timetable: props.day.id }), {
+    form.put(route("unit.dashboard.timetable.update", { timetable: props.day.id, unit:user.unit.slug }), {
         preserveState: (page) => Object.keys(page.props.errors).length,
         preserveScroll: true,
 
@@ -183,7 +184,7 @@ const update = () =>
 
 // Função para atualizar o dia de funcionamento
 const updateActiveDay = () =>
-    formActiveDay.patch(route("dashboard.timetable.active-day", props.day.id), {
+    formActiveDay.patch(route("unit.dashboard.timetable.active-day", {timetable:props.day.id, unit:user.unit.slug}), {
         preserveState: (page) => Object.keys(page.props.errors).length,
         preserveScroll: true,
     });

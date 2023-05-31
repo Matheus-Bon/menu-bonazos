@@ -20,7 +20,6 @@ class CategoryAdminController extends Controller
         return inertia('Admin/Menu',
 
             [
-                dd(Auth::guard('web')->user()),
                 'categories' => Category::all()
             ]
                 
@@ -56,7 +55,7 @@ class CategoryAdminController extends Controller
         ]);
 
 
-        return to_route('dashboard.menu.index');
+        return back();
         
     }
 
@@ -95,7 +94,7 @@ class CategoryAdminController extends Controller
         $categoryFound->name = $request->name;
         $categoryFound->save();
         
-        return to_route('dashboard.menu.index');
+        return back();
     }
 
     public function updateActiveCategory(Request $request, Category $category)
@@ -117,7 +116,7 @@ class CategoryAdminController extends Controller
 
         $categoryFound->delete();
 
-        return Redirect::back()->with('toast', 'Categoria excluída');
+        return back();
     }
 
 }

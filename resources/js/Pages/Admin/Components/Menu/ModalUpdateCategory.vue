@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch,  onMounted, onBeforeUnmount } from "vue";
+import { ref, computed, watch } from "vue";
 import {
     TransitionRoot,
     TransitionChild,
@@ -7,17 +7,17 @@ import {
     DialogPanel,
     DialogTitle,
 } from "@headlessui/vue";
-import { router, useForm } from "@inertiajs/vue3";
+import { router, useForm, usePage } from "@inertiajs/vue3";
 import toast from "@/Stores/toast";
 import PopUpModal from "@/Components/PopUpModal.vue";
 
 const props = defineProps({ category: Object });
-
 const isOpen = computed(() => !!props.category);
+const user = usePage().props.auth.user
 
 function closeModal() {
-    router.visit(route("dashboard.menu.index"), {
-        preserveState: true,
+    router.visit(route("unit.dashboard.menu.index", user.unit.slug), {
+        preserveState: false,
         preserveScroll: true,
     });
 }
@@ -36,7 +36,7 @@ watch(
 );
 
 const deleteCategory = () => {
-    form.delete(route("dashboard.menu.destroy", props.category?.id), {
+    form.delete(route("unit.dashboard.menu.destroy", {category: props.category?.id, unit:user.unit.slug}), {
         preserveScroll:true,
         onSuccess: (page) => {
             closeModal();
@@ -48,7 +48,7 @@ const deleteCategory = () => {
 };
 
 const updateCategory = () => {
-    form.put(route("dashboard.menu.update", props.category?.id), {
+    form.put(route("unit.dashboard.menu.update", {category: props.category?.id, unit:user.unit.slug}), {
         preserveScroll:true,
         onSuccess: (page) => {
             closeModal();

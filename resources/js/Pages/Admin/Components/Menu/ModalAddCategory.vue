@@ -7,9 +7,10 @@ import {
     DialogPanel,
     DialogTitle,
 } from "@headlessui/vue";
-import { useForm } from "@inertiajs/vue3";
+import { useForm, usePage } from "@inertiajs/vue3";
 import toast from "@/Stores/toast";
 
+const user = usePage().props.auth.user
 
 /* Lógica Create para Categoria */
 // Início
@@ -19,7 +20,7 @@ const form = useForm({
 });
 
 const create = () =>
-    form.post(route("dashboard.menu.store"), {
+    form.post(route("unit.dashboard.menu.store", user.unit.slug), {
         preserveState: false,
         preserveScroll: true,
         onSuccess: (page) => {

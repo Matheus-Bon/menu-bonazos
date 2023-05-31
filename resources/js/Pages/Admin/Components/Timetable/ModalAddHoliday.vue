@@ -7,9 +7,10 @@ import {
     DialogPanel,
     DialogTitle,
 } from "@headlessui/vue";
-import { useForm } from "@inertiajs/vue3";
+import { useForm, usePage } from "@inertiajs/vue3";
 import toast from "@/Stores/toast";
 
+const user = usePage().props.auth.user
 const props = defineProps({ holiday: Object });
 const isOpen = ref(false);
 
@@ -28,8 +29,8 @@ const form = useForm({
 });
 
 const create = () => {
-    form.post(route("dashboard.timetable.holiday.store"), {
-        preserveState: true,
+    form.post(route("unit.dashboard.timetable.holiday.store", user.unit.slug), {
+        preserveState: false,
         preserveScroll: true,
         onSuccess: (page) => {
             toast.add({

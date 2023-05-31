@@ -118,7 +118,7 @@ Route::group(
         ]);
     })->name('initial');
 
-    Route::prefix('{unit?}')->name('unit.')->middleware(['set.unit'])->group(function () {
+    Route::prefix('{unit:slug}')->name('unit.')->middleware(['set.unit'])->group(function () {
 
         Route::get('/', function () {
             return Inertia::render('Client/Index', [
