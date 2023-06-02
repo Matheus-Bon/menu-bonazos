@@ -87,4 +87,8 @@ class Kernel extends HttpKernel
         'set.unit' => \App\Http\Middleware\SetUnit::class
         
     ];
+
+    protected $middlewarePriority = [
+        \App\Http\Middleware\SetUnit::class
+    ];
 }

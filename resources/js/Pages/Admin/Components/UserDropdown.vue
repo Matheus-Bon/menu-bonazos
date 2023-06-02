@@ -53,7 +53,7 @@ const toggleDark = useToggle(isDark);
                     </MenuItem>
                     <MenuItem v-slot="{ active }">
                         <Link
-                            :href="route('home')"
+                            :href="route('unit.home')"
                             class="block px-4 py-2 text-base text-gray-700 hover:text-gray-500 dark:text-gray-400 dark:hover:bg-white dark:hover:text-gray-600"
                         >
                             <i class="bi bi-shop-window pr-2"></i>

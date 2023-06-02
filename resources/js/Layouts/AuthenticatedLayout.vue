@@ -1,10 +1,16 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { Link, usePage } from "@inertiajs/vue3";
 
-const user = usePage().props.auth.user;
+onMounted(() => {
+    
+})
 
+const user = usePage().props.auth.user;
 console.log(user)
+
+const admin = user?.roles?.some(user => {return user.name === 'admin'})
+const manager = user?.roles?.some(user => {return user.name === 'manager'})
 </script>
 
 <template>
@@ -19,15 +25,15 @@ console.log(user)
                         Início
                     </Link>
                     <Link
-                        :href="route('unit.profile.edit')"
+                        :href="route('profile.edit')"
                         v-if="user"
                         class="dark:text-gray-200 text-xl hover:underline decoration-amber-600"
                     >
                         Profile
                     </Link>
                     <Link
-                        :href="route('unit.dashboard.', user.unit.slug)"
-                        v-if="user"
+                        :href="route('unit.dashboard.')"
+                        v-if="admin || manager"
                         class="dark:text-gray-200 text-xl hover:underline decoration-amber-600"
                     >
                         Dasboard
@@ -35,7 +41,7 @@ console.log(user)
                 </div>
                 <div class="flex flex-row gap-2">
                     <Link
-                        :href="'/login'"
+                        :href="route('login')"
                         v-if="!user"
                         class="dark:text-gray-200 text-xl hover:underline decoration-amber-600"
                     >

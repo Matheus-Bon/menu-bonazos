@@ -22,6 +22,6 @@ class AdminSeeder extends Seeder
             'region' => 'BR',
             'unit_id' => Unit::all()->first()->id
             
-        ])->assignRole('user', 'admin', 'manager');
+        ])->assignRole('admin');
     }
 }

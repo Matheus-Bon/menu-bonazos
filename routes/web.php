@@ -99,26 +99,29 @@ Route::group(
     });
     
 
-    
+    /* Rota da pág de escolha da Unidade */
     Route::get('/', function () {
-
-        $unitsAll = Unit::all();
-
-        $units = $unitsAll->map(function($unit){
-            return [
-                'name' => $unit->name,
-                'slug' => $unit->slug
-            ];
-        });
 
         return Inertia::render('Client/Initial', [
             'laravelVersion' => Application::VERSION,
             'phpVersion' => PHP_VERSION,
-            'units' => $units
+            
         ]);
     })->name('initial');
 
-    Route::prefix('{unit:slug}')->name('unit.')->middleware(['set.unit'])->group(function () {
+    /* Rota para o profile */
+    Route::middleware('auth')->group(function () {
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        Route::resource('address', AddressController::class);
+        Route::name('addressStandard.change')->put('addressStandard/{address}/change', StandardAddressChange::class);
+    });
+
+    
+
+
+    Route::prefix('{unit:slug?}')->name('unit.')->middleware(['set.unit'])->group(function () {
 
         Route::get('/', function () {
             return Inertia::render('Client/Index', [
@@ -130,15 +133,7 @@ Route::group(
             ]);
         })->name('home');
 
-        Route::middleware('auth')->group(function () {
-            Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-            Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-            Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-        });
         
-        Route::resource('address', AddressController::class);
-        
-        Route::name('addressStandard.change')->put('addressStandard/{address}/change', StandardAddressChange::class);
         
         Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified', 'role:admin|manager'])->group(function () {
         

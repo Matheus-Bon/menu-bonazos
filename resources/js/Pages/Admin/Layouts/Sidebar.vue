@@ -24,7 +24,7 @@ const user = usePage().props.auth.user
             </button>
             <!-- Brand -->
             <Link
-                :href="route('unit.dashboard.', user.unit.slug)"
+                :href="route('unit.dashboard.')"
                 class="md:block text-center md:pb-2 text-gray-800 mr-0 inline-block whitespace-nowrap text-3xl uppercase font-semibold p-4 px-0 dark:text-gray-200"
             >
                 Delivery
@@ -98,7 +98,7 @@ const user = usePage().props.auth.user
                 <ul class="md:flex-col md:min-w-full flex flex-col list-none">
                     <li class="items-center">
                         <Link
-                            :href="route('unit.dashboard.', user.unit.slug)"
+                            :href="route('unit.dashboard.')"
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
@@ -115,7 +115,7 @@ const user = usePage().props.auth.user
 
                     <li class="items-center">
                         <Link
-                            :href="route('unit.dashboard.orders', user.unit.slug)"
+                            :href="route('unit.dashboard.orders')"
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
@@ -132,7 +132,7 @@ const user = usePage().props.auth.user
 
                     <li class="items-center">
                         <Link
-                            :href="route('unit.dashboard.tables', user.unit.slug)"
+                            :href="route('unit.dashboard.tables')"
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
@@ -149,7 +149,7 @@ const user = usePage().props.auth.user
 
                     <li class="items-center">
                         <Link
-                            :href="route('unit.dashboard.menu.index', user.unit.slug)"
+                            :href="route('unit.dashboard.menu.index')"
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
@@ -176,7 +176,7 @@ const user = usePage().props.auth.user
                 <ul class="md:flex-col md:min-w-full flex flex-col list-none">
                     <li class="items-center">
                         <Link
-                            :href="route('unit.dashboard.delivery', user.unit.slug)"
+                            :href="route('unit.dashboard.delivery')"
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
@@ -193,7 +193,7 @@ const user = usePage().props.auth.user
 
                     <li class="items-center">
                         <Link
-                            :href="route('unit.dashboard.schedule', user.unit.slug)"
+                            :href="route('unit.dashboard.schedule')"
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90 hover:text-secondary-color':
@@ -212,7 +212,7 @@ const user = usePage().props.auth.user
 
                     <li class="items-center">
                         <Link
-                            :href="route('unit.dashboard.timetable.index', user.unit.slug)"
+                            :href="route('unit.dashboard.timetable.index')"
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
@@ -231,7 +231,7 @@ const user = usePage().props.auth.user
 
                     <li class="items-center">
                         <Link
-                            :href="route('unit.dashboard.evaluations', user.unit.slug)"
+                            :href="route('unit.dashboard.evaluations')"
                             class="text-base py-3 font-normal block"
                             :class="{
                                 'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
@@ -248,14 +248,11 @@ const user = usePage().props.auth.user
 
                     <li class="items-center">
                         <Link
-                            :href="route('unit.dashboard.unit.index', user.unit.slug)"
+                            :href="route('unit.dashboard.unit.index')"
                             class="text-base py-3 font-normal block"
                             :class="{
-                                'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':
-                                    $page.url === '/dashboard/unit',
-
-                                'text-gray-800 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark':
-                                    $page.url != '/dashboard/unit',
+                                'text-secondary-color-light dark:text-secondary-color-dark hover:opacity-90':$page.url.startsWith('/\/unit$/') ,
+                                'text-gray-800 hover:text-secondary-color-light dark:text-gray-200 dark:hover:text-secondary-color-dark': !$page.url.startsWith('/\/unit$/')
                             }"
                         >
                             <i class="bi bi-shop"></i>

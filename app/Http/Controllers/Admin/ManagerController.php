@@ -34,7 +34,7 @@ class ManagerController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password)
-        ])->assignRole('manager', 'user');
+        ])->assignRole('manager');
 
         return back();
     }

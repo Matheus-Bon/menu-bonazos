@@ -22,26 +22,16 @@ class SetUnit
         $unit = $request->route('unit');
 
         if (!$unit instanceof Unit) {
-            
-            $unit = Unit::where('slug', $unit)->firstOrFail();
-            
+            $unit = Unit::where('slug', $unit)->firstOrFail(); 
         }
-
-        $request->route()->forgetParameter('unit');
-        $request->route()->setParameter('unit', $unit);
 
         URL::defaults(['unit' => $unit->slug]);
 
-        if ($user) {
-
+        if ($user?->getRoleNames()->contains('manager')) {
+            
             $users_unit = $user->unit;
-
-            // Set users branch as default for URL generation.
-            URL::defaults(['unit' => $users_unit->slug]);
-
-            // if current branch is not the same as the user's branch, redirect to the user's branch dashboard.
+            
             if ($unit->isNot($users_unit) and !($user->getRoleNames()->contains('admin'))) {
-
                 return back();
             }
         }
