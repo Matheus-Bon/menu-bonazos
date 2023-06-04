@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Unit;
 use App\Models\User;
+use Inertia\Inertia;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rules;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 
 class ManagerController extends Controller
@@ -44,7 +46,12 @@ class ManagerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Inertia::render('Admin/Unit', [
+            
+            'managerEdit' => User::where('id', $id)->firstOrfail(),
+            'units' => Unit::with('manager')->get(),
+            'managers' => User::role(['manager','admin'])->with('unit')->get()
+        ]);
     }
 
     /**

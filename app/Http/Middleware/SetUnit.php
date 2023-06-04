@@ -25,6 +25,9 @@ class SetUnit
             $unit = Unit::where('slug', $unit)->firstOrFail(); 
         }
 
+        $request->route()->forgetParameter('unit');
+        $request->route()->setParameter('unit', $unit);
+
         URL::defaults(['unit' => $unit->slug]);
 
         if ($user?->getRoleNames()->contains('manager')) {

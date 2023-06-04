@@ -8,13 +8,14 @@ export default {
 
 <script setup>
 import { Head, usePage } from "@inertiajs/vue3";
+import { ref } from "vue";
 import CardManager from "@/Pages/Admin/Partials/Unit/CardManager.vue";
 import CardListManager from "@/Pages/Admin/Partials/Unit/CardListManager.vue";
 import CardUnit from "@/Pages/Admin/Partials/Unit/CardUnit.vue";
 import CardListUnit from "@/Pages/Admin/Partials/Unit/CardListUnit.vue";
-import { ref } from "vue";
+import ModalEditManager from "@/Pages/Admin/Components/Unit/ModalEditManager.vue"
 
-const props = defineProps({ units: Object, managers: Object });
+const props = defineProps({ units: Object, managers: Object, managerEdit: Object });
 const user = usePage().props.auth.user
 const cardUnit = ref(null)
 
@@ -25,6 +26,8 @@ const admin = user.roles.some(user => {return user.name === 'admin'})
 
 <template>
     <Head title="Unidades" />
+
+    <ModalEditManager :manager="managerEdit"/>
 
     <div v-if="admin" class="grid grid-cols-2 mx-14 gap-5">
         <div class="basis-1/2">
