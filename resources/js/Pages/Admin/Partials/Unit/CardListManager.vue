@@ -2,7 +2,8 @@
 import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
 import { Link } from "@inertiajs/vue3";
 
-const props = defineProps({ units: Object, managers: Object });
+const props = defineProps({ managers: Object });
+
 </script>
 
 <template>
@@ -53,6 +54,7 @@ const props = defineProps({ units: Object, managers: Object });
                             <td class="px-6 py-4">{{ manager.email }}</td>
                             <td class="px-6 py-4 text-right">
                                 <Link
+                                    
                                     :href="route('unit.dashboard.unit.manager.show', manager.id)"
                                     class="font-medium text-indigo-600 dark:text-indigo-500 hover:underline"
                                     as="button"

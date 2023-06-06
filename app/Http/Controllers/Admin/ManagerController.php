@@ -8,18 +8,11 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class ManagerController extends Controller
 {
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -38,6 +31,7 @@ class ManagerController extends Controller
             'password' => Hash::make($request->password)
         ])->assignRole('manager');
 
+
         return back();
     }
 
@@ -55,26 +49,50 @@ class ManagerController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $managerFound = User::findOrfail($id);
+
+        $request->validate([
+            'name' => 'string|min:3|max:255',
+            'email' => 'email|max:255|unique:users,email',
+        ]);
+    }
+
+    // Função para atualizar a senha do Manager
+    public function updatePasswordOfManager(Request $request)
+    {
+        $adm = Auth::user();
+        $manager = User::findOrfail($request->manager);
+
+        $request->validate([
+            'new_password' => 'required|string|min:8|confirmed',
+            'admin_password' => 'required|string|min:8|confirmed'
+        ]);
+
+        dd($request);
+
+        if(Hash::check(($request->admin_password), $adm->password)){
+
+            $manager->password = Hash::make($request->new_password);
+            $manager->save();
+            
+        }
+
+        return back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $manager)
     {
-        //
+        $managerFound = User::findOrFail($manager->id);     
+        
+        $managerFound->delete();
+
+        return back();
     }
 }

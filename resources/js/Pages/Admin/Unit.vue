@@ -34,7 +34,7 @@ const admin = user.roles.some(user => {return user.name === 'admin'})
             <CardManager />
         </div>
         <div class="basis-1/2">
-            <CardListManager :units="units" :managers="managers"/>
+            <CardListManager :managers="managers"/>
         </div>
         <div class="basis-1/2">
             <CardUnit ref="cardUnit" :managers="managers"/>

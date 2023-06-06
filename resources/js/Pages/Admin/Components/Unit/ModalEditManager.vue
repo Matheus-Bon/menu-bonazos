@@ -13,9 +13,7 @@ import toast from "@/Stores/toast";
 import { formatTime } from "@/Pages/Functions/functionsOfDate";
 
 const props = defineProps({ manager: Object });
-const user = usePage().props.auth.user;
 const isOpen = computed(() => !!props.manager);
-
 function closeModal() {
     router.visit(route("unit.dashboard.unit.index"), {
         preserveState: true,
@@ -26,34 +24,19 @@ function closeModal() {
 const form = useForm({
     name: props.manager?.name,
     email: props.manager?.email,
-    password: props.manager?.password,
-    unit: props.manager?.unit
 });
-
-watch(
-    () => props.manager,
-    (manager) => {
-        if (manager) {
-            form.name = manager?.name;
-            form.email = manager?.email;
-            form.password = manager?.password;
-            form.unit = manager?.unit;
-        }
-    }
-);
 
 const deleteManager = () => {
     form.delete(
-        route("unit.dashboard.timetable.holiday.destroy", {
-            holiday: props.holiday?.id,
-            unit: user.unit.slug,
+        route("unit.dashboard.unit.manager.destroy", {
+            manager: props.manager,
         }),
         {
             preserveState: false,
             preserveScroll: true,
             onSuccess: (page) => {
                 toast.add({
-                    message: "Feriado excluído com sucesso.",
+                    message: "Gerente excluído com sucesso.",
                 });
             },
         }
@@ -77,6 +60,30 @@ const updateManager = () => {
         }
     );
 };
+
+const formPassword = useForm({
+    admin_password: '',
+    new_password: '',
+    new_password_confirmation: '',
+});
+
+const updatePassword = () => {
+    formPassword.put(route('unit.dashboard.unit.update.manager-password', props.manager), {
+        preserveScroll: true,
+        onSuccess: () => formPassword.reset(),
+        
+    });
+};
+
+watch(
+    () => props.manager,
+    (manager) => {
+        if (manager) {
+            form.name = manager?.name;
+            form.email = manager?.email;
+        }
+    }
+);
 
 const messagePopUp = "Você deseja excluir esse gerente?";
 const modalPopUp = ref(null);
@@ -132,42 +139,177 @@ const openPopUp = () => {
                             </DialogTitle>
                             <div class="mt-2">
                                 <p class="text-sm text-gray-500">
-                                    Nessa caixa você edita as informações do gerente.
+                                    Nessa caixa você edita as informações do
+                                    gerente.
                                 </p>
                             </div>
                             <div class="mt-5">
-                                <form>
-                                    
+                                <form @submit.prevent="updateManager">
+                                    <div class="flex flex-col gap-7">
+                                        <div class="flex flex-col">
+                                            <label
+                                                for="category"
+                                                class="label-default"
+                                            >
+                                                Nome
+                                            </label>
+                                            <input
+                                                v-model="form.name"
+                                                id="category"
+                                                type="text"
+                                                class="input-default"
+                                            />
+                                            <span v-if="form.errors.name">
+                                                {{ form.errors.name }}
+                                            </span>
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <label
+                                                for="category"
+                                                class="label-default"
+                                            >
+                                                Email
+                                            </label>
+                                            <input
+                                                v-model="form.email"
+                                                id="category"
+                                                type="text"
+                                                class="input-default"
+                                            />
+                                            <span v-if="form.errors.email">
+                                                {{ form.errors.email }}
+                                            </span>
+                                        </div>
+
+                                        <div
+                                            class="mt-1 flex flex-row justify-start gap-2"
+                                        >
+                                            <form
+                                                hidden
+                                                @submit.prevent="deleteManager"
+                                            ></form>
+
+                                            <button
+                                                type="button"
+                                                class="btn-delete-style-1"
+                                                @click="openPopUp"
+                                            >
+                                                Excluir
+                                            </button>
+                                            <button
+                                                type="button"
+                                                class="btn-primary-style-1"
+                                                :disabled="form.processing"
+                                                @click="updateManager"
+                                            >
+                                                Editar
+                                            </button>
+                                        </div>
+                                    </div>
                                 </form>
-                            </div>
 
-                            <div class="mt-4 flex flex-row justify-end gap-2">
-                                <form
-                                    hidden
-                                    @submit.prevent="deleteHoliday"
-                                ></form>
+                                <!-- Form reset password -->
+                                <form @submit.prevent="updatePassword" class="mt-10">
+                                    <div class="flex flex-col gap-7">
+                                        <div
+                                            class="flex p-4 text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300"
+                                            role="alert"
+                                        >
+                                            <svg
+                                                aria-hidden="true"
+                                                class="flex-shrink-0 inline w-5 h-5 mr-3"
+                                                fill="currentColor"
+                                                viewBox="0 0 20 20"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    fill-rule="evenodd"
+                                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                                    clip-rule="evenodd"
+                                                ></path>
+                                            </svg>
+                                            <span class="sr-only">Info</span>
+                                            <div>
+                                                Área de edição da senha do
+                                                gerente. Para fazer a
+                                                modificação dela, você precisa
+                                                da
+                                                <span class="font-medium"
+                                                    >senha do
+                                                    administrador</span
+                                                >.
+                                                Assim que você atualizar a senha a sessão do gerente irá reiniciar para colocar a nova.
+                                            </div>
+                                        </div>
 
-                                <button
-                                    v-if="!props.holiday?.fixed"
-                                    type="button"
-                                    class="btn-delete-style-1"
-                                    @click="openPopUp"
-                                >
-                                    Excluir
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn-primary-style-1"
-                                    @click="updateHoliday"
-                                >
-                                    Editar
-                                </button>
+                                        <div class="flex flex-col">
+                                            <label
+                                                for="newPassword"
+                                                class="label-default"
+                                            >
+                                                Nova Senha
+                                            </label>
+                                            <input
+                                                v-model="formPassword.new_password"
+                                                id="newPassword"
+                                                type="text"
+                                                class="input-default"
+                                            />
+                                            <span v-if="formPassword.errors.new_password" class="label-error">
+                                                {{ formPassword.errors.new_password }}
+                                            </span>
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <label
+                                                for="category"
+                                                class="label-default"
+                                            >
+                                                Confirme a Senha
+                                            </label>
+                                            <input
+                                                v-model="formPassword.new_password_confirmation"
+                                                id="category"
+                                                type="text"
+                                                class="input-default"
+                                            />
+                                        </div>
+                                        <div class="flex flex-col">
+                                            <label
+                                                for="category"
+                                                class="label-default"
+                                            >
+                                                Senha do Administrador
+                                            </label>
+                                            <input
+                                                v-model="formPassword.admin_password"
+                                                id="category"
+                                                type="text"
+                                                class="input-default"
+                                            />
+                                            <span v-if="formPassword.errors.admin_password" class="label-error">
+                                                {{ formPassword.errors.admin_password }}
+                                            </span>
+                                        </div>
+                                        <div
+                                            class="mt-2 flex flex-row justify-start gap-2"
+                                        >
+                                            <button
+                                                type="button"
+                                                class="btn-primary-style-1"
+                                                :disabled="formPassword.processing"
+                                                @click="updatePassword"
+                                            >
+                                                Editar senha
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
 
                             <PopUpModal
                                 ref="modalPopUp"
                                 :message="messagePopUp"
-                                @delete="deleteHoliday"
+                                @delete="deleteManager"
                             />
                         </DialogPanel>
                     </TransitionChild>

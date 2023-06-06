@@ -168,7 +168,8 @@ Route::group(
             Route::prefix('unit')->name('unit.')->group(function(){
     
                 Route::resource('', UnitController::class)->only(['index', 'store']);   // Rotas referente ao CRUD de unidade
-                Route::resource('manager', ManagerController::class)->only(['store', 'show']);  // Rotas referente ao CRUD de manager
+                Route::resource('manager', ManagerController::class)->except(['edit', 'create' ]);  // Rotas referente ao CRUD de manager
+                Route::put('manager/{manager}/update-password', [ManagerController::class, 'updatePasswordOfManager'])->name('update.manager-password');
     
             });
         

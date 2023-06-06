@@ -14,7 +14,6 @@ const managersName = props.managers.find(
     (manager) => manager.id == props.infoSentByCardUnit?.form.manager_id
 );
 
-console.log(managersName);
 </script>
 
 <template>

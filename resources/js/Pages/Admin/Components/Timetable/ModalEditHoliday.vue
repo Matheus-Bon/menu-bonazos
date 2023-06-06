@@ -221,6 +221,7 @@ const openPopUp = () => {
                                     type="button"
                                     class="btn-primary-style-1"
                                     @click="updateHoliday"
+                                    :disabled="form.processing"
                                 >
                                     Editar
                                 </button>

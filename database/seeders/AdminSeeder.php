@@ -3,9 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Unit;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class AdminSeeder extends Seeder
 {
@@ -14,7 +15,7 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
+        $admin = User::create([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
@@ -23,5 +24,7 @@ class AdminSeeder extends Seeder
             'unit_id' => Unit::all()->first()->id
             
         ])->assignRole('admin');
+
+        
     }
 }

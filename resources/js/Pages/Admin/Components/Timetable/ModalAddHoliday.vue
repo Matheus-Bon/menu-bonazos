@@ -141,6 +141,7 @@ const create = () => {
                                     type="button"
                                     class="btn-primary-style-1"
                                     @click="create"
+                                    :disabled="form.processing"
                                 >
                                     Adicionar
                                 </button>

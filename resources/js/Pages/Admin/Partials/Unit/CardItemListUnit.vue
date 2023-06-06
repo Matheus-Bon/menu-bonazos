@@ -1,5 +1,6 @@
 <script setup>
 import { formatTime } from "@/Pages/Functions/functionsOfDate";
+import { Link } from "@inertiajs/vue3";
 
 const props = defineProps({ unit: Object });
 </script>
@@ -27,6 +28,14 @@ const props = defineProps({ unit: Object });
                     CEP {{ unit.zip_code }} - {{ unit.city }}, {{ unit.state }}
                 </span>
                 <span> TEL {{ unit.phone }} </span>
+            </div>
+            <div>
+                <Link
+                    :href="`/${unit.slug}`"
+                    :preserve-state="false"
+                > 
+                    Ir para unidade 
+                </Link>
             </div>
         </div>
 
