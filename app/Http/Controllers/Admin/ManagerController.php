@@ -10,6 +10,7 @@ use Illuminate\Validation\Rules;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Redirect;
 
 class ManagerController extends Controller
 {
@@ -63,24 +64,26 @@ class ManagerController extends Controller
 
     // Função para atualizar a senha do Manager
     public function updatePasswordOfManager(Request $request)
-    {
+    {   
+        $request->validate([
+            'new_password' => 'required|string|min:8|confirmed',
+            'admin_password' => 'required|string|min:8'
+        ]);
+
         $adm = Auth::user();
         $manager = User::findOrfail($request->manager);
 
-        $request->validate([
-            'new_password' => 'required|string|min:8|confirmed',
-            'admin_password' => 'required|string|min:8|confirmed'
-        ]);
-
-        dd($request);
-
-        if(Hash::check(($request->admin_password), $adm->password)){
-
-            $manager->password = Hash::make($request->new_password);
-            $manager->save();
-            
+        if(!Hash::check($request->admin_password, $adm->password)){
+            return back()->withErrors(['admin_password' => 'Senha inválida.']);
         }
 
+        if(Hash::check($request->new_password, $manager->password)){
+            return back()->withErrors(['new_password' => 'A senha não pode ser mesma que a antiga.']);
+        }
+
+        $manager->password = Hash::make($request->new_password);
+        $manager->save();
+            
         return back();
     }
 

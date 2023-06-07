@@ -212,5 +212,10 @@ return [
         'updated_at'               => 'atualizado em',
         'username'                 => 'usuário',
         'year'                     => 'ano',
+
+
+        // Campops/Atributos personalizados
+        'admin_password'           => 'Senha do Administrador',
+        'new_password'             => 'Nova Senha'
     ],
 ];

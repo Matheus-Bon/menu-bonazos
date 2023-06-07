@@ -212,5 +212,8 @@ return [
         'updated_at'               => 'updated at',
         'username'                 => 'username',
         'year'                     => 'year',
+
+
+        // Campops/Atributos personalizados
     ],
 ];

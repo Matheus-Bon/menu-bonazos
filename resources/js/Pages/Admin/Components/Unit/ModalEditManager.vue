@@ -62,17 +62,24 @@ const updateManager = () => {
 };
 
 const formPassword = useForm({
-    admin_password: '',
-    new_password: '',
-    new_password_confirmation: '',
+    admin_password: "",
+    new_password: "",
+    new_password_confirmation: "",
 });
 
 const updatePassword = () => {
-    formPassword.put(route('unit.dashboard.unit.update.manager-password', props.manager), {
-        preserveScroll: true,
-        onSuccess: () => formPassword.reset(),
-        
-    });
+    formPassword.put(
+        route("unit.dashboard.unit.update.manager-password", props.manager),
+        {
+            preserveScroll: true,
+            onSuccess: () => {
+                formPassword.reset(),
+                    toast.add({
+                        message: "Senha do gerente modificada com sucesso.",
+                    });
+            },
+        }
+    );
 };
 
 watch(
@@ -209,7 +216,10 @@ const openPopUp = () => {
                                 </form>
 
                                 <!-- Form reset password -->
-                                <form @submit.prevent="updatePassword" class="mt-10">
+                                <form
+                                    @submit.prevent="updatePassword"
+                                    class="mt-10"
+                                >
                                     <div class="flex flex-col gap-7">
                                         <div
                                             class="flex p-4 text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300"
@@ -237,66 +247,94 @@ const openPopUp = () => {
                                                 <span class="font-medium"
                                                     >senha do
                                                     administrador</span
-                                                >.
-                                                Assim que você atualizar a senha a sessão do gerente irá reiniciar para colocar a nova.
+                                                >. Assim que você atualizar a
+                                                senha a sessão do gerente irá
+                                                reiniciar para colocar a nova.
                                             </div>
                                         </div>
 
                                         <div class="flex flex-col">
                                             <label
-                                                for="newPassword"
+                                                for="Password"
                                                 class="label-default"
                                             >
                                                 Nova Senha
                                             </label>
                                             <input
-                                                v-model="formPassword.new_password"
-                                                id="newPassword"
+                                                v-model="
+                                                    formPassword.new_password
+                                                "
+                                                name="Senha"
+                                                id="Password"
                                                 type="text"
                                                 class="input-default"
                                             />
-                                            <span v-if="formPassword.errors.new_password" class="label-error">
-                                                {{ formPassword.errors.new_password }}
+                                            <span
+                                                v-if="
+                                                    formPassword.errors
+                                                        .new_password
+                                                "
+                                                class="label-error"
+                                            >
+                                                {{
+                                                    formPassword.errors
+                                                        .new_password
+                                                }}
                                             </span>
                                         </div>
                                         <div class="flex flex-col">
                                             <label
-                                                for="category"
+                                                for="newPasswordConfirmation"
                                                 class="label-default"
                                             >
                                                 Confirme a Senha
                                             </label>
                                             <input
-                                                v-model="formPassword.new_password_confirmation"
-                                                id="category"
+                                                v-model="
+                                                    formPassword.new_password_confirmation
+                                                "
+                                                id="newPasswordConfirmation"
                                                 type="text"
                                                 class="input-default"
                                             />
                                         </div>
                                         <div class="flex flex-col">
                                             <label
-                                                for="category"
+                                                for="adminPassword"
                                                 class="label-default"
                                             >
                                                 Senha do Administrador
                                             </label>
                                             <input
-                                                v-model="formPassword.admin_password"
-                                                id="category"
+                                                v-model="
+                                                    formPassword.admin_password
+                                                "
+                                                id="adminPassword"
                                                 type="text"
                                                 class="input-default"
                                             />
-                                            <span v-if="formPassword.errors.admin_password" class="label-error">
-                                                {{ formPassword.errors.admin_password }}
+                                            <span
+                                                v-if="
+                                                    formPassword.errors
+                                                        .admin_password
+                                                "
+                                                class="label-error"
+                                            >
+                                                {{
+                                                    formPassword.errors
+                                                        .admin_password
+                                                }}
                                             </span>
                                         </div>
                                         <div
-                                            class="mt-2 flex flex-row justify-start gap-2"
+                                            class="flex flex-row justify-start"
                                         >
                                             <button
                                                 type="button"
                                                 class="btn-primary-style-1"
-                                                :disabled="formPassword.processing"
+                                                :disabled="
+                                                    formPassword.processing
+                                                "
                                                 @click="updatePassword"
                                             >
                                                 Editar senha
