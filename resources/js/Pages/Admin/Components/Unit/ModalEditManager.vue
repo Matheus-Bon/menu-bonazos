@@ -16,9 +16,8 @@ const props = defineProps({ manager: Object });
 const isOpen = computed(() => !!props.manager);
 function closeModal() {
     router.visit(route("unit.dashboard.unit.index"), {
-        preserveState: true,
+        preserveState: false,
     });
-    form.clearErrors();
 }
 
 const form = useForm({
@@ -28,13 +27,11 @@ const form = useForm({
 
 const deleteManager = () => {
     form.delete(
-        route("unit.dashboard.unit.manager.destroy", {
-            manager: props.manager,
-        }),
+        route("unit.dashboard.unit.manager.destroy", props.manager),
         {
-            preserveState: false,
             preserveScroll: true,
-            onSuccess: (page) => {
+            onSuccess: () => {
+                closeModal()
                 toast.add({
                     message: "Gerente excluído com sucesso.",
                 });
@@ -45,16 +42,13 @@ const deleteManager = () => {
 
 const updateManager = () => {
     form.put(
-        route("unit.dashboard.timetable.holiday.update", {
-            holiday: props.holiday?.id,
-            unit: user.unit.slug,
-        }),
+        route("unit.dashboard.unit.manager.update",props.manager),
         {
-            preserveState: (page) => Object.keys(page.props.errors).length,
             preserveScroll: true,
-            onSuccess: (page) => {
+            onSuccess: () => {
+                closeModal()
                 toast.add({
-                    message: "Feriado editado com sucesso.",
+                    message: "Gerente editado com sucesso.",
                 });
             },
         }
@@ -155,35 +149,41 @@ const openPopUp = () => {
                                     <div class="flex flex-col gap-7">
                                         <div class="flex flex-col">
                                             <label
-                                                for="category"
+                                                for="name"
                                                 class="label-default"
                                             >
                                                 Nome
                                             </label>
                                             <input
                                                 v-model="form.name"
-                                                id="category"
+                                                id="name"
                                                 type="text"
                                                 class="input-default"
                                             />
-                                            <span v-if="form.errors.name">
+                                            <span
+                                                v-if="form.errors.name"
+                                                class="label-error"
+                                            >
                                                 {{ form.errors.name }}
                                             </span>
                                         </div>
                                         <div class="flex flex-col">
                                             <label
-                                                for="category"
+                                                for="email"
                                                 class="label-default"
                                             >
                                                 Email
                                             </label>
                                             <input
                                                 v-model="form.email"
-                                                id="category"
-                                                type="text"
+                                                id="email"
+                                                type="email"
                                                 class="input-default"
                                             />
-                                            <span v-if="form.errors.email">
+                                            <span
+                                                v-if="form.errors.email"
+                                                class="label-error"
+                                            >
                                                 {{ form.errors.email }}
                                             </span>
                                         </div>
@@ -204,10 +204,9 @@ const openPopUp = () => {
                                                 Excluir
                                             </button>
                                             <button
-                                                type="button"
+                                                type="submit"
                                                 class="btn-primary-style-1"
                                                 :disabled="form.processing"
-                                                @click="updateManager"
                                             >
                                                 Editar
                                             </button>
@@ -330,12 +329,11 @@ const openPopUp = () => {
                                             class="flex flex-row justify-start"
                                         >
                                             <button
-                                                type="button"
+                                                type="submit"
                                                 class="btn-primary-style-1"
                                                 :disabled="
                                                     formPassword.processing
                                                 "
-                                                @click="updatePassword"
                                             >
                                                 Editar senha
                                             </button>

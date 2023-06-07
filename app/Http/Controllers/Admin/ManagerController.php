@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Redirect;
 use App\Models\Unit;
 use App\Models\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Redirect;
 
 class ManagerController extends Controller
 {
@@ -57,9 +58,23 @@ class ManagerController extends Controller
         $managerFound = User::findOrfail($id);
 
         $request->validate([
-            'name' => 'string|min:3|max:255',
-            'email' => 'email|max:255|unique:users,email',
+            'name' => 'required|string|min:3|max:255',
+            'email' => ['string','email', 'required',Rule::unique('users')->ignore($managerFound->id)],
         ]);
+
+        $managerFound->update([
+
+            'name' => $request->name,
+            'email' => $request->email
+        ]);
+
+        if ($managerFound->isDirty('email')) {
+            $managerFound->email_verified_at = null;
+        }
+
+        $managerFound->save();
+
+        return back();
     }
 
     // Função para atualizar a senha do Manager
@@ -96,6 +111,6 @@ class ManagerController extends Controller
         
         $managerFound->delete();
 
-        return back();
+        return redirect()->route('unit.dashboard.unit.index');
     }
 }
