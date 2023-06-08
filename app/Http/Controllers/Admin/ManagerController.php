@@ -44,9 +44,9 @@ class ManagerController extends Controller
     {
         return Inertia::render('Admin/Unit', [
             
-            'managerEdit' => User::where('id', $id)->firstOrfail(),
+            'managerEdit' => User::where('id', $id)->with('roles')->firstOrfail(),
             'units' => Unit::with('manager')->get(),
-            'managers' => User::role(['manager','admin'])->with('unit')->get()
+            'managers' => User::role(['manager','admin'])->with(['unit'])->get()
         ]);
     }
 
@@ -55,19 +55,49 @@ class ManagerController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $adm = Auth::user();
         $managerFound = User::findOrfail($id);
 
+        // Validador dos inputs
         $request->validate([
             'name' => 'required|string|min:3|max:255',
             'email' => ['string','email', 'required',Rule::unique('users')->ignore($managerFound->id)],
         ]);
 
+        if($managerFound->getRoleNames()->first() == 'admin'){
+            
+            // Se o user for admin e queira atualizar os dados, deverá ter a senha admin
+
+            if(!Hash::check($request->admin_password, $adm->password)){
+                return back()->withErrors(['admin_password' => 'Senha inválida.']);
+
+            } else {
+
+                $managerFound->update([
+
+                    'name' => $request->name,
+                    'email' => $request->email
+                ]);
+        
+                if ($managerFound->isDirty('email')) {
+                    $managerFound->email_verified_at = null;
+                }
+        
+                $managerFound->save();
+        
+                return back();
+
+            }
+        }
+
+        // Salva os novos dados no BD
         $managerFound->update([
 
             'name' => $request->name,
             'email' => $request->email
         ]);
 
+        // Atualiza o campo de verificação do email para null
         if ($managerFound->isDirty('email')) {
             $managerFound->email_verified_at = null;
         }

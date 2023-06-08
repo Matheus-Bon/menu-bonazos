@@ -7,10 +7,9 @@ import {
     DialogPanel,
     DialogTitle,
 } from "@headlessui/vue";
-import { router, useForm, usePage } from "@inertiajs/vue3";
+import { router, useForm, Link } from "@inertiajs/vue3";
 import PopUpModal from "@/Components/PopUpModal.vue";
 import toast from "@/Stores/toast";
-import { formatTime } from "@/Pages/Functions/functionsOfDate";
 
 const props = defineProps({ manager: Object });
 const isOpen = computed(() => !!props.manager);
@@ -20,39 +19,38 @@ function closeModal() {
     });
 }
 
+const admin = props.manager?.roles.some((el) => {
+    return el.name === "admin";
+});
+
 const form = useForm({
     name: props.manager?.name,
     email: props.manager?.email,
+    admin_password: ''
 });
 
 const deleteManager = () => {
-    form.delete(
-        route("unit.dashboard.unit.manager.destroy", props.manager),
-        {
-            preserveScroll: true,
-            onSuccess: () => {
-                closeModal()
-                toast.add({
-                    message: "Gerente excluído com sucesso.",
-                });
-            },
-        }
-    );
+    form.delete(route("unit.dashboard.unit.manager.destroy", props.manager), {
+        preserveScroll: true,
+        onSuccess: () => {
+            closeModal();
+            toast.add({
+                message: "Gerente excluído com sucesso.",
+            });
+        },
+    });
 };
 
 const updateManager = () => {
-    form.put(
-        route("unit.dashboard.unit.manager.update",props.manager),
-        {
-            preserveScroll: true,
-            onSuccess: () => {
-                closeModal()
-                toast.add({
-                    message: "Gerente editado com sucesso.",
-                });
-            },
-        }
-    );
+    form.put(route("unit.dashboard.unit.manager.update", props.manager), {
+        preserveScroll: true,
+        onSuccess: () => {
+            closeModal();
+            toast.add({
+                message: "Gerente editado com sucesso.",
+            });
+        },
+    });
 };
 
 const formPassword = useForm({
@@ -146,6 +144,29 @@ const openPopUp = () => {
                             </div>
                             <div class="mt-5">
                                 <form @submit.prevent="updateManager">
+                                    <div
+                                        v-if="admin"
+                                        class="flex p-4 my-5 text-sm text-gray-800 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600"
+                                        role="alert"
+                                    >
+                                        <svg
+                                            aria-hidden="true"
+                                            class="flex-shrink-0 inline w-5 h-5 mr-3"
+                                            fill="currentColor"
+                                            viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                                clip-rule="evenodd"
+                                            ></path>
+                                        </svg>
+                                        <span class="sr-only">Info</span>
+                                        <div>
+                                            Aqui você consegue modificar somente o nome e email do administrador. Caso queria mais informações entre na <Link class="font-medium" href="#">área de perfil</Link>.
+                                        </div>
+                                    </div>
                                     <div class="flex flex-col gap-7">
                                         <div class="flex flex-col">
                                             <label
@@ -187,6 +208,34 @@ const openPopUp = () => {
                                                 {{ form.errors.email }}
                                             </span>
                                         </div>
+                                        <div v-if="admin" class="flex flex-col">
+                                            <label
+                                                for="adminPassword"
+                                                class="label-default"
+                                            >
+                                                Senha do Administrador
+                                            </label>
+                                            <input
+                                                v-model="
+                                                    form.admin_password
+                                                "
+                                                id="adminPassword"
+                                                type="text"
+                                                class="input-default"
+                                            />
+                                            <span
+                                                v-if="
+                                                    form.errors
+                                                        .admin_password
+                                                "
+                                                class="label-error"
+                                            >
+                                                {{
+                                                    form.errors
+                                                        .admin_password
+                                                }}
+                                            </span>
+                                        </div>
 
                                         <div
                                             class="mt-1 flex flex-row justify-start gap-2"
@@ -197,6 +246,7 @@ const openPopUp = () => {
                                             ></form>
 
                                             <button
+                                                v-if="!admin"
                                                 type="button"
                                                 class="btn-delete-style-1"
                                                 @click="openPopUp"
@@ -216,6 +266,7 @@ const openPopUp = () => {
 
                                 <!-- Form reset password -->
                                 <form
+                                    v-if="!admin"
                                     @submit.prevent="updatePassword"
                                     class="mt-10"
                                 >

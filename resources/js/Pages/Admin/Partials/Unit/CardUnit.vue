@@ -95,18 +95,12 @@ const filterManagers = computed(() => {
         <div class="gap-6 content-center">
             <form @submit.prevent="submit" autocomplete="off">
                 <div class="grid grid-cols-2 gap-7 items-center">
-                    <div class="flex flex-col gap-5">
+                    <div class="flex flex-col gap-3">
                         <div class="flex flex-col gap-2 w-full">
                             <div>
                                 <label for="unit" class="label-default">
                                     Unidade
                                 </label>
-                                <span
-                                    v-if="form.errors.name"
-                                    class="text-red-500 dark:text-red-700 font-thin"
-                                >
-                                    *
-                                </span>
                             </div>
                             <input
                                 required
@@ -117,7 +111,9 @@ const filterManagers = computed(() => {
                                 @focusin="openCardUnit"
                                 @focus="focus"
                             />
+                            
                         </div>
+                        <span v-if="form.errors.name" class="label-error">{{ form.errors.name }}</span>
                         <div class="flex flex-col gap-2 w-full">
                             <div>
                                 <label for="manager" class="label-default">
@@ -189,7 +185,7 @@ const filterManagers = computed(() => {
                         </div>
                     </div>
 
-                    <div class="flex flex-col gap-5">
+                    <div class="flex flex-col gap-3">
                         <div class="flex flex-col gap-2 w-full">
                             <div>
                                 <label for="street" class="label-default">

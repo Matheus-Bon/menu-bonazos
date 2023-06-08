@@ -65,7 +65,7 @@
     }
 
     .label-error {
-        @apply text-red-500 dark:text-red-700 mt-1 font-light
+        @apply text-red-500 dark:text-red-700 mt-0 font-light
     }
 
     .input-default {
