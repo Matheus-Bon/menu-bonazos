@@ -47,7 +47,7 @@ const activeCategory = () =>
                 <div class="flex flex-row gap-5 align-middle">
                     <div>
                         <h2
-                            class="text-3xl text-gray-600 dark:text-gray-300 font-semibold"
+                            class="xl:text-2xl 2xl:text-3xl text-gray-600 dark:text-gray-300 font-semibold"
                         >
                             {{ props.category.name }}
                         </h2>

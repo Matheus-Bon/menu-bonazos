@@ -74,7 +74,7 @@ defineExpose({ openModal });
                         leave-to="opacity-0 scale-95"
                     >
                         <DialogPanel
-                            class="w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white dark:bg-admin-card p-6 text-left align-middle shadow-xl transition-all"
+                            class="w-full max-w-6xl transform overflow-hidden rounded-2xl bg-white dark:bg-admin-card p-6 text-left align-middle shadow-xl transition-all"
                         >
                             <DialogTitle
                                 as="h3"
@@ -90,12 +90,206 @@ defineExpose({ openModal });
                                     <i class="fa-solid fa-xmark"></i>
                                 </button>
                             </DialogTitle>
-                            <div class="mt-2">
+                            <div class="mt-1">
                                 <p class="text-sm text-gray-500">
-                                    Nesse parte você adiciona produtos a sua categoria.
+                                    Nesse parte você adiciona produtos a sua
+                                    categoria.
                                 </p>
                             </div>
-                            
+
+                            <div class="mt-5">
+                                <form action="" class="flex flex-col gap-2">
+                                    <div class="flex flex-col">
+                                        <label for="" class="label-default">
+                                            Nome
+                                        </label>
+                                        <input
+                                            type="text"
+                                            class="input-default"
+                                        />
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <label for="" class="label-default">
+                                            Preço
+                                        </label>
+                                        <input
+                                            type="text"
+                                            class="input-default"
+                                        />
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <label for="" class="label-default">
+                                            Desconto
+                                        </label>
+                                        <input
+                                            type="text"
+                                            class="input-default"
+                                        />
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <label for="" class="label-default">
+                                            Peso (g)
+                                        </label>
+                                        <input
+                                            type="text"
+                                            class="input-default"
+                                        />
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <label for="" class="label-default">
+                                            Descrição
+                                        </label>
+                                        <input
+                                            type="text"
+                                            class="input-default"
+                                        />
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <label for="" class="label-default">
+                                            Serve para quantas pessoas?
+                                        </label>
+
+                                        <div class="flex">
+                                            <div class="flex items-center mr-4">
+                                                <input
+                                                    id="notApplicable"
+                                                    type="radio"
+                                                    value=""
+                                                    name="inline-radio-group"
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                                />
+                                                <label
+                                                    for="notApplicable"
+                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                                    >Não se aplica</label
+                                                >
+                                            </div>
+                                            <div class="flex items-center mr-4">
+                                                <input
+                                                    id="onePerson"
+                                                    type="radio"
+                                                    value=""
+                                                    name="inline-radio-group"
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                                />
+                                                <label
+                                                    for="onePerson"
+                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                                    >1 pessoa</label
+                                                >
+                                            </div>
+                                            <div class="flex items-center mr-4">
+                                                <input
+                                                    id="twoPeople"
+                                                    type="radio"
+                                                    value=""
+                                                    name="inline-radio-group"
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                                />
+                                                <label
+                                                    for="twoPeople"
+                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                                    >2 pessoas</label
+                                                >
+                                            </div>
+                                            <div class="flex items-center mr-4">
+                                                <input
+                                                    id="threePeople"
+                                                    type="radio"
+                                                    value=""
+                                                    name="inline-radio-group"
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                                />
+                                                <label
+                                                    for="threePeople"
+                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                                    >3 pessoas</label
+                                                >
+                                            </div>
+                                            <div class="flex items-center mr-4">
+                                                <input
+                                                    id="fourPeople"
+                                                    type="radio"
+                                                    value=""
+                                                    name="inline-radio-group"
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                                />
+                                                <label
+                                                    for="fourPeople"
+                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                                    >4 pessoas</label
+                                                >
+                                            </div>
+                                            <div class="flex items-center mr-4">
+                                                <input
+                                                    id="lotPeople"
+                                                    type="radio"
+                                                    value=""
+                                                    name="inline-radio-group"
+                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                                />
+                                                <label
+                                                    for="lotPeople"
+                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                                    >+ 4 pessoas</label
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-5 flex flex-col">
+                                        <label for="" class="label-default">
+                                            Complementos?
+                                        </label>
+                                        <div class="flex flex-wrap">
+                                            <div class="flex items-center mr-4">
+                                                <input
+                                                    id="notComplement"
+                                                    type="radio"
+                                                    value=""
+                                                    name="colored-radio"
+                                                    class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                                />
+                                                <label
+                                                    for="notComplement"
+                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                                    >Não</label
+                                                >
+                                            </div>
+                                            <div class="flex items-center mr-4">
+                                                <input
+                                                    id="yesComplement"
+                                                    type="radio"
+                                                    value=""
+                                                    name="colored-radio"
+                                                    class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                                />
+                                                <label
+                                                    for="yesComplement"
+                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                                    >Sim</label
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="mt-4 flex flex-row justify-end gap-2">
+                                <button
+                                    type="button"
+                                    class="btn-normal-style-1"
+                                    @click="closeModal"
+                                >
+                                    Sair
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn-primary-style-1"
+                                    @click="create"
+                                    :disabled="form.processing"
+                                >
+                                    Criar produto
+                                </button>
+                            </div>
                         </DialogPanel>
                     </TransitionChild>
                 </div>

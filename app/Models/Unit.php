@@ -52,4 +52,9 @@ class Unit extends Model
     {
         return $this->hasMany(Category::class, 'unit_id');
     }
+
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class, 'unit_id');
+    }
 }

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->uuid('unit_id');
             $table->tinyText('name');
             $table->unsignedDecimal('discount',8,2)->nullable();
             $table->unsignedDecimal('weight',8,3)->nullable();

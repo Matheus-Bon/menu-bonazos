@@ -19,10 +19,10 @@ defineProps({
         <ModalUpdateCategory :category="categoryForEdit" />
 
         <div class="flex flex-row mx-14 justify-center gap-5">
-            <div class="basis-2/3">
+            <div class="basis-1/2 lg:basis-2/3">
                 <CardCategories :categories="categories" />
             </div>
-            <div class="basis-1/3">
+            <div class="basis-1/2">
                 <CardViewDelivery />
             </div>
         </div>
