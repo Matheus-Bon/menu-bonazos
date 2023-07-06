@@ -2,8 +2,16 @@
 import { ref } from "vue";
 import { useForm, Link, usePage } from "@inertiajs/vue3";
 import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
+import ModalAddProduct from "../../Components/Menu/ModalAddProduct.vue";
 
-const modal = ref(null); // Referência do ModalUpdateCategory - Final: Pegar atributos e funções do ModalUpdateCategory
+/* Configuração do ModalAddProduct*/
+const modalAddProduct = ref(null); // Referência do ModalAddProduct
+const openModalAddProduct = () => {
+    modalAddProduct.value.openModal()
+} 
+
+
+
 const user = usePage().props.auth.user
 
 /* Constante que pega as informações do BD para usar no front  */
@@ -28,6 +36,11 @@ const activeCategory = () =>
 
 <template>
     <!-- <ModalUpdateCategory :category="category" ref="modal" /> -->
+
+    <Teleport to="body">
+        <ModalAddProduct ref="modalAddProduct"/>
+    </Teleport>
+
     <BoxBorder>
         <template #card-header>
             <div class="flex flex-row gap-2 justify-between items-center">
@@ -58,7 +71,7 @@ const activeCategory = () =>
                         </label>
                     </form>
 
-                    <button title="Adicionar produto">
+                    <button @click="openModalAddProduct" title="Adicionar produto">
                         <i
                             class="bi bi-plus-circle-dotted text-xl text-secondary-color-300"
                         ></i>
