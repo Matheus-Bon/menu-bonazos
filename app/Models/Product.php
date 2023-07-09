@@ -17,7 +17,7 @@ class Product extends Model
 
     public function categories(): BelongsToMany
     {
-        return $this->belongsToMany(\App\Models\Product::class);
+        return $this->belongsToMany(Category::class);
     }
 
     public function price(): HasOne

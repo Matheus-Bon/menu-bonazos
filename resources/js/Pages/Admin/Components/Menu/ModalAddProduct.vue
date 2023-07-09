@@ -100,61 +100,72 @@ defineExpose({ openModal });
                             <div class="mt-5">
                                 <form action="" class="flex flex-col gap-2">
                                     <div class="flex flex-col">
-                                        <label for="" class="label-default">
+                                        <label for="name" class="label-default">
                                             Nome
                                         </label>
                                         <input
+                                        id="name"
+                                        v-model="form.name"
                                             type="text"
                                             class="input-default"
                                         />
                                     </div>
                                     <div class="flex flex-col">
-                                        <label for="" class="label-default">
+                                        <label for="price" class="label-default">
                                             Preço
                                         </label>
                                         <input
+                                        id="price"
+                                        v-model="form.price"
                                             type="text"
                                             class="input-default"
                                         />
                                     </div>
                                     <div class="flex flex-col">
-                                        <label for="" class="label-default">
+                                        <label for="discount" class="label-default">
                                             Desconto
                                         </label>
                                         <input
+                                        id="discount"
+                                        v-model="form.discount"
                                             type="text"
                                             class="input-default"
                                         />
                                     </div>
                                     <div class="flex flex-col">
-                                        <label for="" class="label-default">
+                                        <label for="weight" class="label-default">
                                             Peso (g)
                                         </label>
                                         <input
+                                        id="weight"
+                                        v-model="form.weight"
                                             type="text"
                                             class="input-default"
                                         />
                                     </div>
                                     <div class="flex flex-col">
-                                        <label for="" class="label-default">
+                                        <label for="description" class="label-default">
                                             Descrição
                                         </label>
                                         <input
+                                        id="description"
+                                        v-model="form.description"
                                             type="text"
                                             class="input-default"
                                         />
                                     </div>
                                     <div class="flex flex-col">
-                                        <label for="" class="label-default">
+                                        <label class="label-default">
                                             Serve para quantas pessoas?
                                         </label>
 
                                         <div class="flex">
                                             <div class="flex items-center mr-4">
                                                 <input
+                                                    v-model="form.server_people"
                                                     id="notApplicable"
                                                     type="radio"
-                                                    value=""
+                                                    value="notApplicable"
                                                     name="inline-radio-group"
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                                 />
@@ -166,9 +177,10 @@ defineExpose({ openModal });
                                             </div>
                                             <div class="flex items-center mr-4">
                                                 <input
+                                                    v-model="form.server_people"
                                                     id="onePerson"
                                                     type="radio"
-                                                    value=""
+                                                    value="onePerson"
                                                     name="inline-radio-group"
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                                 />
@@ -180,9 +192,10 @@ defineExpose({ openModal });
                                             </div>
                                             <div class="flex items-center mr-4">
                                                 <input
+                                                    v-model="form.server_people"
                                                     id="twoPeople"
                                                     type="radio"
-                                                    value=""
+                                                    value="twoPeople"
                                                     name="inline-radio-group"
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                                 />
@@ -194,9 +207,10 @@ defineExpose({ openModal });
                                             </div>
                                             <div class="flex items-center mr-4">
                                                 <input
+                                                    v-model="form.server_people"
                                                     id="threePeople"
                                                     type="radio"
-                                                    value=""
+                                                    value="threePeople"
                                                     name="inline-radio-group"
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                                 />
@@ -208,9 +222,10 @@ defineExpose({ openModal });
                                             </div>
                                             <div class="flex items-center mr-4">
                                                 <input
+                                                    v-model="form.server_people"
                                                     id="fourPeople"
                                                     type="radio"
-                                                    value=""
+                                                    value="fourPeople"
                                                     name="inline-radio-group"
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                                 />
@@ -222,9 +237,10 @@ defineExpose({ openModal });
                                             </div>
                                             <div class="flex items-center mr-4">
                                                 <input
+                                                    v-model="form.server_people"
                                                     id="lotPeople"
                                                     type="radio"
-                                                    value=""
+                                                    value="lotPeople"
                                                     name="inline-radio-group"
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                                 />
