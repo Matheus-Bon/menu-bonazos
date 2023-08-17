@@ -5,12 +5,16 @@ import { Head } from "@inertiajs/vue3";
 import CardViewDelivery from "./Partials/Menu/CardViewDelivery.vue";
 import LayoutAdmin from "./Layouts/LayoutAdmin.vue";
 import ModalUpdateCategory from "@/Pages/Admin/Components/Menu/ModalUpdateCategory.vue";
-import { ref } from "vue";
+import { provide } from 'vue'
 
-defineProps({
+
+const props = defineProps({
     categories: Object,
     categoryForEdit: Object,
 });
+
+console.log(props.categories)
+
 </script>
 
 <template>

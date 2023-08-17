@@ -3,21 +3,19 @@ import { ref } from "vue";
 import { useForm, Link, usePage } from "@inertiajs/vue3";
 import BoxBorder from "@/Pages/Admin/Components/UI/BoxBorder.vue";
 import ModalAddProduct from "../../Components/Menu/ModalAddProduct.vue";
+import { inject } from "vue";
 
 /* Configuração do ModalAddProduct*/
 const modalAddProduct = ref(null); // Referência do ModalAddProduct
 const openModalAddProduct = () => {
-    modalAddProduct.value.openModal()
-} 
+    modalAddProduct.value.openModal();
+};
 
-
-
-const user = usePage().props.auth.user
+const user = usePage().props.auth.user;
 
 /* Constante que pega as informações do BD para usar no front  */
 const props = defineProps({
     category: Object,
-    product: Object,
 });
 
 /* Lógica Update para ativar/desativar Categoria */
@@ -27,9 +25,15 @@ const form = useForm({
 });
 
 const activeCategory = () =>
-    form.put(route("unit.dashboard.menu.update.active.category", {category: props.category.id, unit: user.unit.slug}), {
-        preserveScroll: true,
-    });
+    form.put(
+        route("unit.dashboard.menu.update.active.category", {
+            category: props.category.id,
+            unit: user.unit.slug,
+        }),
+        {
+            preserveScroll: true,
+        }
+    );
 
 // Fim
 </script>
@@ -38,7 +42,7 @@ const activeCategory = () =>
     <!-- <ModalUpdateCategory :category="category" ref="modal" /> -->
 
     <Teleport to="body">
-        <ModalAddProduct ref="modalAddProduct"/>
+        <ModalAddProduct ref="modalAddProduct" :category="category.id" />
     </Teleport>
 
     <BoxBorder>
@@ -71,7 +75,10 @@ const activeCategory = () =>
                         </label>
                     </form>
 
-                    <button @click="openModalAddProduct" title="Adicionar produto">
+                    <button
+                        @click="openModalAddProduct"
+                        title="Adicionar produto"
+                    >
                         <i
                             class="bi bi-plus-circle-dotted text-xl text-secondary-color-300"
                         ></i>
@@ -82,7 +89,7 @@ const activeCategory = () =>
                         :href="
                             route('unit.dashboard.menu.show', {
                                 category: category.id,
-                                unit: user.unit.slug
+                                unit: user.unit.slug,
                             })
                         "
                         :title="'Editar categoria ' + category.name"
@@ -97,6 +104,13 @@ const activeCategory = () =>
             </div>
         </template>
 
-        <section v-if="product">Aqui ficarão os produtos</section>
+        <section v-if="category.products.length > 0">
+            <div v-for="product in category.products" :key="product.id" class="mb-5">
+                <div class="flex flex-col bg-gray-800 rounded-md p-2">
+                    <span class="text-gray-400 text-lg">{{ product.name }}</span>
+                    <span class="text-gray-400">Serve para: {{ product.server_people }} pessoas</span>
+                </div>
+            </div>
+        </section>
     </BoxBorder>
 </template>

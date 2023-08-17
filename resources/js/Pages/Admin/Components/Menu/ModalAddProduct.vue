@@ -12,15 +12,21 @@ import toast from "@/Stores/toast";
 
 const user = usePage().props.auth.user;
 
+const props = defineProps({category: Number})
+
 /* Lógica Create para Categoria */
 // Início
 const form = useForm({
     name: null,
-    active: false,
+    price: null,
+    description: null,
+    server_people: null,
+    category: props.category
+
 });
 
 const create = () =>
-    form.post(route("unit.dashboard.menu.store", user.unit.slug), {
+    form.post(route("unit.dashboard.menu.product.store"), {
         preserveState: false,
         preserveScroll: true,
         onSuccess: (page) => {
@@ -98,7 +104,10 @@ defineExpose({ openModal });
                             </div>
 
                             <div class="mt-5">
-                                <form action="" class="flex flex-col gap-2">
+                                <form @submit.prevent="create" class="flex flex-col gap-2">
+
+                                    <input type="hidden" v-model="form.category">
+
                                     <div class="flex flex-col">
                                         <label for="name" class="label-default">
                                             Nome
@@ -117,29 +126,7 @@ defineExpose({ openModal });
                                         <input
                                         id="price"
                                         v-model="form.price"
-                                            type="text"
-                                            class="input-default"
-                                        />
-                                    </div>
-                                    <div class="flex flex-col">
-                                        <label for="discount" class="label-default">
-                                            Desconto
-                                        </label>
-                                        <input
-                                        id="discount"
-                                        v-model="form.discount"
-                                            type="text"
-                                            class="input-default"
-                                        />
-                                    </div>
-                                    <div class="flex flex-col">
-                                        <label for="weight" class="label-default">
-                                            Peso (g)
-                                        </label>
-                                        <input
-                                        id="weight"
-                                        v-model="form.weight"
-                                            type="text"
+                                            type="number"
                                             class="input-default"
                                         />
                                     </div>
@@ -165,7 +152,7 @@ defineExpose({ openModal });
                                                     v-model="form.server_people"
                                                     id="notApplicable"
                                                     type="radio"
-                                                    value="notApplicable"
+                                                    value="0"
                                                     name="inline-radio-group"
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                                 />
@@ -180,7 +167,7 @@ defineExpose({ openModal });
                                                     v-model="form.server_people"
                                                     id="onePerson"
                                                     type="radio"
-                                                    value="onePerson"
+                                                    value="1"
                                                     name="inline-radio-group"
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                                 />
@@ -195,7 +182,7 @@ defineExpose({ openModal });
                                                     v-model="form.server_people"
                                                     id="twoPeople"
                                                     type="radio"
-                                                    value="twoPeople"
+                                                    value="2"
                                                     name="inline-radio-group"
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                                 />
@@ -210,7 +197,7 @@ defineExpose({ openModal });
                                                     v-model="form.server_people"
                                                     id="threePeople"
                                                     type="radio"
-                                                    value="threePeople"
+                                                    value="3"
                                                     name="inline-radio-group"
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                                 />
@@ -225,7 +212,7 @@ defineExpose({ openModal });
                                                     v-model="form.server_people"
                                                     id="fourPeople"
                                                     type="radio"
-                                                    value="fourPeople"
+                                                    value="4"
                                                     name="inline-radio-group"
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                                 />
@@ -240,7 +227,7 @@ defineExpose({ openModal });
                                                     v-model="form.server_people"
                                                     id="lotPeople"
                                                     type="radio"
-                                                    value="lotPeople"
+                                                    value="999"
                                                     name="inline-radio-group"
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                                 />
@@ -248,41 +235,6 @@ defineExpose({ openModal });
                                                     for="lotPeople"
                                                     class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                                                     >+ 4 pessoas</label
-                                                >
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mt-5 flex flex-col">
-                                        <label for="" class="label-default">
-                                            Complementos?
-                                        </label>
-                                        <div class="flex flex-wrap">
-                                            <div class="flex items-center mr-4">
-                                                <input
-                                                    id="notComplement"
-                                                    type="radio"
-                                                    value=""
-                                                    name="colored-radio"
-                                                    class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                                />
-                                                <label
-                                                    for="notComplement"
-                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                                    >Não</label
-                                                >
-                                            </div>
-                                            <div class="flex items-center mr-4">
-                                                <input
-                                                    id="yesComplement"
-                                                    type="radio"
-                                                    value=""
-                                                    name="colored-radio"
-                                                    class="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                                                />
-                                                <label
-                                                    for="yesComplement"
-                                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                                    >Sim</label
                                                 >
                                             </div>
                                         </div>

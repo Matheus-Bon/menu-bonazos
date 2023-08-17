@@ -14,6 +14,7 @@ class Category extends Model
 
     protected $fillable = ['name', 'active', 'unit_id'];
 
+    protected $with = ['products'];
 
     public function products(): BelongsToMany
     {

@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\ManagerController;
 use App\Http\Controllers\Admin\TimetableController;
 use App\Http\Controllers\Admin\IndexAdminController;
 use App\Http\Controllers\Admin\CategoryAdminController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Models\Unit;
 use App\Models\User;
 use Illuminate\Support\Facades\Request;
@@ -151,6 +152,9 @@ Route::group(
     
                 Route::resource('', CategoryAdminController::class)->parameters(['' => 'category'])->except(['create', 'edit']); // Rotas referente ao CRUD de categorias
                 Route::put('menu/{category}/active-category', [CategoryAdminController::class, 'updateActiveCategory'])->name('update.active.category'); // Rota para ativar categoria
+
+                //Rotas dos produtos
+                Route::resource('/product', ProductController::class)->except(['create', 'edit', 'index']);
     
             });
             

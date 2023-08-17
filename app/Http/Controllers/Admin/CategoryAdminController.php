@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Auth;
 use Redirect;
+use App\Models\Unit;
 use Inertia\Inertia;
+use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Unit;
-use Auth;
 
 class CategoryAdminController extends Controller
 {
@@ -17,10 +18,10 @@ class CategoryAdminController extends Controller
      */
     public function index()
     {
-        return inertia('Admin/Menu',
 
+        return inertia('Admin/Menu',
             [
-                'categories' => Category::all()
+                'categories' => Category::with('products')->get(),
             ]
                 
         );
