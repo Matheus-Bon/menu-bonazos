@@ -24,18 +24,31 @@ const form = useForm({
     active: props.category.active,
 });
 
+const formProduct = useForm({
+    available: props.category.products,
+});
+
 const activeCategory = () =>
     form.put(
         route("unit.dashboard.menu.update.active.category", {
             category: props.category.id,
-            unit: user.unit.slug,
         }),
         {
             preserveScroll: true,
         }
     );
 
-// Fim
+const activeProduct = () =>
+    form.put(
+        route("unit.dashboard.menu.update.active.category", {
+            category: props.category.id,
+        }),
+        {
+            preserveScroll: true,
+        }
+    );
+
+console.log(props.category);
 </script>
 
 <template>
@@ -105,10 +118,25 @@ const activeCategory = () =>
         </template>
 
         <section v-if="category.products.length > 0">
-            <div v-for="product in category.products" :key="product.id" class="mb-5">
+            <div
+                v-for="product in category.products"
+                :key="product.id"
+                class="mb-5"
+            >
                 <div class="flex flex-col bg-gray-800 rounded-md p-2">
-                    <span class="text-gray-400 text-lg">{{ product.name }}</span>
-                    <span class="text-gray-400">Serve para: {{ product.server_people }} pessoas</span>
+                    <span class="text-gray-400 text-lg">{{
+                        product.name
+                    }}</span>
+                    <span class="text-gray-400 text-lg"
+                        >Preço: R$ {{ product.price.price }}</span
+                    >
+                    <span class="text-gray-400"
+                        >Serve para: {{ product.server_people }} pessoas</span
+                    >
+                    <div class="flex flex-row gap-2 mt-2">
+                        <button class="btn-normal-style-1">Editar</button>
+                        <button class="btn-delete-style-1">Excluir</button>
+                    </div>
                 </div>
             </div>
         </section>

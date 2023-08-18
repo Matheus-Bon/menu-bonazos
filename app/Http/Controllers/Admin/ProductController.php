@@ -46,15 +46,14 @@ class ProductController extends Controller
             'server_people' => $request->server_people
         ]);
 
-        $price = Price::create([
-            'product_id' => $product->id,
-            'price' => $priceNumeric
+        $price = new Price([
+            'price' => $priceNumeric,
         ]);
 
         $category->products()->attach($product);
 
         $product->save();
-        $price->save();
+        $product->price()->save($price);
 
 
         return back();
